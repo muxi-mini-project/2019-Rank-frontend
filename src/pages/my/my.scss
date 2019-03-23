@@ -1,0 +1,95 @@
+.index{
+    .avatar{
+        background: red;
+        height: 140px;
+        width: 140px;
+        margin-left: 30px;
+        border-radius: 70px;
+    }
+    .top-container{
+        .like{
+            display: inline-block;
+            vertical-align: top;
+            margin: 30px 40px;
+            Image{
+                height: 50px;
+                width: 50px;
+                background: red;
+                border-radius: 25px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .like-number{
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+        .per-information{
+            
+            display: inline-block;
+            
+            .nickname{
+                View{
+                    display: inline-block;
+                }
+                margin: 20px 0px;
+            }
+            .student-number{
+                View{
+                    display: inline-block;
+                }
+                margin-bottom: 20px;
+            }
+            .QQnumber{
+                View{
+                    display: inline-block;
+                }
+            }
+        }
+        .setting{
+            background: #DCDCDC;
+            display: inline-block;
+            height: 80px;
+            width: 180px;
+            text-align: center;
+            line-height: 80px;
+            border-radius: 10px;
+            vertical-align: top;
+            margin: 20px 20px;
+        }
+    }
+    .form{
+        display: inline-block;
+        margin: 0 auto;
+        .first-row{
+            View{
+                display: inline-block;
+                height: 100px;
+                width: 200px;
+                text-align: center;
+                line-height: 100px;
+                border: 1px solid #dcdcdc;
+            }
+        }
+        .second-row{
+            View{
+                display: inline-block;
+                height: 100px;
+                width: 200px;
+                text-align: center;
+                line-height: 100px;
+                border: 1px solid #dcdcdc;
+            }
+        }
+    }
+    .feedback{
+        border: 1px solid #DCDCDC;
+        height: 80px;
+        width: 450px;
+        border-radius: 20px;
+        line-height: 80px;
+        text-align: center;
+        margin: 30px auto;
+
+    }
+}
