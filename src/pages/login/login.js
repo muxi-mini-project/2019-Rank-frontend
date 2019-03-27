@@ -4,8 +4,8 @@ import './login.scss'
 
 export default class Login extends Component {
   state = {
-    loginNumber = "",
-    password = ""
+    loginNumber : "",
+    password : ""
   }
 
   config = {

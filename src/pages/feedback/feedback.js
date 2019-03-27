@@ -2,6 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Button, Textarea } from "@tarojs/components";
 
 export default class Index extends Component {
+
     config = {
       navigationBarTitleText: '意见反馈'
     };
@@ -46,7 +47,7 @@ export default class Index extends Component {
         })
       })
     }
-    
+  
 
     onChange(type, e) {
       const obj = {}

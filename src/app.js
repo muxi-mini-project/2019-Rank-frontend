@@ -18,10 +18,9 @@ class App extends Component {
       'pages/my/my',
       'pages/feedback/feedback',
       'pages/rankLib/rankLib',
-      'pages/rankPer/rankPer',
-      'pages/rankCollegeDay/rankCollegeDay',
-      'pages/rankCollegeWeek/rankCollegeWeek',
-      'pages/rankCollegeMonth/rankCollegeMonth'
+      //'pages/rankPer/rankPer',
+      //'pages/rankCollegeWeek/rankCollegeWeek',
+      //'pages/rankCollegeMonth/rankCollegeMonth'
     ],
     window: {
       backgroundTextStyle: 'light',
