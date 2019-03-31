@@ -1,0 +1,124 @@
+
+    .avatar{
+        background: red;
+        height: 140px;
+        width: 140px;
+        margin-left: 30px;
+        border-radius: 70px;
+    }
+    .top-container{
+        .per-information{
+            
+            display: inline-block;
+
+            .setting{
+                background: #DCDCDC;
+                display: inline-block;
+                height: 60px;
+                width: 100px;
+                text-align: center;
+                line-height: 60px;
+                border-radius: 10px;
+                vertical-align: center;
+                margin-right: 20px;
+            }
+            .nickname{
+                View{
+                    display: inline-block;
+                }
+                margin: 20px 0px;
+            }
+            .student-number{
+                View{
+                    display: inline-block;
+                }
+                margin-bottom: 20px;
+            }
+            .QQnumber{
+                View{
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    .data{
+        margin: 30 auto;
+        .first-row{
+            View{
+                display: inline-block;
+                height: 100px;
+                width: 200px;
+                text-align: center;
+                line-height: 100px;
+                border: 1px solid #dcdcdc;
+            }
+        }
+        .second-row{
+            View{
+                display: inline-block;
+                height: 100px;
+                width: 200px;
+                text-align: center;
+                line-height: 100px;
+                border: 1px solid #dcdcdc;
+            }
+        }
+    }
+    .feedback{
+        border: 1px solid #DCDCDC;
+        height: 80px;
+        width: 450px;
+        border-radius: 20px;
+        line-height: 80px;
+        text-align: center;
+        margin: 30px auto;
+    }
+    .mask_bg_show{
+        width: 100%;
+        height: 100%;
+        background: grey;
+        position: absolute;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        opacity: 0.6;
+    }
+    .mask_bg_none{
+        display: none;
+    }
+    .mask{
+        display: none;
+    }
+    .unmask{
+        width: 500px;
+        position: absolute;
+        z-index: 1005;
+        top: 50%;
+        left: 50%;
+        transform:translate(-50%, -50%);
+    }
+    .checkbox_label{
+            display: block;
+            background: white;
+        }
+        .inputbox{
+            margin: 10 auto;
+            height: 80px;
+            background: white;
+            Text{
+                display: inline-block;
+                vertical-align: bottom;
+                width: 140px;
+            }
+            Input{
+                display: inline-block;
+                vertical-align: bottom;
+                width: 300px;
+            }
+            button{
+                width: 200px;
+                height: 80px;
+            }
+            
+        }
+
