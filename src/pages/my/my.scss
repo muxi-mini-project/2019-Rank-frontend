@@ -7,6 +7,20 @@
         border-radius: 70px;
     }
     .top-container{
+        .likebox{
+            display: inline-block;
+            
+            .likePhoto{
+                width: 80px;
+                height: 80px;
+            }
+            Text{
+                display: inline-block;
+                height: 80px;
+                line-height: 80px;
+                vertical-align: middle;
+            }
+        }
         .per-information{
             
             display: inline-block;

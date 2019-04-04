@@ -3,27 +3,34 @@ import { View, Image , Label, Checkbox, Input, Button, Text} from '@tarojs/compo
 import './my.scss'
 
 export default class My extends Component {
-  state = {
-    list: [
-      {
-        value: '对他人显示学号',
-        text: '对他人显示学号',
-        checked: false
-      },
-      {
-        value: '对他人显示QQ号',
-        text: '对他人显示QQ号',
-        checked: false
+  constructor(){
+    super(...arguments);
+      this.state = {
+        show_qq: '',
+        show_stdnum: '',
+        booknum: 'booknum',
+        likes: '445',
+        list: [
+          {
+            value: '对他人显示学号',
+            text: '对他人显示学号',
+            checked: this.state.show_stdnum
+          },
+          {
+            value: '对他人显示QQ号',
+            text: '对他人显示QQ号',
+            checked: this.state.show_qq
+          }
+        ],
+        button:[{
+          text:'保存',
+          size:'primary',
+          type: '{{mini}}'
+        }],
+        mask_name: 'mask',
+        content_name: 'uncover',
+        mask_bg: 'mask-bg-none'
       }
-    ],
-    button:[{
-      text:'保存',
-      size:'primary',
-      type: '{{mini}}'
-    }],
-    mask_name: 'mask',
-    content_name: 'uncover',
-    mask_bg: 'mask-bg-none'
   }
   config = {
     navigationBarTitleText: '我的'
@@ -52,12 +59,19 @@ export default class My extends Component {
       mask_bg: 'mask_bg_none'
     })
   }
+  checkboxChange() {
+    console.log('改了')
+  }
   render() {
     return (
       <View>
         <View className={this.state.content_name}>
           <Image className='avatar'></Image>
           <View className='top-container'>
+            <View className='likebox'>
+              <Image className='likePhoto' src={require('../../assets/png/like.png')}></Image>
+              <Text>{this.state.likes}</Text>
+            </View>
             <View className='per-information'>
               <View className='nickname'>
                 <View>昵称：</View>
@@ -71,12 +85,12 @@ export default class My extends Component {
                 <View>QQ：</View>
                 <View>XXXXXXXXX</View>
               </View>
-              <View 
-                className='setting'
-                onClick={this.handleMask.bind(this)}
-              >
-                编辑
-              </View>
+            </View>
+            <View 
+              className='setting'
+              onClick={this.handleMask.bind(this)}
+            >
+              编辑
             </View>
           </View>
           <View className='data'>
@@ -86,7 +100,7 @@ export default class My extends Component {
               <View>学院贡献值</View>
             </View>
             <View className='second-row'>
-              <View>40</View>
+              <View>{this.state.booknum}</View>
               <View>1000</View>
               <View>？</View>
             </View>
@@ -98,10 +112,17 @@ export default class My extends Component {
           {this.state.list.map((item, i) => {
             return (  
               <Label className='checkbox_label' for={i} key={i}> 
-                <Checkbox className='checkbox_checkbox' value={item.value} checked={item.checked}>{item.text}</Checkbox>
+                <Checkbox 
+                  className='checkbox_checkbox' 
+                  value={item.value} 
+                  checked={item.checked}
+                  onChange='checkboxChange'
+                >
+                {item.text}
+                </Checkbox>
               </Label>
             )
-          })}  
+          })}
           <View className='inputbox'>
             <Text>QQ号：</Text>
             <Input type='number'></Input>

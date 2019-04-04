@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "ranking",
 	"description": "",
-	"appid": "touristappid",
+	"appid": "wx99d261528d305c95",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
