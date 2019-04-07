@@ -16,40 +16,18 @@ class App extends Component {
       'pages/index/index',
       'pages/login/login',
       'pages/my/my',
-<<<<<<< HEAD
       //'pages/help/help',
       'pages/feedback/feedback',
       'pages/rankLib/rankLib',
       'pages/rankPer/rankPer',
       'pages/rankCollegeWeek/rankCollegeWeek',
       //'pages/rankCollegeMonth/rankCollegeMonth'
-=======
-      'pages/feedback/feedback'
->>>>>>> cfe20d869ac3f7f282965ab5c8c473457692eebb
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
-<<<<<<< HEAD
-    },
-    tabBar: {
-      list: [
-        {
-          pagePath: "pages/index/index",
-          text: "首页"
-        },
-        {
-          pagePath: "pages/my/my",
-          text: "我的"
-        }
-      ]
-    }
-  }
-
-  componentDidMount () {}
-=======
     }
   }
 
@@ -70,7 +48,6 @@ class App extends Component {
       }
     })
   }
->>>>>>> cfe20d869ac3f7f282965ab5c8c473457692eebb
 
   componentDidShow () {}
 
