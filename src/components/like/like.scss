@@ -1,0 +1,17 @@
+.like{
+    display: inline-block;
+    vertical-align: top;
+    margin: 30px 40px;
+    Image{
+        height: 50px;
+        width: 50px;
+        background: red;
+        border-radius: 25px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .like-number{
+        display: inline-block;
+        vertical-align: middle;
+    }
+}

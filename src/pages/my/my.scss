@@ -1,4 +1,4 @@
-.index{
+
     .avatar{
         background: red;
         height: 140px;
@@ -7,27 +7,35 @@
         border-radius: 70px;
     }
     .top-container{
-        .like{
+        .likebox{
             display: inline-block;
-            vertical-align: top;
-            margin: 30px 40px;
-            Image{
-                height: 50px;
-                width: 50px;
-                background: red;
-                border-radius: 25px;
-                display: inline-block;
-                vertical-align: middle;
+            
+            .likePhoto{
+                width: 80px;
+                height: 80px;
             }
-            .like-number{
+            Text{
                 display: inline-block;
+                height: 80px;
+                line-height: 80px;
                 vertical-align: middle;
             }
         }
         .per-information{
             
             display: inline-block;
-            
+
+            .setting{
+                background: #DCDCDC;
+                display: inline-block;
+                height: 60px;
+                width: 100px;
+                text-align: center;
+                line-height: 60px;
+                border-radius: 10px;
+                vertical-align: center;
+                margin-right: 20px;
+            }
             .nickname{
                 View{
                     display: inline-block;
@@ -46,21 +54,9 @@
                 }
             }
         }
-        .setting{
-            background: #DCDCDC;
-            display: inline-block;
-            height: 80px;
-            width: 180px;
-            text-align: center;
-            line-height: 80px;
-            border-radius: 10px;
-            vertical-align: top;
-            margin: 20px 20px;
-        }
     }
-    .form{
-        display: inline-block;
-        margin: 0 auto;
+    .data{
+        margin: 30 auto;
         .first-row{
             View{
                 display: inline-block;
@@ -90,6 +86,53 @@
         line-height: 80px;
         text-align: center;
         margin: 30px auto;
-
     }
-}
+    .mask_bg_show{
+        width: 100%;
+        height: 100%;
+        background: grey;
+        position: absolute;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        opacity: 0.6;
+    }
+    .mask_bg_none{
+        display: none;
+    }
+    .mask{
+        display: none;
+    }
+    .unmask{
+        width: 500px;
+        position: absolute;
+        z-index: 1005;
+        top: 50%;
+        left: 50%;
+        transform:translate(-50%, -50%);
+    }
+    .checkbox_label{
+            display: block;
+            background: white;
+        }
+        .inputbox{
+            margin: 10 auto;
+            height: 80px;
+            background: white;
+            Text{
+                display: inline-block;
+                vertical-align: bottom;
+                width: 140px;
+            }
+            Input{
+                display: inline-block;
+                vertical-align: bottom;
+                width: 300px;
+            }
+            button{
+                width: 200px;
+                height: 80px;
+            }
+            
+        }
+

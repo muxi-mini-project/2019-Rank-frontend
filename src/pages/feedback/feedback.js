@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Button, Textarea } from "@tarojs/components";
+import { View, Label, Input, Button, Textarea } from "@tarojs/components";
 
 export default class Index extends Component {
 
@@ -8,8 +8,8 @@ export default class Index extends Component {
     };
   
     state = {
-      contact: "",
-      content: ""
+      contact: '',
+      content: ''
     };
 
     componentWillMount() {}
@@ -31,19 +31,20 @@ export default class Index extends Component {
         })
         return
       }
-
+      const prehttp ='http://67.216.199.87:5000/'
       Taro.request({
-        url: xxx,
+        url: prehttp+'api/v1/suggestions',
         data: { 
           contact, content 
         },
-        method: POST
+        method: 'POST'
       })
       .then((res) => {
         console.log(res.data)
         Taro.showToast({
           title: '反馈成功',
-          icon: 'success'
+          icon: 'success',
+          duration: 1000
         })
       })
     }
@@ -59,25 +60,25 @@ export default class Index extends Component {
     render() {
       const { contact, content } = this.state
       return (
-        <View className = 'feedback'>
-          <View className = 'form'>
+        <View className='feedback'>
+          <View className='form'>
             <View>
               <Label>联系方式</Label>
               <Input 
-                type = 'text'
-                placeholder = '请填写您的QQ号或手机号'
-                value = {contact}
+                type='text'
+                placeholder='请填写您的QQ号或手机号'
+                value={contact}
                 onChange={this.onChange.bind(this, "contact")}
               />
             </View>
             <Textarea 
-              value = {content}
-              placeholder = '请填写您的意见或建议，同时欢迎加入小程序交流群XXXXXXXXX与我们交流'
-              className = 'text'
+              value={content}
+              placeholder='请填写您的意见或建议，同时欢迎加入小程序交流群XXXXXXXXX与我们交流'
+              className='text'
               onInput={this.onChange.bind(this, "content")}
             />
             <View>
-              <Button onClick = {this.submit}>提交</Button>
+              <Button onClick={this.submit}>提交</Button>
             </View>
           </View>
         </View>

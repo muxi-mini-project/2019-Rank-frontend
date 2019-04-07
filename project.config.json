@@ -2,13 +2,14 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "rank",
 	"description": "",
-	"appid": "touristappid",
+	"appid": "wx99d261528d305c95",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
-		"newFeature": true
+		"newFeature": true,
+		"autoAudits": false
 	},
 	"compileType": "miniprogram",
 	"condition": {}

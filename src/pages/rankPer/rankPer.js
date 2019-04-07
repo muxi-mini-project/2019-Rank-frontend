@@ -1,9 +1,9 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image, ScrollView } from '@tarojs/components';
-import './rankLib.scss'
-import RankItem from '../../components/rankItem/index'
+import './rankPer.scss'
+import RankItem from '../../components/RankItem/index'
 
-export default class rankLib extends Component {
+export default class rankPer extends Component {
   state = {
     list: [],
     my: [],
@@ -12,14 +12,14 @@ export default class rankLib extends Component {
     pageSize: 10
   }
   config = {
-    navigationBarTitleText: '学霸排行榜'
+    navigationBarTitleText: '运动健将榜'
   }
 
 
   componentWillMount () {
     const prehttp ='http://67.216.199.87:5000/'
     Taro.request({
-      url: prehttp+'api/v1/rank/lib',
+      url: prehttp+'api/v1/rank/step/person',
       data: {
         offset: 0,
         limit: 5
@@ -53,7 +53,7 @@ export default class rankLib extends Component {
     const { currentNum, pageSize, totalNum, list } = this.state
     if(list.length < totalNum) {
       Taro.request({
-        url: 'rank/lib',
+        url: 'rank/step/person',
         data: {
         offset: currentNum,
         limit: pageSize
@@ -78,7 +78,7 @@ export default class rankLib extends Component {
           <View className='title'>名次</View>
           <View className='title'>头像</View>
           <View className='title'>昵称</View>
-          <View className='title'>借书本数</View>
+          <View className='title'>步数</View>
         </View>
         <View className='body'>
           <ScrollView
@@ -94,7 +94,7 @@ export default class rankLib extends Component {
               <View>{my.rank}</View>
               <Image></Image>
               <View>{my.username}</View>
-              <View>{my.booknum}</View>
+              <View>{my.step}</View>
             </View>
             {list.map((item, index) => {
               return (

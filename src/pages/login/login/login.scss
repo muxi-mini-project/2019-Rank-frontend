@@ -1,0 +1,40 @@
+$baseborder: 1PX solid grey !default;
+$basefontsize: 12PX;
+.login{
+    font-size: $basefontsize;
+    margin-bottom: 30PX;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .number{
+        label{
+            display: inline-block;
+        }
+        input{
+            border: $baseborder;
+            display: inline-block;
+        }
+    }
+    .password{
+        label{
+            display: inline-block;
+        }
+        input{
+            border: $baseborder;
+            display: inline-block;
+        }
+    }
+    .tips{
+        height: 30PX;
+        line-height: 30PX;
+    }
+    .sub{
+        border: $baseborder;
+        display: inline-block;
+        width: 80PX;
+        height: 30PX;
+        text-align: center;
+        line-height: 30PX;
+        margin: 0 auto;
+    }
+}

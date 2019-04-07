@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import './index.scss'
 
 export default class Index extends Component {
@@ -22,11 +22,11 @@ export default class Index extends Component {
   render() {
     return (
       <View className='index'>
-        <navigator url="../login/login">注册</navigator>
-        <navigator url="../feedback/feedback">feedback</navigator>
-        <navigator url="../rankLib/rankLib">学霸排行榜</navigator>
-        <navigator url="../rankPer/rankPer">运动健将榜</navigator>
-        <navigator url="../rankCollegeDay/rankCollegeDay">学院运动榜</navigator>
+        <navigator url='../login/login'>注册</navigator>
+        <navigator url='../feedback/feedback'>feedback</navigator>
+        <navigator url='../rankLib/rankLib'>学霸排行榜</navigator>
+        <navigator url='../rankPer/rankPer'>运动健将榜</navigator>
+        <navigator url='../rankCollegeWeek/rankCollegeWeek'>学院运动榜</navigator>
       </View>
     )
   }
