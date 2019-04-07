@@ -1,6 +1,11 @@
 const config = {
+<<<<<<< HEAD
   projectName: 'rank',
   date: '2019-3-21',
+=======
+  projectName: 'ranking',
+  date: '2019-3-18',
+>>>>>>> cfe20d869ac3f7f282965ab5c8c473457692eebb
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,
