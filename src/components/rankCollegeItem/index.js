@@ -6,9 +6,9 @@ export default class RankItem extends Component {
   render() {
     const { item, index } = this.props;
     return (
-      <View className='college-item' onClick={this.onClick}>
+      <View className='item' onClick={this.onClick}>
         <View>{index+1}</View>
-        <View>{item.department_name}</View>
+        <View>{item.department_rname}</View>
         <View>{item.count}</View>
       </View>
     )

@@ -1,7 +1,8 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image, ScrollView } from '@tarojs/components';
-import './rankCollegeWeek.scss'
+import './rankCollege.scss'
 import RankCollegeItem from '../../components/rankCollegeItem/index'
+import NavBar from '../../compoments/navBar/index'
 
 export default class rankCollege extends Component {
   state = {
@@ -30,6 +31,7 @@ export default class rankCollege extends Component {
     const { list } = this.state;
     return (
       <View className='rankCollege'>
+        <NavBar navlist={['周榜','月榜']} />
         <Image className='rank-background'></Image>
         <View className='head'>
           <View className='title'>名次</View>

@@ -4,7 +4,7 @@ import Taro from "@tarojs/taro";
 // promise就是一个表示未来的事情；
 
 // Fetch(url, data).then((res) => { console.log(res)})
-const preHttp = "67.216.199.87:5000/api/v1";
+const preHttp = "67.216.199.87:5000/";
 const Fetch = (url, data = {}, method = "GET") => {
   const header = { "content-type": "application/json" };
   const token = Taro.getStorageSync("token");

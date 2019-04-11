@@ -33,7 +33,7 @@ export default class Index extends Component {
       }
       const prehttp ='http://67.216.199.87:5000/'
       Taro.request({
-        url: prehttp+'api/v1/suggestions',
+        url: prehttp+'api/v1/suggestions/',
         data: { 
           contact, content 
         },

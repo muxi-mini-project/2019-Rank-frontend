@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image, ScrollView } from '@tarojs/components';
 import './rankLib.scss'
-import RankItem from '../../components/rankItem/index'
+import RankItem  from '../../components/RankItem/index'
 
 export default class rankLib extends Component {
   state = {

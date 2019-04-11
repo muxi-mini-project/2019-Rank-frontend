@@ -122,7 +122,7 @@ export default class Index extends Component {
         <navigator url='../my/my'>我的</navigator>
         <navigator url='../rankLib/rankLib'>学霸排行榜</navigator>
         <navigator url='../rankPer/rankPer'>运动健将榜</navigator>
-        <navigator url='../rankCollegeDay/rankCollegeDay'>学院运动榜</navigator>
+        <navigator url='../rankCollege/rankCollege'>学院运动榜</navigator>
         <navigator url='../login/login'>登录</navigator>
         <navigator url='../test/test'>测试</navigator>
       </View>

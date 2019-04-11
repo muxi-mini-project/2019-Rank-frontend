@@ -20,7 +20,7 @@ class App extends Component {
       'pages/feedback/feedback',
       'pages/rankLib/rankLib',
       'pages/rankPer/rankPer',
-      'pages/rankCollegeWeek/rankCollegeWeek',
+      'pages/rankCollege/rankCollege',
       //'pages/rankCollegeMonth/rankCollegeMonth'
     ],
     window: {
