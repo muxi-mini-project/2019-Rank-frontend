@@ -1,7 +1,6 @@
 {
 	"miniprogramRoot": "dist/",
-<<<<<<< HEAD
-	"projectname": "rank",
+	"projectname": "ranking",
 	"description": "",
 	"appid": "wx99d261528d305c95",
 	"setting": {
@@ -11,17 +10,6 @@
 		"minified": false,
 		"newFeature": true,
 		"autoAudits": false
-=======
-	"projectname": "ranking",
-	"description": "",
-	"appid": "wx99d261528d305c95",
-	"setting": {
-		"urlCheck": true,
-		"es6": false,
-		"postcss": false,
-		"minified": false,
-		"newFeature": true
->>>>>>> cfe20d869ac3f7f282965ab5c8c473457692eebb
 	},
 	"compileType": "miniprogram",
 	"condition": {}

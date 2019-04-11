@@ -16,18 +16,13 @@ class App extends Component {
       'pages/index/index',
       'pages/login/login',
       'pages/my/my',
-      //'pages/help/help',
-      'pages/feedback/feedback',
-      'pages/rankLib/rankLib',
-      'pages/rankPer/rankPer',
-      'pages/rankCollegeWeek/rankCollegeWeek',
-      //'pages/rankCollegeMonth/rankCollegeMonth'
+      'pages/feedback/feedback'
     ],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#FF9125',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'white'
     }
   }
 
