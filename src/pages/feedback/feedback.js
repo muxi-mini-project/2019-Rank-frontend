@@ -1,5 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Label, Input, Button, Textarea } from "@tarojs/components";
+import Fetch from '../../common/require'
 
 export default class Index extends Component {
 
@@ -31,15 +32,14 @@ export default class Index extends Component {
         })
         return
       }
-      const prehttp ='http://67.216.199.87:5000/'
-      Taro.request({
-        url: prehttp+'api/v1/suggestions/',
-        data: { 
-          contact, content 
+      Fetch(
+        'api/v1/suggestions',
+        {
+          contact,
+          content
         },
-        method: 'POST'
-      })
-      .then((res) => {
+        'POST'
+      ).then((res) => {
         console.log(res.data)
         Taro.showToast({
           title: '反馈成功',

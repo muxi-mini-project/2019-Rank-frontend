@@ -4,7 +4,7 @@ import Taro from "@tarojs/taro";
 // promise就是一个表示未来的事情；
 
 // Fetch(url, data).then((res) => { console.log(res)})
-const preHttp = "67.216.199.87:5000/";
+const preHttp = "http://67.216.199.87:5000/";
 const Fetch = (url, data = {}, method = "GET") => {
   const header = { "content-type": "application/json" };
   const token = Taro.getStorageSync("token");
@@ -17,16 +17,17 @@ const Fetch = (url, data = {}, method = "GET") => {
     method,
     header
   }).then(res => {
+    console.log(res)//
     if (res.statusCode === 200) {
-      if (res.data.data) {
-        return res.data.data;
+      if (res.data) {
+        return res.data;
       } else {
-        return res.data.code; // 业务逻辑错误，返回业务错误码
+        return res.code; // 业务逻辑错误，返回业务错误码
       }
     } else {
       // 异常
       Taro.showToast({
-        title: `服务端错误: ${res.statusCode}, ${res.data.message}`,
+        title: `服务端错误: ${res.statusCode}`,
         icon: "none",
         duration: 1000
       });

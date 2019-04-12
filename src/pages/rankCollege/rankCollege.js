@@ -1,8 +1,8 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image, ScrollView } from '@tarojs/components';
 import './rankCollege.scss'
-import RankCollegeItem from '../../components/rankCollegeItem/index'
-import NavBar from '../../compoments/navBar/index'
+import NavBar from '../../components/NavBar/index'
+import Fetch from '../../common/require'
 
 export default class rankCollege extends Component {
   state = {
@@ -13,13 +13,14 @@ export default class rankCollege extends Component {
   }
 
 
-  componentWillMount () {
-    Taro.request({
-      
-    })  
-  }
+  componentWillMount () { }
 
-  componentDidMount () { }
+  componentDidMount () { 
+    Fetch('api/v1/rank/step/dept/week').then(data => {
+      console.log(data)
+      this.setState({list: data})
+    })
+  }
 
   componentWillUnmount () { }
 
@@ -31,7 +32,8 @@ export default class rankCollege extends Component {
     const { list } = this.state;
     return (
       <View className='rankCollege'>
-        <NavBar navlist={['周榜','月榜']} />
+        <View>周榜 月榜</View>
+        <NavBar navlist={['周榜','月榜']}>111222</NavBar>
         <Image className='rank-background'></Image>
         <View className='head'>
           <View className='title'>名次</View>
@@ -48,14 +50,20 @@ export default class rankCollege extends Component {
             onScrollToLower={this.scrolltobottom}
             lowerThreshold='20'
           >
-            {list.map((item, index) => {
-              return (
-                <RankCollegeItem 
-                  key={index}
-                  item={item}
-                />
-              )
-            })}  
+            <View className='body-list'>
+              {list.map((item, index) => {
+                return (
+                  <View 
+                    key={index}
+                    className='college-item' 
+                  >
+                    <View>{index+1}</View>
+                    <View>{item.department_name}</View>
+                    <View>{item.step}</View>
+                 </View>
+                )
+              })} 
+            </View> 
           </ScrollView>
         </View>
       </View>

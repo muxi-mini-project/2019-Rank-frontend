@@ -2,6 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Image, ScrollView } from '@tarojs/components';
 import './rankLib.scss'
 import RankItem  from '../../components/RankItem/index'
+import Fetch from '../../common/require'
 
 export default class rankLib extends Component {
   state = {
@@ -16,26 +17,24 @@ export default class rankLib extends Component {
   }
 
 
-  componentWillMount () {
-    const prehttp ='http://67.216.199.87:5000/'
-    Taro.request({
-      url: prehttp+'api/v1/rank/lib',
-      data: {
+  componentWillMount () { }
+
+  componentDidMount () {
+    Fetch(
+      'api/v1/rank/lib',
+      {
         offset: 0,
         limit: 5
-      },
-      method: 'GET'
-    }).then(data => {
-        this.setState({
-          list: this.state.list.concat(data.list),
-          my: data.my,
-          totalNum: data.total,
-          currentNum: this.state.currentNum+5
-        })
-    })  
+      }
+    ).then(data => {
+      this.setState({
+        list: this.state.list.concat(data.list),
+        my: data.my,
+        totalNum: data.total,
+        currentNum: this.state.currentNum+5, //setState异步，可能要改成函数用prevState实现？
+      })
+    }) 
   }
-
-  componentDidMount () { }
 
   componentWillUnmount () { }
 
@@ -52,20 +51,19 @@ export default class rankLib extends Component {
   scrolltobottom() {
     const { currentNum, pageSize, totalNum, list } = this.state
     if(list.length < totalNum) {
-      Taro.request({
-        url: 'rank/lib',
-        data: {
-        offset: currentNum,
-        limit: pageSize
-        },
-        method: 'GET'
-    }).then(data => {
+      Fetch(
+        'api/v1/rank/lib',
+        {
+          offset: currentNum,
+          limit: pageSize
+        }
+      ).then(data => {
         this.setState({
           list: this.state.list.concat(data.list),
           totalNum: data.total,
-          currentNum: currentNum+pageSize
+          currentNum: currentNum+pageSize//同上？
         })
-    })
+      })
     }
   }
 

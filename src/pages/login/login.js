@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Form, Input, Label, Button } from '@tarojs/components';
+import { View, Form, Input, Label, Button, Image} from '@tarojs/components';
 import './login.scss';
 import Fetch from '../../common/require'
 
@@ -12,40 +12,40 @@ export default class Login extends Component {
   }
 
   config = {
-    navigationBarTitleText: '登录'
+    navigationBarTitleText: '注册'
   }
 
   componentWillMount () { }
 
   componentDidMount () {
     //获取用户信息的授权函数
-    Taro.getSetting({
-      success(res) {
-        if (!res.authSetting['scope.userInfo']) {
-          Taro.authorize({
-            scope: 'scope.userInfo',
-            success() {
-              // 用户已经同意小程序使用获取用户信息功能，后续调用 Taro.getUserInfo 接口不会弹窗询问
-              Taro.getUserInfo()
-            }
-          })
-        }
-      }
-    })
+    // Taro.getSetting({
+    //   success(res) {
+    //     if (!res.authSetting['scope.userInfo']) {
+    //       Taro.authorize({
+    //         scope: 'scope.userInfo',
+    //         success() {
+    //           // 用户已经同意小程序使用获取用户信息功能，后续调用 Taro.getUserInfo 接口不会弹窗询问
+    //           Taro.getUserInfo()
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
     //获取用户微信运动步数的授权函数
-    Taro.getSetting({
-      success(res) {
-        if (!res.authSetting['scope.werun']) {
-          Taro.authorize({
-            scope: 'scope.werun',
-            success() {
-              // 用户已经同意小程序获取微信运动步数功能，后续调用 wx.getWeRunData 接口不会弹窗询问
-              Taro.getWeRunData()
-            }
-          })
-        }
-      }
-    })
+  //   Taro.getSetting({
+  //     success(res) {
+  //       if (!res.authSetting['scope.werun']) {
+  //         Taro.authorize({
+  //           scope: 'scope.werun',
+  //           success() {
+  //             // 用户已经同意小程序获取微信运动步数功能，后续调用 wx.getWeRunData 接口不会弹窗询问
+  //             Taro.getWeRunData()
+  //           }
+  //         })
+  //       }
+  //     }
+  //   })
    }
 
   componentWillUnmount () { }
@@ -67,6 +67,19 @@ export default class Login extends Component {
   }
   
   toLogin(){
+    Taro.login({
+      success(res) {
+        if (res.code) {
+          this.setState({
+            code: res.code
+          })
+          console.log('成功获取code')
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+
     //如果学号为空，提醒输入学号
     if(!this.state.stdnum){
       Taro.showToast({
@@ -84,7 +97,7 @@ export default class Login extends Component {
     }
     //把学号、密码以及微信昵称和code发送给后端
     Fetch(
-      'bind',
+      'api/v1/bind/',
       {
         stdnum: this.state.stdnum,
         password: this.state.password,
@@ -109,37 +122,66 @@ export default class Login extends Component {
       }
     })
   }
+  
+  toget(){
+    Taro.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userInfo']) {
+          Taro.authorize({
+            scope: 'scope.userInfo',
+            success() {
+              // 用户已经同意小程序使用获取用户信息功能，后续调用 Taro.getUserInfo 接口不会弹窗询问
+              Taro.getUserInfo()
+            }
+          })
+        }
+      }
+    })
+  }
 
   render() {
     return (
-        <Form className='form_login'>
-            <View className='username'>
-                <Label>学号：</Label>
-                <Input 
-                  placeholderClass='placeholder'
-                  type='number'
-                  placeholder='请输入你的学号'
-                  value={this.state.stdnum}
-                  onInput={this.changeLoginNumber}
-                  onChange={this.changeLoginNumber}/>
-            </View>
-            <View className='passcode'>
-                <Label>密码：</Label>
-                <Input 
-                  placeholderClass='placeholder'
-                  type='number'
-                  placeholder='请输入你的密码'
-                  value={this.state.password}
-                  onInput={this.changePassword}
-                  onChange={this.changePassword}/>
-            </View>
-            <View className='tips'>*请输入一站式服务的学号和对应的密码</View>
-            <View>
-              <Button className='loginBtn' onClick={this.toLogin}>
-                登录
-              </Button>
-            </View>
-        </Form>
+    <View>
+      <Image
+        className='icon'
+        src={require("../../assets/png/logo.png")} 
+      />
+      <Form className='form_login'>
+        <View className='username'>
+            <View>学号：</View>
+            <Input 
+              placeholderClass='placeholder'
+              type='number'
+              placeholder='请输入你的学号'
+              value={this.state.stdnum}
+              onInput={this.changeLoginNumber}
+              onChange={this.changeLoginNumber}
+            />
+        </View>
+        <View className='passcode'>
+            <View>密码：</View>
+            <Input 
+              placeholderClass='placeholder'
+              type='number'
+              placeholder='请输入你的密码'
+              value={this.state.password}
+              onInput={this.changePassword}
+              onChange={this.changePassword}
+              password='true'
+            />
+        </View>
+        <View className='tips'>*请输入一站式服务的学号和对应的密码</View>
+      </Form>
+      <View>
+        <Button className='loginBtn' onClick={this.toLogin}>
+          注册
+        </Button>
+        <Button
+          open-type='getUserInfo'
+          onClick={this.toGet} 
+        />
+      </View>
+    </View>
     )
   }
 }
