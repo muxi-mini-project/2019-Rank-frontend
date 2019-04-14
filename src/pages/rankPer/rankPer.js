@@ -8,9 +8,8 @@ export default class rankPer extends Component {
   state = {
     list: [],
     my: [],
-    currentNum: 0,
-    totalNum: 0,
-    pageSize: 10
+    page: 1,
+    totalNum: 0
   }
   config = {
     navigationBarTitleText: '运动健将榜'
@@ -30,8 +29,8 @@ export default class rankPer extends Component {
       this.setState({
         list: this.state.list.concat(data.list),
         my: data.my,
-        totalNum: data.total,
-        currentNum: this.state.currentNum+5, //setState异步，可能要改成函数用prevState实现？
+        totalNum: data.total_page,
+        page: data.now_page
       })
     }) 
   }
@@ -49,19 +48,18 @@ export default class rankPer extends Component {
   }
 
   scrolltobottom() {
-    const { currentNum, pageSize, totalNum, list } = this.state
+    const { page, totalNum, list } = this.state
     if(list.length < totalNum) {
       Fetch(
         'api/v1/rank/step/person',
         {
-          offset: currentNum,
-          limit: pageSize
+          page: page+1
         }
       ).then(data => {
         this.setState({
           list: this.state.list.concat(data.list),
           totalNum: data.total,
-          currentNum: currentNum+pageSize//同上？
+          page: data.now_page
         })
       })
     }

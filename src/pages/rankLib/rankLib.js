@@ -9,7 +9,7 @@ export default class rankLib extends Component {
     list: [],
     my: [],
     page: 1,
-    totalNum: 0,
+    totalNum: 0
   }
   config = {
     navigationBarTitleText: '学霸排行榜'
