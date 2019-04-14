@@ -16,12 +16,10 @@ class App extends Component {
       'pages/index/index',
       'pages/login/login',
       'pages/my/my',
-      //'pages/help/help',
       'pages/feedback/feedback',
       'pages/rankLib/rankLib',
       'pages/rankPer/rankPer',
-      'pages/rankCollege/rankCollege',
-      //'pages/rankCollegeMonth/rankCollegeMonth'
+      'pages/rankCollege/rankCollege'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -31,23 +29,7 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {
-    Taro.login({
-      success(res) {
-        if (res.code) {
-          // 发起网络请求
-          Taro.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=APPSECRET&js_code=CODE&grant_type=authorization_code',
-            data: {
-              code: res.code
-            }
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    })
-  }
+  componentDidMount () { }
 
   componentDidShow () {}
 
