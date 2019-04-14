@@ -1,27 +1,20 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Image , Label, Checkbox, Input, Button, Text} from '@tarojs/components'
+import { View, Image , Checkbox, Input, Button, Text, CheckboxGroup} from '@tarojs/components'
 import './my.scss'
 
 export default class My extends Component {
   constructor(){
     super(...arguments);
       this.state = {
-        show_qq: '',
-        show_stdnum: '',
-        booknum: 'booknum',
-        likes: '445',
-        list: [
-          {
-            value: '对他人显示学号',
-            text: '对他人显示学号',
-            checked: this.state.show_stdnum
-          },
-          {
-            value: '对他人显示QQ号',
-            text: '对他人显示QQ号',
-            checked: this.state.show_qq
-          }
-        ],
+        stdnum:'',
+        qq:'',
+        username:'',
+        show_qq: false,
+        show_stdnum: false,
+        booknum: '',
+        likes: '',
+        contribute: '',
+        rank:'',
         button:[{
           text:'保存',
           size:'primary',
@@ -42,7 +35,29 @@ export default class My extends Component {
 
   componentWillUnmount () { }
 
-  componentDidShow () { }
+  componentDidShow () {
+    var that = this
+    Taro.request({
+      url:'http://67.216.199.87:5000/api/v1/users/my/info/',
+      method:'GET',
+      header: {
+        'cookie': Taro.getStorageSync('cookie')
+      },
+      success(res){
+        that.setState({
+          stdnum: res.data.stdnum,
+          // show_stdnum: res.data.show_stdnum,
+          qq: res.data.qq,
+          // show_qq: res.data.show_qq,
+          booknum: res.data.booknum,
+          likes: res.data.likes,
+          username: res.data.username,
+          contribute: res.data.contribute,
+          rank: res.data.rank
+        })
+      }
+    })
+  }
 
   componentDidHide () { }
   handleMask(){
@@ -53,14 +68,72 @@ export default class My extends Component {
     })
   }
   handleSave(){
+    var that = this
     this.setState({
       mask_name: 'mask',
       content_name: 'uncover',
-      mask_bg: 'mask_bg_none'
+      mask_bg: 'mask_bg_none',
+    })
+    Taro.request({
+      url:'http://67.216.199.87:5000/api/v1/users/my/info/',
+      method:'PUT',
+      header:{
+        'cookie': Taro.getStorageSync('cookie')
+      },
+      data:{
+        qq: that.state.qq,
+        show_qq: that.state.show_qq,
+        show_stdnum: that.state.show_stdnum
+      },
+      success(res){
+        if(res.statusCode === 200){
+          Taro.showToast({
+            title:'编辑成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+        else{
+          Taro.showToast({
+            title:'编辑失败，请重新尝试',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      }
     })
   }
-  checkboxChange() {
-    console.log('改了')
+  changeShow(e){
+    console.log(e.detail.value)
+    var arr = e.detail.value
+    if(arr.indexOf("qq") > -1){
+      this.setState({
+        show_qq: true
+      })
+    }else{
+      this.setState({
+        show_qq: false
+      })
+    }
+    if(arr.indexOf("stdnum") > -1){
+      this.setState({
+        show_stdnum: true
+      })
+    }else{
+      this.setState({
+        show_stdnum: false
+      })
+    }
+  }
+  changeQQNumber(e){
+    this.setState({
+      qq: e.detail.value
+    })
+  }
+  goToHelp(){
+    Taro.navigateTo({
+      url:'../feedback/feedback'
+    })
   }
   render() {
     return (
@@ -75,15 +148,17 @@ export default class My extends Component {
             <View className='per-information'>
               <View className='nickname'>
                 <View>昵称：</View>
-                <View>XXXX</View>
+                <View>{this.state.username}</View>
               </View>
               <View className='student-number'>
                 <View>学号：</View>
-                <View>XXXXXX</View>
+                {this.state.show_stdnum && <View>{this.state.stdnum}</View>}
+                {!this.state.show_stdnum && <View>*********</View>}
               </View>
               <View className='QQnumber'>
                 <View>QQ：</View>
-                <View>XXXXXXXXX</View>
+                {this.state.show_qq && <View>{this.state.qq}</View>}
+                {!this.state.show_qq && <View>*********</View>}
               </View>
             </View>
             <View 
@@ -101,36 +176,33 @@ export default class My extends Component {
             </View>
             <View className='second-row'>
               <View>{this.state.booknum}</View>
-              <View>1000</View>
-              <View>？</View>
+              <View>{this.state.rank}</View>
+              <View>{this.state.contribute}</View>
             </View>
           </View>
-          <View className='feedback' >反馈与帮助</View>
+          <View className='feedback' onClick={this.goToHelp}>反馈与帮助</View>
         </View>
         <View className={this.state.mask_bg}></View>
         <View className={this.state.mask_name}>
-          {this.state.list.map((item, i) => {
-            return (  
-              <Label className='checkbox_label' for={i} key={i}> 
-                <Checkbox 
-                  className='checkbox_checkbox' 
-                  value={item.value} 
-                  checked={item.checked}
-                  onChange='checkboxChange'
-                >
-                {item.text}
-                </Checkbox>
-              </Label>
-            )
-          })}
+          <CheckboxGroup className='checkbox_label' onChange={this.changeShow.bind(this)}>
+            <Checkbox checked={this.state.show_qq} value='qq'>对他人显示QQ号</Checkbox>
+            <Checkbox checked={this.state.show_stdnum} value='stdnum'>对他人显示学号</Checkbox>
+          </CheckboxGroup>
           <View className='inputbox'>
             <Text>QQ号：</Text>
-            <Input type='number'></Input>
+            <Input
+              placeholderClass='placeholder'
+              type='number'
+              placeholder='请输入你的QQ号'
+              value={this.state.QQ}
+              onInput={this.changeQQNumber.bind(this)}
+              onChange={this.changeQQNumber.bind(this)}
+            />
           </View>
           <Button
             size={this.state.button.size}
             type={this.state.button.type}
-            onClick={this.handleSave}
+            onClick={this.handleSave.bind(this)}
           >
             保存
           </Button>
