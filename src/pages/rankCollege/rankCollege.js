@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image, ScrollView, Swiper, SwiperItem } from '@tarojs/components';
 import './rankCollege.scss'
-import NavBar from '../../components/NavBar/index'
 import Fetch from '../../common/require'
 
 export default class rankCollege extends Component {

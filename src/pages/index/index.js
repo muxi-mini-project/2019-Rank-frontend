@@ -1,8 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Button } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import './index.scss';
-import Fetch from '../../common/require';
-
 
 export default class Index extends Component {
   constructor(props){
@@ -94,7 +92,7 @@ export default class Index extends Component {
         <navigator url='../my/my'>我的</navigator>
         <navigator url='../rankLib/rankLib'>学霸排行榜</navigator>
         <navigator url='../rankPer/rankPer'>运动健将榜</navigator>
-        <navigator url='../rankCollegeDay/rankCollegeDay'>学院运动榜</navigator>
+        <navigator url='../rankCollege/rankCollege'>学院运动榜</navigator>
         <navigator url='../login/login'>登录</navigator>
       </View>
     )
