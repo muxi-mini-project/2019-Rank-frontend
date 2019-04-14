@@ -1,6 +1,6 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "rank",
+	"projectname": "D%E7%9B%98ranking4.14%E6%99%9A%E4%B8%8A%E5%8F%A6%E5%AD%98%E7%89%88",
 	"description": "",
 	"appid": "wx99d261528d305c95",
 	"setting": {
@@ -12,33 +12,5 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"miniprogram": {
-			"current": 0,
-			"list": [
-				{
-					"id": 0,
-					"name": "222",
-					"pathName": "pages/rankCollege/rankCollege",
-					"query": "",
-					"scene": null
-				}
-			]
-		}
-	}
+	"condition": {}
 }

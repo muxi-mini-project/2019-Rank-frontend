@@ -46,9 +46,9 @@ export default class My extends Component {
       success(res){
         that.setState({
           stdnum: res.data.stdnum,
-          // show_stdnum: res.data.show_stdnum,
+          show_stdnum: res.data.show_stdnum,
           qq: res.data.qq,
-          // show_qq: res.data.show_qq,
+          show_qq: res.data.show_qq,
           booknum: res.data.booknum,
           likes: res.data.likes,
           username: res.data.username,

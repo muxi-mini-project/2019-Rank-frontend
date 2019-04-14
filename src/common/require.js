@@ -6,11 +6,10 @@ import Taro from "@tarojs/taro";
 // Fetch(url, data).then((res) => { console.log(res)})
 const preHttp = "http://67.216.199.87:5000/";
 const Fetch = (url, data = {}, method = "GET") => {
-  const header = { "content-type": "application/json" };
-  const token = Taro.getStorageSync("token");
-  if (token) {
-    header.Authorization = `Bearer ${token}`;
-  }
+  const header = { 
+    "content-type": "application/json",
+    "cookie": Taro.getStorageSync('cookie')
+  };
   return Taro.request({
     url: preHttp + url,
     data,

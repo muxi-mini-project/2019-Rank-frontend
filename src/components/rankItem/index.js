@@ -8,13 +8,13 @@ export default class RankItem extends Component {
     onClick(item)
   }
   render() {
-    const { username,rank,count } = this.props;
+    const { item, index } = this.props;
     return (
       <View className='item' onClick={this.onClick}>
-        <View>{rank}</View>
+        <View>{index+1}</View>
         <Image></Image>
-        <View>{username}</View>
-        <View>{count}</View>
+        <View>{item.username}</View>
+        <View>{item.booknum||item.step}</View>
       </View>
     )
   }
