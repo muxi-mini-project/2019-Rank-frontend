@@ -1,5 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
+import './index.scss'
 
 export default class NavBar extends Component {
 
@@ -9,9 +10,7 @@ export default class NavBar extends Component {
       currentTab: 0
     }
   }
-  componentDidShow () {
-    console.log(this.props.navlist)
-  }
+  
   switchNav(e) {
     var cur = e.target.dataset.index 
     //取事件源组件上的index值, 此处target可以替换成currentTarget（指向当前组件）吗
@@ -30,7 +29,7 @@ export default class NavBar extends Component {
         {navList.map((item, index) => {
           return (
             <View
-              className='nav-item'
+              className={this.state.currentTab===index?'active':''}
               key={index}
               onClick={this.switchNav.bind(this)}
             >

@@ -8,14 +8,12 @@ export default class rankLib extends Component {
   state = {
     list: [],
     my: [],
-    currentNum: 0,
+    page: 1,
     totalNum: 0,
-    pageSize: 10
   }
   config = {
     navigationBarTitleText: '学霸排行榜'
   }
-
 
   componentWillMount () { }
 
@@ -23,15 +21,14 @@ export default class rankLib extends Component {
     Fetch(
       'api/v1/rank/lib',
       {
-        offset: 0,
-        limit: 5
+        page: 1
       }
     ).then(data => {
       this.setState({
         list: this.state.list.concat(data.list),
         my: data.my,
-        totalNum: data.total,
-        currentNum: this.state.currentNum+5, //setState异步，可能要改成函数用prevState实现？
+        totalNum: data.total_page,
+        page: data.now_page
       })
     }) 
   }
@@ -49,19 +46,18 @@ export default class rankLib extends Component {
   }
 
   scrolltobottom() {
-    const { currentNum, pageSize, totalNum, list } = this.state
-    if(list.length < totalNum) {
+    const { page,totalNum,list } = this.state
+    if(page < totalNum) {
       Fetch(
         'api/v1/rank/lib',
         {
-          offset: currentNum,
-          limit: pageSize
+          page: page+1
         }
       ).then(data => {
         this.setState({
-          list: this.state.list.concat(data.list),
-          totalNum: data.total,
-          currentNum: currentNum+pageSize//同上？
+          list: list.concat(data.list),
+          totalNum: data.total_page,
+          page: data.now_page
         })
       })
     }
@@ -98,7 +94,9 @@ export default class rankLib extends Component {
               return (
                 <RankItem 
                   key={index}
-                  item={item}
+                  rank={index+1}
+                  count={item.booknum}
+                  username={item.username}
                   onCLick={this.toLinkShow}
                 />
               )

@@ -3,6 +3,12 @@
   align-items: center;
   justify-content: space-between;
 }
+.nav-title{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  //position: fixed
+}
 .college-item{
   display: flex;
   align-items: center;
@@ -11,4 +17,7 @@
 .rank-background{
   height: 100px;
   background-color: black;
+}
+.swiper-box{
+  height:1400px
 }

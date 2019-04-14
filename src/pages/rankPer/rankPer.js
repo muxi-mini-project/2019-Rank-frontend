@@ -98,7 +98,9 @@ export default class rankPer extends Component {
               return (
                 <RankItem 
                   key={index}
-                  item={item}
+                  rank={index+1}
+                  count={item.step}
+                  username={item.username}
                   onCLick={this.toLinkShow}
                 />
               )
