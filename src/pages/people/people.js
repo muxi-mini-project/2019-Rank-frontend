@@ -15,7 +15,8 @@ export default class People extends Component {
         rank:'',
         is_liked: true,
         likes: 0,
-        url:''
+        url:'',
+        id:''
       }
   }
   config = {
@@ -37,7 +38,8 @@ export default class People extends Component {
           likes: data.likes,
           username: data.username,
           contribute: data.contribute,
-          rank: data.rank
+          rank: data.rank,
+          id: data.id
       });
     });
     Fetch(`api/v1/users/${this.$router.params.id}/info/avatar`).then(data => {
@@ -51,6 +53,7 @@ export default class People extends Component {
   //add like发送给后端，并把is_liked改为true(已经点赞啦)
   changeToLike(){
     var that = this
+    const {id} = this.state
     Taro.request({
       url:'http://67.216.199.87:5000/api/v1/likes/',
       method:'POST',
@@ -58,7 +61,7 @@ export default class People extends Component {
         'cookie': Taro.getStorageSync('cookie')
       },
       data:{
-        star_id: that.state.id
+        star_id: id
       },
       success(res){
         if(res.statusCode === 200){
@@ -82,6 +85,7 @@ export default class People extends Component {
   //delete like发送给后端，并把is_liked改为false(还没有点赞)
   changeToUnlike(){
     var that = this
+    const {id} = this.state
     Taro.request({
       url:'http://67.216.199.87:5000/api/v1/likes/',
       method:'DELETE',
@@ -89,7 +93,7 @@ export default class People extends Component {
         'cookie': Taro.getStorageSync('cookie')
       },
       data:{
-        star_id: that.state.id
+        star_id: id
       },
       success(res){
         if(res.statusCode === 200){
