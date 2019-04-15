@@ -41,7 +41,7 @@ export default class rankLib extends Component {
   
   toLinkShow(item) {
     Taro.navigateTo({
-      url: `/pages/myShow?id=${item.user_id}`
+      url: `../people/people?id=${item.user_id}`
     });
   }
 
@@ -95,6 +95,7 @@ export default class rankLib extends Component {
                 <RankItem 
                   key={index}
                   rank={index+1}
+                  item={item}
                   count={item.booknum}
                   username={item.username}
                   onCLick={this.toLinkShow}

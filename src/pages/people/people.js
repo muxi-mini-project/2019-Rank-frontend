@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image , Text} from '@tarojs/components'
 import './people.scss'
+import Fetch from '../../common/require'
 
 export default class People extends Component {
   constructor(){
@@ -28,27 +29,19 @@ export default class People extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    var that = this
-    Taro.request({
-      url:'http://67.216.199.87:5000/api/v1/users/my/info/',
-      method:'GET',
-      header: {
-        'cookie': Taro.getStorageSync('cookie')
-      },
-      success(res){
-        that.setState({
-          stdnum: res.data.stdnum,
-          show_stdnum: res.data.show_stdnum,
-          qq: res.data.qq,
-          show_qq: res.data.show_qq,
-          booknum: res.data.booknum,
-          likes: res.data.likes,
-          username: res.data.username,
-          contribute: res.data.contribute,
-          rank: res.data.rank
-        })
-      }
-    })
+    Fetch('users/${this.$router.params.id}/info').then(data => {
+      this.setState({
+        stdnum: data.stdnum,
+          show_stdnum: data.show_stdnum,
+          qq: data.qq,
+          show_qq: data.show_qq,
+          booknum: data.booknum,
+          likes: data.likes,
+          username: data.username,
+          contribute: data.contribute,
+          rank: data.rank
+      });
+    });
   }
 
   componentDidHide () { }

@@ -1,5 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
+import './index.scss';
 
 export default class RankItem extends Component {
   
@@ -8,13 +9,13 @@ export default class RankItem extends Component {
     onClick(item)
   }
   render() {
-    const { item, index } = this.props;
+    const { rank,username,count } = this.props;
     return (
       <View className='item' onClick={this.onClick}>
-        <View>{index+1}</View>
+        <View>{rank}</View>
         <Image></Image>
-        <View>{item.username}</View>
-        <View>{item.booknum||item.step}</View>
+        <View>{username}</View>
+        <View>{count}</View>
       </View>
     )
   }
