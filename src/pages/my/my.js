@@ -15,6 +15,7 @@ export default class My extends Component {
         likes: '',
         contribute: '',
         rank:'',
+        avatarUrl:'',
         button:[{
           text:'保存',
           size:'primary',
@@ -36,6 +37,7 @@ export default class My extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
+    //获取我的qq、学号、是否显示、借书次数、排名等信息
     var that = this
     Taro.request({
       url:'http://67.216.199.87:5000/api/v1/users/my/info/',
@@ -57,6 +59,7 @@ export default class My extends Component {
         })
       }
     })
+    //获取我的头像url
   }
 
   componentDidHide () { }
@@ -139,7 +142,10 @@ export default class My extends Component {
     return (
       <View>
         <View className={this.state.content_name}>
-          <Image className='avatar'></Image>
+          <Image 
+            className='avatar'
+            src={this.state.avatarUrl}
+          />
           <View className='top-container'>
             <View className='likebox'>
               <Image className='likePhoto' src={require('../../assets/png/like.png')}></Image>

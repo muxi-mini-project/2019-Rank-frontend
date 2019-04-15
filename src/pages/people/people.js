@@ -9,16 +9,16 @@ export default class People extends Component {
         stdnum:'',
         qq:'',
         username:'',
-        show_qq: false,
-        show_stdnum: false,
         booknum: '',
-        likes: '',
         contribute: '',
         rank:'',
+        is_liked: true,
+        likes: 0,
+        id:''
       }
   }
   config = {
-    navigationBarTitleText: '我的'
+    navigationBarTitleText: '个人展示页面'
   }
 
   componentWillMount () { }
@@ -28,31 +28,95 @@ export default class People extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
+    //获取用户的昵称、贡献值、排名、qq、学号等信息
     var that = this
     Taro.request({
-      url:'http://67.216.199.87:5000/api/v1/users/my/info/',
+      url:'http://67.216.199.87:5000/api/v1/users/3/info/',
       method:'GET',
-      header: {
+      header:{
         'cookie': Taro.getStorageSync('cookie')
       },
       success(res){
         that.setState({
           stdnum: res.data.stdnum,
-          show_stdnum: res.data.show_stdnum,
           qq: res.data.qq,
-          show_qq: res.data.show_qq,
           booknum: res.data.booknum,
-          likes: res.data.likes,
           username: res.data.username,
           contribute: res.data.contribute,
-          rank: res.data.rank
+          rank: res.data.rank,
+          is_liked: res.data.is_liked,
+          likes: res.data.likes,
+          is_liked: res.data.is_liked,
+          id: res.data.id
         })
       }
     })
+    
   }
 
   componentDidHide () { }
- 
+  //add like发送给后端，并把is_liked改为true(已经点赞啦)
+  changeToLike(){
+    var that = this
+    Taro.request({
+      url:'http://67.216.199.87:5000/api/v1/likes/',
+      method:'POST',
+      header: {
+        'cookie': Taro.getStorageSync('cookie')
+      },
+      data:{
+        star_id: that.state.id
+      },
+      success(res){
+        if(res.statusCode === 200){
+          Taro.showToast({
+            title:'点赞成功'
+          })    
+        }
+        else{
+          Taro.showToast({
+            title:'点赞失败',
+            icon: 'none'
+          })
+        }
+      }
+    })
+    that.setState({
+      is_liked: true,
+      likes: this.state.likes + 1
+    })  
+  }
+  //delete like发送给后端，并把is_liked改为false(还没有点赞)
+  changeToUnlike(){
+    var that = this
+    Taro.request({
+      url:'http://67.216.199.87:5000/api/v1/likes/',
+      method:'DELETE',
+      header: {
+        'cookie': Taro.getStorageSync('cookie')
+      },
+      data:{
+        star_id: that.state.id
+      },
+      success(res){
+        if(res.statusCode === 200){
+          Taro.showToast({
+            title:'取消点赞成功'
+          })    
+        }
+        else{
+          Taro.showToast({
+            title:'取消点赞失败',
+            icon: 'none'
+          })
+        }
+      }
+    })
+    that.setState({
+      is_liked: false,
+      likes: this.state.likes - 1
+    })  
+  }
   render() {
     return (
       <View>
@@ -60,7 +124,8 @@ export default class People extends Component {
           <Image className='avatar'></Image>
           <View className='top-container'>
             <View className='likebox'>
-              <Image className='likePhoto' src={require('../../assets/png/like.png')}></Image>
+              {this.state.is_liked && <Image onClick={this.changeToUnlike.bind(this)} className='likePhoto' src={require('../../assets/png/like.png')} />}
+              {!this.state.is_liked && <Image onClick={this.changeToLike.bind(this)} className='likePhoto' src={require('../../assets/png/unlike.png')} />}
               <Text>{this.state.likes}</Text>
             </View>
             <View className='per-information'>
@@ -70,13 +135,13 @@ export default class People extends Component {
               </View>
               <View className='student-number'>
                 <View>学号：</View>
-                {this.state.show_stdnum && <View>{this.state.stdnum}</View>}
-                {!this.state.show_stdnum && <View>*********</View>}
+                {this.state.stdnum && <View>{this.state.stdnum}</View>}
+                {!this.state.stdnum && <View>*********</View>}
               </View>
               <View className='QQnumber'>
                 <View>QQ：</View>
-                {this.state.show_qq && <View>{this.state.qq}</View>}
-                {!this.state.show_qq && <View>*********</View>}
+                {this.state.qq && <View>{this.state.qq}</View>}
+                {!this.state.qq && <View>*********</View>}
               </View>
             </View>
           </View>
