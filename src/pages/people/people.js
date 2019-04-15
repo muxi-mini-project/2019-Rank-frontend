@@ -15,7 +15,7 @@ export default class People extends Component {
         rank:'',
         is_liked: true,
         likes: 0,
-        id:''
+        url:''
       }
   }
   config = {
@@ -29,18 +29,20 @@ export default class People extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    console.log(this.$router.params.id)
     Fetch(`api/v1/users/${this.$router.params.id}/info`).then(data => {
       this.setState({
         stdnum: data.stdnum,
-          show_stdnum: data.show_stdnum,
           qq: data.qq,
-          show_qq: data.show_qq,
           booknum: data.booknum,
           likes: data.likes,
           username: data.username,
           contribute: data.contribute,
           rank: data.rank
+      });
+    });
+    Fetch(`api/v1/users/${this.$router.params.id}/info/avatar`).then(data => {
+      this.setState({
+        url: data.url
       });
     });
   }
@@ -112,7 +114,10 @@ export default class People extends Component {
     return (
       <View>
         <View className={this.state.content_name}>
-          <Image className='avatar'></Image>
+          <Image 
+            className='avatar'
+            src={this.state.url}
+          />
           <View className='top-container'>
             <View className='likebox'>
               {this.state.is_liked && <Image onClick={this.changeToUnlike.bind(this)} className='likePhoto' src={require('../../assets/png/like.png')} />}

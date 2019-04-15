@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Button } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import './index.scss';
 
 
@@ -7,19 +7,7 @@ export default class Index extends Component {
   constructor(props){
     super(props);
     this.state = {
-      // id:'',
-      // openid:'',
-      // stdnum:'',
-      // departemnt_id:'',
-      // departemnt_name:'',
-      // username:'',
-      // qq:'',
-      // show_stdnum:'',
-      // show_qq:'',
-      // booknum:'',
-      // likes:''
-    }
-    
+    } 
   }
  
   config = {
@@ -27,14 +15,19 @@ export default class Index extends Component {
   }
 
   componentWillMount () { 
+    //微信运动授权
+    //判断是否授权过微信运动
     Taro.getSetting({
       success(res) {
+        //如果没有授权过就去授权
         if (!res.authSetting['scope.werun']) {
           Taro.authorize({
             scope: 'scope.werun',
             success(){
+              //授权成功调取微信运动API获得数据
               Taro.getWeRunData({
                 success(res){
+                  //获取数据后发给后端
                   Taro.request({
                     url: 'http://67.216.199.87:5000/api/v1/werun/',
                     method: 'POST',
@@ -56,22 +49,6 @@ export default class Index extends Component {
         }
       }
     })
-     // 用户已经同意小程序使用微信运动功能，后续调用 Taro.getWeRunData 接口不会弹窗询问
-    //  Taro.getWeRunData({
-    //   success(res){
-    //     Taro.request({
-    //       url: 'http://67.216.199.87:5000/api/v1/werun/',
-    //       method: 'POST',
-    //       data:{
-    //         encryptedData: res.encryptedData,
-    //         iv: res.iv
-    //       },
-    //       success(){
-    //         console.log('发送微信运动数据成功啦')
-    //       }
-    //     })
-    //   }
-    // })
   }
   
   componentDidMount () { }
@@ -81,7 +58,6 @@ export default class Index extends Component {
   componentDidShow () {
     //如果本地没有cookie
     if (!Taro.getStorageSync('cookie')) {
-      var that = this
       //获取code并把code发给后端
       Taro.login({
         success(res){
@@ -93,33 +69,19 @@ export default class Index extends Component {
               },
               method: 'POST',
               success(res){
-                //如果400说明没有注册需要去注册，跳转页面
-                if(res.statusCode === 400){
-                  Taro.navigateTo({
-                    url:'../login/login'
-                  })
-                }
                 //如果200说明已经注册过了只是session过期，那就储存session并且登陆成功
-                else if(res.statusCode === 200){
-                  // that.setState({
-                  //   id: res.data.id,
-                  //   openid: res.data.openid,
-                  //   stdnum: res.data.stdnum,
-                  //   departemnt_id: res.data.departementid,
-                  //   username: res.data.username,
-                  //   qq: res.data.qq,
-                  //   show_stdnum: res.data.show_stdnum,
-                  //   show_qq: res.data.show_qq,
-                  //   booknum: res.data.booknum,
-                  //   likes: res.data.likes
-                  // })
+                if(res.statusCode === 200){
                   Taro.setStorage({
                     key:'cookie',
                     data: res.header['Set-Cookie']
                   })
                 }
+                //否则就跳转到注册界面注册
                 else{
                   console.log(res.statusCode)
+                  Taro.navigateTo({
+                    url:'../login/login'
+                  })
                 }
               }
             })
