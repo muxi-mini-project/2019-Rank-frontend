@@ -29,7 +29,8 @@ export default class People extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    Fetch('users/${this.$router.params.id}/info').then(data => {
+    console.log(this.$router.params.id)
+    Fetch(`api/v1/users/${this.$router.params.id}/info`).then(data => {
       this.setState({
         stdnum: data.stdnum,
           show_stdnum: data.show_stdnum,
