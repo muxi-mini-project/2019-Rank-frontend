@@ -33,7 +33,7 @@ export default class Index extends Component {
         return
       }
       Fetch(
-        'api/v1/suggestions',
+        'api/v1/suggestions/',
         {
           contact,
           content

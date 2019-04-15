@@ -10,7 +10,7 @@ export default class Login extends Component {
       password:'',
       code:'',
       username:'',
-      // avatarUrl:'',
+      avatarUrl:'',
       mask_name: 'unmask',
       content_name: 'cover',
       mask_bg: 'mask_bg_show'
@@ -112,8 +112,17 @@ export default class Login extends Component {
   
   onGotUserInfo(e){
     this.setState({
-      username: e.detail.userInfo.nickName,
-      // avatarUrl: e.detail.userInfo.avatarUrl
+      username: e.detail.userInfo.nickName
+    })
+    Taro.request({
+      url:'http://67.216.199.87:5000/api/v1/users/my/info/avatar',
+      method:'PUT',
+      header: {
+        'cookie': Taro.getStorageSync('cookie')
+      },
+      data:{
+        ulr: e.detail.userInfo.avatarUrl
+      }
     })
   }
 
@@ -147,7 +156,7 @@ export default class Login extends Component {
             <View>密码：</View>
             <Input 
               placeholderClass='placeholder'
-              type='number'
+              type='text'
               placeholder='请输入你的密码'
               value={this.state.password}
               onInput={this.changePassword}
