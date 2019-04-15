@@ -22,8 +22,7 @@ export default class rankPer extends Component {
     Fetch(
       'api/v1/rank/step/person',
       {
-        offset: 0,
-        limit: 5
+        page: 1
       }
     ).then(data => {
       this.setState({
@@ -43,13 +42,13 @@ export default class rankPer extends Component {
   
   toLinkShow(item) {
     Taro.navigateTo({
-      url: `/pages/myShow?id=${item.user_id}`
+      url: `../people/people?id=${item.user_id}`
     });
   }
 
   scrolltobottom() {
-    const { page, totalNum, list } = this.state
-    if(list.length < totalNum) {
+    const { page,totalNum,list } = this.state
+    if(page < totalNum) {
       Fetch(
         'api/v1/rank/step/person',
         {
@@ -57,8 +56,8 @@ export default class rankPer extends Component {
         }
       ).then(data => {
         this.setState({
-          list: this.state.list.concat(data.list),
-          totalNum: data.total,
+          list: list.concat(data.list),
+          totalNum: data.total_page,
           page: data.now_page
         })
       })

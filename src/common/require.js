@@ -7,8 +7,8 @@ import Taro from "@tarojs/taro";
 const preHttp = "http://67.216.199.87:5000/";
 const Fetch = (url, data = {}, method = "GET") => {
   const header = { 
-    "content-type": "application/json",
-    "cookie": Taro.getStorageSync('cookie')
+    "content-type": "application/json", 
+    "cookie": Taro.getStorageSync("cookie")
   };
   return Taro.request({
     url: preHttp + url,

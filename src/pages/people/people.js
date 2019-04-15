@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image , Text} from '@tarojs/components'
 import './people.scss'
+import Fetch from '../../common/require'
 
 export default class People extends Component {
   constructor(){
@@ -28,30 +29,20 @@ export default class People extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    //获取用户的昵称、贡献值、排名、qq、学号等信息
-    var that = this
-    Taro.request({
-      url:'http://67.216.199.87:5000/api/v1/users/3/info/',
-      method:'GET',
-      header:{
-        'cookie': Taro.getStorageSync('cookie')
-      },
-      success(res){
-        that.setState({
-          stdnum: res.data.stdnum,
-          qq: res.data.qq,
-          booknum: res.data.booknum,
-          username: res.data.username,
-          contribute: res.data.contribute,
-          rank: res.data.rank,
-          is_liked: res.data.is_liked,
-          likes: res.data.likes,
-          is_liked: res.data.is_liked,
-          id: res.data.id
-        })
-      }
-    })
-    
+    console.log(this.$router.params.id)
+    Fetch(`api/v1/users/${this.$router.params.id}/info`).then(data => {
+      this.setState({
+        stdnum: data.stdnum,
+          show_stdnum: data.show_stdnum,
+          qq: data.qq,
+          show_qq: data.show_qq,
+          booknum: data.booknum,
+          likes: data.likes,
+          username: data.username,
+          contribute: data.contribute,
+          rank: data.rank
+      });
+    });
   }
 
   componentDidHide () { }
