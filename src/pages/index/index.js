@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View } from '@tarojs/components';
+import { View, Image , Swiper, SwiperItem} from '@tarojs/components';
 import './index.scss';
 
 
@@ -89,19 +89,82 @@ export default class Index extends Component {
         }
       })
     }
+
+    if(!Taro.getStorageSync('stdnum') || !Taro.getStorageSync('password')){
+      Taro.navigateTo({
+          url:'../libLogin/libLogin'
+      })
+    }
+    else{
+      Taro.request({
+        url:'http://67.216.199.87:5000/api/v1/users/lib/',
+        data:{
+          stdnum: Taro.getStorageSync('stdnum'),
+          password: Taro.getStorageSync('password')
+        },
+        method:'POST'
+      })
+    }
   }
 
   componentDidHide () { }
   
+  torankLib(){
+    Taro.navigateTo({
+      url:'../rankLib/rankLib'
+    })
+  }
+  torankPer(){
+    Taro.navigateTo({
+      url:'../rankPer/rankPer'
+  })
+  }
+  torankCollege(){
+    Taro.navigateTo({
+      url:'../rankCollege/rankCollege'
+  })
+  }
+  toMy(){
+    Taro.navigateTo({
+      url:'../my/my'
+    })
+  }
+  toIndex(){
+    Taro.navigateTo({
+      url:'../index/index'
+    })
+  }
   render() {
     return (
       <View className='index'>
-        <navigator url='../my/my'>我的</navigator>
-        <navigator url='../rankLib/rankLib'>学霸排行榜</navigator>
-        <navigator url='../rankPer/rankPer'>运动健将榜</navigator>
-        <navigator url='../rankCollege/rankCollege'>学院运动榜</navigator>
+        <Image
+          className='rankLib'
+          src={require('../../assets/png/rankLib.png')}
+          onClick={this.torankLib}
+        />
+        <Image
+          className='rankPer'
+          src={require('../../assets/png/rankPer.png')}
+          onClick={this.torankPer}
+        />
+        <Image
+          className='rankCollege'
+          src={require('../../assets/png/rankCollege.png')}
+          onClick={this.torankCollege}
+        />
         <navigator url='../login/login'>登录</navigator>
-        <navigator url='../people/people'>个人展示页面</navigator>
+        <Swiper
+          className='banner'
+          onChange={this.toMy}
+          display-multiple-items='2'
+        >
+        <SwiperItem>
+          <View className='demo-text-1' onClick={this.toIndex}>首页</View>
+        </SwiperItem>
+        <SwiperItem>
+          <View className='demo-text-2'onClick={this.toMy}>我的</View>
+        </SwiperItem>
+        </Swiper>
       </View>
     )
   }

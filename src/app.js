@@ -22,7 +22,8 @@ class App extends Component {
       'pages/rankPer/rankPer',
       'pages/rankCollege/rankCollege',
       // 'pages/rankCollegeMonth/rankCollegeMonth',
-      'pages/people/people'
+      'pages/people/people',
+      'pages/libLogin/libLogin'
     ],
     window: {
       backgroundTextStyle: 'light',
