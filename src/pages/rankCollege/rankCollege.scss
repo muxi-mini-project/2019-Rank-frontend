@@ -1,22 +1,69 @@
-.head{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.rankCollege{
+  font-size:32px;
+  background:rgba(239,239,244,1);
+}
+.swiper-box{
+  border-radius:10px 10px 5px 5px;
+  text-align: center;
+  display:flex;                    
+  justify-content: center; 
+
+}
+.main{
+  width:664px;
 }
 .nav-title{
   display: flex;
   align-items: center;
   justify-content: space-around;
+  height: 99px;
   //position: fixed
+  background:rgba(255,255,255,1);
+  
 }
-.college-item{
+.head{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 89px;
+  font-weight:500;
+  background:rgba(255,255,255,1);
+}
+.body-list{
+  background:rgba(255,255,255,1);
+}
+.college-item{
+  //display: flex;
+  //align-items: center;
+  //justify-content: space-between;
+  width:664px;
+  height:134px;
+  border-bottom: 1px solid rgba(220,220,220,1);
+  border-top: 1px solid rgba(220,220,220,1);
+  background:rgba(255,255,255,1);
+}
+.rank{
+  width: 140px;
+  display: inline-block;
+  text-align: center;
+}
+.name{
+  width: 348px;
+  display: inline-block;
+  text-align: center;
+}
+.count{
+  width: 176px;
+  display: inline-block;
+  text-align: center;
+}
+.background{
+  text-align: center;
 }
 .rank-background{
-  height: 100px;
-  background-color: black;
+  width: 600px;
+  height: 212px;
+  background:rgba(220,220,220,1);
 }
 .swiper-box{
   height:1400px

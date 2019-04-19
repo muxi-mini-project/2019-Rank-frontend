@@ -66,7 +66,7 @@ export default class rankCollege extends Component {
           {navList.map((item, index) => {
             return (
               <View
-                className='active'
+                className={this.state.currentNav == index ? 'now' : 'then'}
                 key={index}
                 id={index}
                 onClick={this.switchNav.bind(this)}
@@ -75,25 +75,27 @@ export default class rankCollege extends Component {
               </View>
             )
           })}
-        </View>
-        <Image className='rank-background'></Image>
+        </View>                      
         <View className='swiper-box'>
-          <View className='box'> 
-            <View className='head'>
-              <View className='title'>名次</View>
-              <View className='title'>学院名称</View>
-              <View className='title'>平均步数</View>
-            </View>
-            <View className='body'>
+            <View className='main'>
               <ScrollView
                 className='scrollbox'
                 scrollY
                 scrollWithAnimation
                 scrollTop='0'
                 enableBackToTop
+                style={`height:${Taro.getSystemInfoSync().windowHeight}px`}
                 onScrollToLower={this.scrolltobottom}
                 lowerThreshold='20'
               >
+                <View className='background'>
+                  <Image className='rank-background'></Image>
+                </View>               
+                <View className='head'>
+                  <View className='title'>名次</View>
+                  <View className='title'>学院名称</View>
+                  <View className='title'>平均步数</View>
+                </View>
                 <View className='body-list'>
                   {list.map((item, index) => {
                     return (
@@ -110,7 +112,6 @@ export default class rankCollege extends Component {
                 </View> 
               </ScrollView>
             </View>
-          </View>
         </View>              
       </View>
     )

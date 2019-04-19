@@ -41,12 +41,14 @@ export default class rankPer extends Component {
   componentDidHide () { }
   
   toLinkShow(item) {
+    //console.log(item.user_id)
     Taro.navigateTo({
       url: `../people/people?id=${item.user_id}`
     });
   }
 
   scrolltobottom() {
+    console.log('have a try!')
     const { page,totalNum,list } = this.state
     if(page < totalNum) {
       Fetch(
@@ -60,6 +62,7 @@ export default class rankPer extends Component {
           totalNum: data.total_page,
           page: data.now_page
         })
+        console.log('haha')
       })
     }
   }
@@ -82,6 +85,7 @@ export default class rankPer extends Component {
             scrollWithAnimation
             scrollTop='0'
             enableBackToTop
+            style={`height:${Taro.getSystemInfoSync().windowHeight}px`}
             onScrollToLower={this.scrolltobottom}
             lowerThreshold='20'
           >
@@ -96,6 +100,8 @@ export default class rankPer extends Component {
                 <RankItem 
                   key={index}
                   rank={index+1}
+                  item={item}
+                  url={item.url}
                   count={item.step}
                   username={item.username}
                   onCLick={this.toLinkShow}

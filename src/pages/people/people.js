@@ -35,7 +35,6 @@ export default class People extends Component {
         stdnum: data.stdnum,
           qq: data.qq,
           booknum: data.booknum,
-          likes: data.likes,
           username: data.username,
           contribute: data.contribute,
           rank: data.rank,
@@ -84,6 +83,7 @@ export default class People extends Component {
   }
   //delete like发送给后端，并把is_liked改为false(还没有点赞)
   changeToUnlike(){
+    const { id } = this.state
     var that = this
     const {id} = this.state
     Taro.request({

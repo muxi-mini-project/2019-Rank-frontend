@@ -32,6 +32,13 @@ export default class Index extends Component {
         })
         return
       }
+      if (contact === "") {
+        Taro.showToast({
+          title: '写点什么吧～', 
+          icon: 'none'
+        })
+        return
+      }
       Fetch(
         'api/v1/suggestions/',
         {

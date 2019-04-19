@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image, ScrollView } from '@tarojs/components';
 import './rankLib.scss'
-import RankItem  from '../../components/RankItem/index'
+import RankItem  from '../../components/RankItem'
 import Fetch from '../../common/require'
 
 export default class rankLib extends Component {
@@ -67,42 +67,51 @@ export default class rankLib extends Component {
     const { list, my } = this.state;
     return (
       <View className='rankLib'>
-        <Image className='rank-background'></Image>
-        <View className='head'>
-          <View className='title'>名次</View>
-          <View className='title'>头像</View>
-          <View className='title'>昵称</View>
-          <View className='title'>借书本数</View>
-        </View>
-        <View className='body'>
-          <ScrollView
-            className='scrollbox'
-            scrollY
-            scrollWithAnimation
-            scrollTop='0'
-            enableBackToTop
-            onScrollToLower={this.scrolltobottom}
-            lowerThreshold='20'
-          >
-            <View className='item'>
-              <View>{my.rank}</View>
-              <Image></Image>
-              <View>{my.username}</View>
-              <View>{my.booknum}</View>
+        <View className='main-box'>
+            <View className='body'>
+              <ScrollView
+                className='scrollbox'
+                scrollY
+                scrollWithAnimation
+                style={`height:${Taro.getSystemInfoSync().windowHeight}px`}
+                enableBackToTop
+                onScrollToLower={this.scrolltobottom}
+                lowerThreshold='20'
+              >
+                <View className='background'>
+                  <Image className='rank-background'></Image>
+                </View>           
+                <View className='main'>
+                <View className='head'>
+                  <View className='rank'>名次</View>
+                  <View className='avatar'>头像</View>
+                  <View className='name'>昵称</View>
+                  <View className='count'>借书本数</View>
+                </View>              
+                <View className='item my'>
+                  <View className='rank'>{my.rank}</View>
+                  <View className='avatar'>
+                    <Image url={my.url}></Image>
+                  </View>
+                  <View className='name'>{my.username}</View>
+                  <View className='count'>{my.booknum}</View>
+                </View>
+                {list.map((item, index) => {
+                  return (
+                    <RankItem 
+                      key={item.user_id}
+                      rank={index+1}
+                      item={item}
+                      url={item.url}
+                      count={item.booknum}
+                      username={item.username}
+                      onCLick={this.toLinkShow}
+                    />
+                  )
+                })}  
+                </View>   
+              </ScrollView>
             </View>
-            {list.map((item, index) => {
-              return (
-                <RankItem 
-                  key={index}
-                  rank={index+1}
-                  item={item}
-                  count={item.booknum}
-                  username={item.username}
-                  onCLick={this.toLinkShow}
-                />
-              )
-            })}  
-          </ScrollView>
         </View>
       </View>
     )
