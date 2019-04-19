@@ -15,6 +15,7 @@ export default class People extends Component {
         rank:'',
         is_liked: true,
         likes: 0,
+        url:'',
         id:''
       }
   }
@@ -29,8 +30,7 @@ export default class People extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    console.log(this.$router.params.id)
-    Fetch(`api/v1/users/${this.$router.params.id}/info/`).then(data => {
+    Fetch(`api/v1/users/${this.$router.params.id}/info`).then(data => {
       this.setState({
         stdnum: data.stdnum,
           qq: data.qq,
@@ -50,6 +50,7 @@ export default class People extends Component {
   //add like发送给后端，并把is_liked改为true(已经点赞啦)
   changeToLike(){
     var that = this
+    const {id} = this.state
     Taro.request({
       url:'http://67.216.199.87:5000/api/v1/likes/',
       method:'POST',
@@ -57,7 +58,7 @@ export default class People extends Component {
         'cookie': Taro.getStorageSync('cookie')
       },
       data:{
-        star_id: that.state.id
+        star_id: id
       },
       success(res){
         if(res.statusCode === 200){
@@ -82,6 +83,7 @@ export default class People extends Component {
   changeToUnlike(){
     const { id } = this.state
     var that = this
+    const {id} = this.state
     Taro.request({
       url:'http://67.216.199.87:5000/api/v1/likes/',
       method:'DELETE',
@@ -114,7 +116,10 @@ export default class People extends Component {
     return (
       <View>
         <View className={this.state.content_name}>
-          <Image className='avatar'></Image>
+          <Image 
+            className='avatar'
+            src={this.state.url}
+          />
           <View className='top-container'>
             <View className='likebox'>
               {this.state.is_liked && <Image onClick={this.changeToUnlike.bind(this)} className='likePhoto' src={require('../../assets/png/like.png')} />}

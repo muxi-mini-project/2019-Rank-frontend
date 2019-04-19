@@ -10,7 +10,6 @@ export default class Login extends Component {
       password:'',
       code:'',
       username:'',
-      // avatarUrl:'',
       mask_name: 'unmask',
       content_name: 'cover',
       mask_bg: 'mask_bg_show'
@@ -22,6 +21,7 @@ export default class Login extends Component {
   }
   
   componentWillMount () {
+    //向微信获取code并存下来
     Taro.login({
       success:res => {
         if (res.code) { 
@@ -109,11 +109,21 @@ export default class Login extends Component {
       }
     })
   }
-  
+  //获取用户信息被授权后把username储存下来以便注册时发给后端
   onGotUserInfo(e){
     this.setState({
-      username: e.detail.userInfo.nickName,
-      // avatarUrl: e.detail.userInfo.avatarUrl
+      username: e.detail.userInfo.nickName
+    })
+    //把avatarUrl发送给后端
+    Taro.request({
+      url:'http://67.216.199.87:5000/api/v1/users/my/info/avatar',
+      method:'PUT',
+      header: {
+        'cookie': Taro.getStorageSync('cookie')
+      },
+      data:{
+        ulr: e.detail.userInfo.avatarUrl
+      }
     })
   }
 
@@ -147,7 +157,7 @@ export default class Login extends Component {
             <View>密码：</View>
             <Input 
               placeholderClass='placeholder'
-              type='number'
+              type='text'
               placeholder='请输入你的密码'
               value={this.state.password}
               onInput={this.changePassword}
