@@ -1,14 +1,67 @@
+.rankLib{
+  background:rgba(239,239,244,1);
+  font-size:32px;
+  font-weight:500;
+}
+.scrollbox{
+  border-radius:10px 10px 5px 5px;
+}
 .head{
   display: flex;
   align-items: center;
   justify-content: space-around;
+  height: 89px;
 }
 .item{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    //justify-content: space-around;
+    width:664px;
+    height:134px;
+    border: 2px rgba(220,220,220,1);
   }
+.my{
+  background:rgba(220,220,220,1);
+}
+.background{
+  display:flex;                    
+  justify-content: center; 
+} 
 .rank-background{
+  height: 312px;
+  width:600px;
+  background:rgba(220,220,220,1);
+}
+.main-box{
+  display:flex;                    
+  justify-content: center; 
+}
+.main{
+  width:664px;
+  background:rgba(255,255,255,1);
+  border-radius:10px 10px 5px 5px;
+}
+.rank{
+  width: 110px;
+  text-align: center;
+  display: inline-block;
+}
+.avatar{
+  width: 140px;
+  display: inline-block;
+  text-align: center;
+}
+.avatar image{
+  width: 100px;
   height: 100px;
-  background-color: black;
+}
+.name{
+  width: 238px;
+  text-align: center;
+  display: inline-block;
+}
+.count{
+  width: 176px;
+  text-align: center; 
+  display: inline-block; 
 }

@@ -10,6 +10,10 @@ export default class Login extends Component {
       password:'',
       code:'',
       username:'',
+      // avatarUrl:'',
+      mask_name: 'unmask',
+      content_name: 'cover',
+      mask_bg: 'mask_bg_show'
     }
   }
 
@@ -106,24 +110,23 @@ export default class Login extends Component {
     })
   }
   
-  getUserInfo(){
-    Taro.getUserInfo({
-      success: res=>{
-        this.setState({
-          username: res.userInfo.nickName
-        })
-      }
+  onGotUserInfo(e){
+    this.setState({
+      username: e.detail.userInfo.nickName,
+      // avatarUrl: e.detail.userInfo.avatarUrl
     })
   }
 
-  
-
-
-  
-
+  handleSave(){
+    this.setState({
+      mask_name: 'mask',
+      content_name: 'uncover',
+      mask_bg: 'mask_bg_none',
+    })
+  }
   render() {
     return (
-    <View>
+    <View className={this.state.content_name}>
       <Image
         className='icon'
         src={require("../../assets/png/logo.png")} 
@@ -158,11 +161,18 @@ export default class Login extends Component {
         <Button className='loginBtn' onClick={this.toLogin.bind(this)}>
           注册
         </Button>
+      </View>
+      <View className={this.state.mask_bg}></View>
+      <View className={this.state.mask_name}>
+        <Image></Image>
         <Button
-          open-type='getUserInfo'
-          lang='zh_CN'
-          onClick={this.getUserInfo.bind(this)}
-        />
+          open-type='getUserInfo' 
+          lang='zh_CN' 
+          onGetUserInfo={this.onGotUserInfo.bind(this)}
+          onClick={this.handleSave.bind(this)}
+        >
+        点我授权
+        </Button>
       </View>
     </View>
     )

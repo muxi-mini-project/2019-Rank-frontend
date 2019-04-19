@@ -1,5 +1,30 @@
 .item{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    width:664px;
+    height: 134px;
+    border-bottom: 2px solid rgba(220,220,220,1);
+    background:rgba(255,255,255,1);
   }
+.rank{
+  width: 110px;
+  text-align: center;
+  display: inline-block;
+}
+.avatar{
+  width: 140px;
+  display: inline-block;
+}
+.avatar image{
+  width: 100px;
+  height: 100px;
+}
+.name{
+  width: 238px;
+  text-align: center;
+  display: inline-block;
+}
+.count{
+  width: 176px;
+  text-align: center; 
+  display: inline-block; 
+}
+
