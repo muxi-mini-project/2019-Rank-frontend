@@ -14,7 +14,7 @@ export default class RankItem extends Component {
       <View className='item' onClick={this.onClick}>
         <View className='rank'>{rank}</View>
         <View className='avatar'>
-          <Image url={url}></Image>
+          <Image src={url}></Image>
         </View>
         <View className='name'>{username}</View>
         <View className='count'>{count}</View>

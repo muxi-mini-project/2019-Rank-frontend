@@ -23,8 +23,21 @@ class App extends Component {
       'pages/rankCollege/rankCollege',
       // 'pages/rankCollegeMonth/rankCollegeMonth',
       'pages/people/people',
-      'pages/libLogin/libLogin'
+      'pages/libLogin/libLogin',
+      
     ],
+    tabBar: {
+      list: [
+        {
+          pagePath: "pages/index/index",
+          text: "首页"
+        },
+        {
+          pagePath: "pages/my/my",
+          text: "我的"
+        }
+      ]
+    },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#FF9125',
@@ -33,7 +46,16 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    Taro.request({
+      url:'http://47.103.103.195:5000/api/v1/users/lib/',
+      data:{
+        stdnum: Taro.getStorageSync('stdnum'),
+        password: Taro.getStorageSync('password')
+      },
+      method:'POST'
+    })
+  }
 
   componentDidShow () {}
 

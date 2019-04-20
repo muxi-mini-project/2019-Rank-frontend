@@ -57,7 +57,7 @@ export default class Login extends Component {
       })
     }
     Taro.request({
-        url:'http://67.216.199.87:5000/api/v1/users/lib/',
+        url:'http://47.103.103.195:5000/api/v1/users/lib/',
         data:{
           stdnum: that.state.stdnum,
           password: that.state.password
@@ -65,20 +65,30 @@ export default class Login extends Component {
         header:{
             'cookie': Taro.getStorageSync('cookie')
         },
-        method:'POST'
-    })
-    Taro.setStorage({
-        key:'stdnum',
-        data: that.state.stdnum
-    })
-    Taro.setStorage({
-        key:'password',
-        data: that.state.password,
-        success(){
-          Taro.navigateTo({
-          url:'../index/index'
-        })  
-      }
+        method:'POST',
+        success(res){
+          if(res.statusCode === 200){
+            Taro.setStorage({
+              key:'stdnum',
+              data: that.state.stdnum
+          })
+          Taro.setStorage({
+              key:'password',
+              data: that.state.password,
+              success(){
+                Taro.switchTab({
+                url:'../index/index'
+              })  
+            }
+          })
+          }
+          if(res.statusCode != 200){
+            Taro.showToast({
+              title:'账号或密码输入错误',
+              icon:'none'
+            })
+          }
+        }
     })
   }
   

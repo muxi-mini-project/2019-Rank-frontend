@@ -40,7 +40,7 @@ export default class My extends Component {
     //获取我的qq、学号、是否显示、借书次数、排名等信息
     var that = this
     Taro.request({
-      url:'http://67.216.199.87:5000/api/v1/users/my/info/',
+      url:'http://47.103.103.195:5000/api/v1/users/my/info/',
       method:'GET',
       header: {
         'cookie': Taro.getStorageSync('cookie')
@@ -55,7 +55,8 @@ export default class My extends Component {
           likes: res.data.likes,
           username: res.data.username,
           contribute: res.data.contribute,
-          rank: res.data.rank
+          rank: res.data.rank,
+          avatarUrl: res.data.url
         })
       }
     })
@@ -78,7 +79,7 @@ export default class My extends Component {
       mask_bg: 'mask_bg_none',
     })
     Taro.request({
-      url:'http://67.216.199.87:5000/api/v1/users/my/info/',
+      url:'http://47.103.103.195:5000/api/v1/users/my/info/',
       method:'PUT',
       header:{
         'cookie': Taro.getStorageSync('cookie')

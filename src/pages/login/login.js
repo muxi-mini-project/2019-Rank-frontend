@@ -10,6 +10,7 @@ export default class Login extends Component {
       password:'',
       code:'',
       username:'',
+      url:'',
       mask_name: 'unmask',
       content_name: 'cover',
       mask_bg: 'mask_bg_show'
@@ -80,13 +81,14 @@ export default class Login extends Component {
     }
     //把学号、密码以及微信昵称和code发送给后端
     Taro.request({
-      url:'http://67.216.199.87:5000/api/v1/bind/',
+      url:'http://47.103.103.195:5000/api/v1/bind/',
       method:'POST',
       data:{
         stdnum: this.state.stdnum,
         password: this.state.password,
         code: this.state.code,
-        username: this.state.username
+        username: this.state.username,
+        url: this.state.url
       },
       success(res){
         //如果200，cookie存本地，转回index页面
@@ -103,12 +105,12 @@ export default class Login extends Component {
             key:'password',
             data: that.state.password
           })
-          Taro.navigateTo({
+          Taro.switchTab({
             url:'../index/index'
           })
         }
         //否则告诉用户账号或者密码错误
-        else{
+        if(res.statusCode != 200){
           Taro.showToast({
             title:'账号或密码输入错误，请重新输入',
             icon: 'none',
@@ -137,18 +139,8 @@ export default class Login extends Component {
   //获取用户信息被授权后把username储存下来以便注册时发给后端
   onGotUserInfo(e){
     this.setState({
-      username: e.detail.userInfo.nickName
-    })
-    //把avatarUrl发送给后端
-    Taro.request({
-      url:'http://67.216.199.87:5000/api/v1/users/my/info/avatar',
-      method:'PUT',
-      header: {
-        'cookie': Taro.getStorageSync('cookie')
-      },
-      data:{
-        ulr: e.detail.userInfo.avatarUrl
-      }
+      username: e.detail.userInfo.nickName,
+      url: e.detail.userInfo.avatarUrl
     })
   }
 
