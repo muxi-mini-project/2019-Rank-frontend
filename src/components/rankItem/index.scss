@@ -12,10 +12,15 @@
 .avatar{
   width: 140px;
   display: inline-block;
+  text-align: center;
+  height: 134px;
+  line-height: 134px;
 }
 .avatar image{
   width: 100px;
   height: 100px;
+  border-radius: 50%;
+  vertical-align: middle;
 }
 .name{
   width: 238px;

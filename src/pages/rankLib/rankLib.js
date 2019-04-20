@@ -91,7 +91,7 @@ export default class rankLib extends Component {
                 <View className='item my'>
                   <View className='rank'>{my.rank}</View>
                   <View className='avatar'>
-                    <Image url={my.url}></Image>
+                    <Image src={my.url}></Image>
                   </View>
                   <View className='name'>{my.username}</View>
                   <View className='count'>{my.booknum}</View>
