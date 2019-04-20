@@ -110,7 +110,7 @@ export default class Login extends Component {
           })
         }
         //否则告诉用户账号或者密码错误
-        else{
+        if(res.statusCode != 200){
           Taro.showToast({
             title:'账号或密码输入错误，请重新输入',
             icon: 'none',
@@ -120,7 +120,7 @@ export default class Login extends Component {
           Taro.login({
             success(res){
               if (res.code) { 
-                this.setState({
+                that.setState({
                   code: res.code
                 })
               } else {

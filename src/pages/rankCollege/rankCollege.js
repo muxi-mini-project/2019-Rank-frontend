@@ -92,9 +92,9 @@ export default class rankCollege extends Component {
                   <Image className='rank-background'></Image>
                 </View>               
                 <View className='head'>
-                  <View className='rank'>名次</View>
-                  <View className='name'>学院名称</View>
-                  <View className='count'>平均步数</View>
+                  <View className='title'>名次</View>
+                  <View className='title'>学院名称</View>
+                  <View className='title'>平均步数</View>
                 </View>
                 <View className='body-list'>
                   {list.map((item, index) => {
@@ -103,9 +103,9 @@ export default class rankCollege extends Component {
                         key={index}
                         className='college-item' 
                       >
-                        <View className='rank'>{index+1}</View>
-                        <View className='name'>{item.department_name}</View>
-                        <View className='count'>{item.step}</View>
+                        <View>{index+1}</View>
+                        <View>{item.department_name}</View>
+                        <View>{item.step}</View>
                     </View>
                     )
                   })} 

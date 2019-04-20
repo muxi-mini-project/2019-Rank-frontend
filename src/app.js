@@ -53,7 +53,35 @@ class App extends Component {
         stdnum: Taro.getStorageSync('stdnum'),
         password: Taro.getStorageSync('password')
       },
+      header: {
+        'cookie': Taro.getStorageSync('cookie')
+      },
       method:'POST'
+    })
+    Taro.getSetting({
+      success(res){
+        if (res.authSetting['scope.werun']) {
+          Taro.getWeRunData({
+            success(res){
+              //获取数据后发给后端
+              Taro.request({
+                url: 'http://47.103.103.195:5000/api/v1/werun/',
+                method: 'POST',
+                header:{
+                  'cookie': Taro.getStorageSync('cookie')
+                },
+                data:{
+                  encryptedData: res.encryptedData,
+                  iv: res.iv
+                },
+                success(){
+                  console.log('发送微信运动数据成功啦')
+                }
+              })
+            }
+          })
+        } 
+      }
     })
   }
 

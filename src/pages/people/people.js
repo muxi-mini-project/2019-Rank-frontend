@@ -33,13 +33,14 @@ export default class People extends Component {
     Fetch(`api/v1/users/${this.$router.params.id}/info`).then(data => {
       this.setState({
         stdnum: data.stdnum,
-          qq: data.qq,
-          booknum: data.booknum,
-          username: data.username,
-          contribute: data.contribute,
-          rank: data.rank,
-          id: data.id,
-          likes: data.likes
+        qq: data.qq,
+        booknum: data.booknum,
+        username: data.username,
+        contribute: data.contribute,
+        rank: data.rank,
+        id: data.id,
+        likes: data.likes,
+        is_liked: data.is_liked
       });
     });
     Fetch(`api/v1/users/${this.$router.params.id}/info/avatar`).then(data => {
@@ -70,7 +71,7 @@ export default class People extends Component {
           })
           that.setState({
             is_liked: true,
-            likes: this.state.likes + 1
+            likes: that.state.likes + 1
           })    
         }
         else{
@@ -102,7 +103,7 @@ export default class People extends Component {
           }) 
           that.setState({
             is_liked: false,
-            likes: this.state.likes - 1
+            likes: that.state.likes - 1
           })    
         }
         else{
