@@ -1,0 +1,82 @@
+.avatar{
+    background: red;
+    height: 140px;
+    width: 140px;
+    margin-left: 30px;
+    border-radius: 70px;
+}
+.top-container{
+    .likebox{
+        display: inline-block;
+        
+        .likePhoto{
+            width: 80px;
+            height: 80px;
+        }
+        Text{
+            display: inline-block;
+            height: 80px;
+            line-height: 80px;
+            vertical-align: middle;
+        }
+    }
+    .per-information{
+        
+        display: inline-block;
+
+        .setting{
+            background: #DCDCDC;
+            display: inline-block;
+            height: 60px;
+            width: 100px;
+            text-align: center;
+            line-height: 60px;
+            border-radius: 10px;
+            vertical-align: center;
+            margin-right: 20px;
+        }
+        .nickname{
+            View{
+                display: inline-block;
+            }
+            margin: 20px 0px;
+        }
+        .student-number{
+            View{
+                display: inline-block;
+            }
+            margin-bottom: 20px;
+        }
+        .QQnumber{
+            View{
+                display: inline-block;
+            }
+        }
+    }
+}
+.data{
+    margin: 30 auto;
+    .first-row{
+        View{
+            display: inline-block;
+            height: 100px;
+            width: 200px;
+            text-align: center;
+            line-height: 100px;
+            border: 1px solid #dcdcdc;
+        }
+    }
+    .second-row{
+        View{
+            display: inline-block;
+            height: 100px;
+            width: 200px;
+            text-align: center;
+            line-height: 100px;
+            border: 1px solid #dcdcdc;
+        }
+    }
+}
+
+
+
