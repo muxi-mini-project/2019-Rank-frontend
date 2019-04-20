@@ -62,6 +62,7 @@ export default class Login extends Component {
   }
   
   toLogin(){
+    var that = this
     //如果学号为空，提醒输入学号
     if(!this.state.stdnum){
       Taro.showToast({
@@ -94,6 +95,14 @@ export default class Login extends Component {
             key:'cookie',
             data: res.header['Set-Cookie']
           })
+          Taro.setStorage({
+            key:'stdnum',
+            data: that.state.stdnum
+          })
+          Taro.setStorage({
+            key:'password',
+            data: that.state.password
+          })
           Taro.navigateTo({
             url:'../index/index'
           })
@@ -104,6 +113,22 @@ export default class Login extends Component {
             title:'账号或密码输入错误，请重新输入',
             icon: 'none',
             duration: 1000
+          })
+          //向微信获取code并存下来
+          Taro.login({
+            success(res){
+              if (res.code) { 
+                this.setState({
+                  code: res.code
+                })
+              } else {
+                Taro.showToast({
+                  title:'获取code失败，请联系开发者',
+                  icon: 'none',
+                  duration: 1000
+                })
+              }
+            }
           })
         }
       }

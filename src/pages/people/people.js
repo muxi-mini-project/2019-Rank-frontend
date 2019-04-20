@@ -38,10 +38,12 @@ export default class People extends Component {
           username: data.username,
           contribute: data.contribute,
           rank: data.rank,
-          is_liked: data.is_liked,
-          likes: data.likes,
-          is_liked: data.is_liked,
           id: data.id
+      });
+    });
+    Fetch(`api/v1/users/${this.$router.params.id}/info/avatar`).then(data => {
+      this.setState({
+        url: data.url
       });
     });
   }
