@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Image } from '@tarojs/components';
+import { View, Image , Swiper, SwiperItem} from '@tarojs/components';
 import './index.scss';
 
 
@@ -143,6 +143,18 @@ export default class Index extends Component {
           onClick={this.torankCollege}
         />
         <navigator url='../login/login'>登录</navigator>
+        <Swiper
+          className='banner'
+          onChange={this.toMy}
+          display-multiple-items='2'
+        >
+        <SwiperItem>
+          <View className='demo-text-1' onClick={this.toIndex}>首页</View>
+        </SwiperItem>
+        <SwiperItem>
+          <View className='demo-text-2'onClick={this.toMy}>我的</View>
+        </SwiperItem>
+        </Swiper>
       </View>
     )
   }
