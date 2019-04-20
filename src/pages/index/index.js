@@ -29,7 +29,7 @@ export default class Index extends Component {
                 success(res){
                   //获取数据后发给后端
                   Taro.request({
-                    url: 'http://67.216.199.87:5000/api/v1/werun/',
+                    url: 'http://47.103.103.195:5000/api/v1/werun/',
                     method: 'POST',
                     header:{
                       'cookie': Taro.getStorageSync('cookie')
@@ -63,7 +63,7 @@ export default class Index extends Component {
         success(res){
           if(res.code){
             Taro.request({
-              url:'http://67.216.199.87:5000/api/v1/login/',
+              url:'http://47.103.103.195:5000/api/v1/login/',
               data:{
                 code:res.code
               },
@@ -93,16 +93,6 @@ export default class Index extends Component {
     if(!Taro.getStorageSync('stdnum') || !Taro.getStorageSync('password')){
       Taro.navigateTo({
           url:'../libLogin/libLogin'
-      })
-    }
-    else{
-      Taro.request({
-        url:'http://67.216.199.87:5000/api/v1/users/lib/',
-        data:{
-          stdnum: Taro.getStorageSync('stdnum'),
-          password: Taro.getStorageSync('password')
-        },
-        method:'POST'
       })
     }
   }

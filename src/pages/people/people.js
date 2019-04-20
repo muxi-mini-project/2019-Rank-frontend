@@ -38,7 +38,8 @@ export default class People extends Component {
           username: data.username,
           contribute: data.contribute,
           rank: data.rank,
-          id: data.id
+          id: data.id,
+          likes: data.likes
       });
     });
     Fetch(`api/v1/users/${this.$router.params.id}/info/avatar`).then(data => {
@@ -54,7 +55,7 @@ export default class People extends Component {
     var that = this
     const {id} = this.state
     Taro.request({
-      url:'http://67.216.199.87:5000/api/v1/likes/',
+      url:'http://47.103.103.195:5000/api/v1/likes/',
       method:'POST',
       header: {
         'cookie': Taro.getStorageSync('cookie')
@@ -66,6 +67,10 @@ export default class People extends Component {
         if(res.statusCode === 200){
           Taro.showToast({
             title:'点赞成功'
+          })
+          that.setState({
+            is_liked: true,
+            likes: this.state.likes + 1
           })    
         }
         else{
@@ -76,18 +81,13 @@ export default class People extends Component {
         }
       }
     })
-    that.setState({
-      is_liked: true,
-      likes: this.state.likes + 1
-    })  
   }
   //delete like发送给后端，并把is_liked改为false(还没有点赞)
   changeToUnlike(){
     const { id } = this.state
     var that = this
-    const {id} = this.state
     Taro.request({
-      url:'http://67.216.199.87:5000/api/v1/likes/',
+      url:'http://47.103.103.195:5000/api/v1/likes/',
       method:'DELETE',
       header: {
         'cookie': Taro.getStorageSync('cookie')
@@ -99,6 +99,10 @@ export default class People extends Component {
         if(res.statusCode === 200){
           Taro.showToast({
             title:'取消点赞成功'
+          }) 
+          that.setState({
+            is_liked: false,
+            likes: this.state.likes - 1
           })    
         }
         else{
@@ -109,10 +113,7 @@ export default class People extends Component {
         }
       }
     })
-    that.setState({
-      is_liked: false,
-      likes: this.state.likes - 1
-    })  
+     
   }
   render() {
     return (

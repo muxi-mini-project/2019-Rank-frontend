@@ -4,7 +4,7 @@ import Taro from "@tarojs/taro";
 // promise就是一个表示未来的事情；
 
 // Fetch(url, data).then((res) => { console.log(res)})
-const preHttp = "http://67.216.199.87:5000/";
+const preHttp = "http://47.103.103.195/";
 const Fetch = (url, data = {}, method = "GET") => {
   const header = { 
     "content-type": "application/json", 
