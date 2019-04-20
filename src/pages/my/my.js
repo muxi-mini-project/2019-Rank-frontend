@@ -16,6 +16,7 @@ export default class My extends Component {
         contribute: '',
         rank:'',
         avatarUrl:'',
+        url:'',
         button:[{
           text:'保存',
           size:'primary',
@@ -55,7 +56,8 @@ export default class My extends Component {
           likes: res.data.likes,
           username: res.data.username,
           contribute: res.data.contribute,
-          rank: res.data.rank
+          rank: res.data.rank,
+          url: res.data.url
         })
       }
     })
@@ -144,7 +146,7 @@ export default class My extends Component {
         <View className={this.state.content_name}>
           <Image 
             className='avatar'
-            src={this.state.avatarUrl}
+            src={this.state.url}
           />
           <View className='top-container'>
             <View className='likebox'>
