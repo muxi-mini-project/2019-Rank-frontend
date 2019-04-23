@@ -42,13 +42,14 @@ class App extends Component {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#FF9125',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'white'
+      navigationBarTextStyle: 'white',
+      backgroundColor: '#EFEFF4'
     }
   }
 
   componentDidMount () {
     Taro.request({
-      url:'http://47.103.103.195:5000/api/v1/users/lib/',
+      url:'https://rank.muxixyz.com:5000/api/v1/users/lib/',
       data:{
         stdnum: Taro.getStorageSync('stdnum'),
         password: Taro.getStorageSync('password')
@@ -65,7 +66,7 @@ class App extends Component {
             success(res){
               //获取数据后发给后端
               Taro.request({
-                url: 'http://47.103.103.195:5000/api/v1/werun/',
+                url: 'https://47.103.103.195:5000/api/v1/werun/',
                 method: 'POST',
                 header:{
                   'cookie': Taro.getStorageSync('cookie')
@@ -75,7 +76,14 @@ class App extends Component {
                   iv: res.iv
                 },
                 success(){
-                  console.log('发送微信运动数据成功啦')
+                  if(res.statusCode === 200){
+                    console.log('werun' + res.statusCode)
+
+                  }
+                  else{
+                    console.log('werun' + res.statusCode)
+                    console.log(res)
+                  }
                 }
               })
             }

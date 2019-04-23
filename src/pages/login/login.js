@@ -81,7 +81,7 @@ export default class Login extends Component {
     }
     //把学号、密码以及微信昵称和code发送给后端
     Taro.request({
-      url:'http://47.103.103.195:5000/api/v1/bind/',
+      url:'https://rank.muxixyz.com:5000/api/v1/bind/',
       method:'POST',
       data:{
         stdnum: this.state.stdnum,
@@ -108,6 +108,11 @@ export default class Login extends Component {
           Taro.switchTab({
             url:'../index/index'
           })
+          Taro.showToast({
+            title:'登录成功'
+          })
+          console.log('bind' + res.statusCode)
+          console.log(res)
         }
         //否则告诉用户账号或者密码错误
         if(res.statusCode != 200){
@@ -116,6 +121,8 @@ export default class Login extends Component {
             icon: 'none',
             duration: 1000
           })
+          console.log('bind' + res.statusCode)
+          console.log(res)
           //向微信获取code并存下来
           Taro.login({
             success(res){
