@@ -29,13 +29,33 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 3,
 			"list": [
 				{
 					"id": 0,
 					"name": "lib",
 					"pathName": "pages/rankLib/rankLib",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "per",
+					"pathName": "pages/rankPer/rankPer",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "college",
+					"pathName": "pages/rankCollege/rankCollege",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
 					"scene": null
 				}
 			]

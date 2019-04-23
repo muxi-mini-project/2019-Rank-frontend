@@ -16,12 +16,11 @@ class App extends Component {
       'pages/index/index',
       'pages/login/login',
       'pages/my/my',
-      // 'pages/help/help',
+      //'pages/help/help',
       'pages/feedback/feedback',
       'pages/rankLib/rankLib',
       'pages/rankPer/rankPer',
       'pages/rankCollege/rankCollege',
-      // 'pages/rankCollegeMonth/rankCollegeMonth',
       'pages/people/people',
       'pages/libLogin/libLogin',
       

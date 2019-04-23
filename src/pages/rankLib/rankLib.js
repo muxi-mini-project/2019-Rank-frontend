@@ -40,9 +40,16 @@ export default class rankLib extends Component {
   componentDidHide () { }
   
   toLinkShow(item) {
-    Taro.navigateTo({
-      url: `../people/people?id=${item.user_id}`
-    });
+    const { my } = this.state
+    if(item.user_id == my.user_id){
+      Taro.switchTab({
+        url: `../my/my`
+      });
+    }else{
+      Taro.navigateTo({
+        url: `../people/people?id=${item.user_id}`
+      });
+    }
   }
 
   scrolltobottom() {

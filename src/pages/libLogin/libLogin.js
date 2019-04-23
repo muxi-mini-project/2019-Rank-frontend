@@ -57,7 +57,7 @@ export default class Login extends Component {
       })
     }
     Taro.request({
-        url:'http://47.103.103.195:5000/api/v1/users/lib/',
+        url:'https://rank.muxixyz.com:5000/api/v1/users/lib/',
         data:{
           stdnum: that.state.stdnum,
           password: that.state.password
@@ -67,6 +67,7 @@ export default class Login extends Component {
         },
         method:'POST',
         success(res){
+          console.log(res)//
           if(res.statusCode === 200){
             Taro.setStorage({
               key:'stdnum',
