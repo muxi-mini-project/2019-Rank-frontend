@@ -15,7 +15,6 @@ export default class My extends Component {
         likes: '',
         contribute: '',
         rank:'',
-        avatarUrl:'',
         url:'',
         button:[{
           text:'保存',
@@ -41,7 +40,7 @@ export default class My extends Component {
     //获取我的qq、学号、是否显示、借书次数、排名等信息
     var that = this
     Taro.request({
-      url:'http://47.103.103.195:5000/api/v1/users/my/info/',
+      url:'https://rank.muxixyz.com/api/v1/users/my/info/',
       method:'GET',
       header: {
         'cookie': Taro.getStorageSync('cookie')
@@ -80,7 +79,7 @@ export default class My extends Component {
       mask_bg: 'mask_bg_none',
     })
     Taro.request({
-      url:'http://47.103.103.195:5000/api/v1/users/my/info/',
+      url:'https://47.103.103.195:5000/api/v1/users/my/info/',
       method:'PUT',
       header:{
         'cookie': Taro.getStorageSync('cookie')
@@ -142,17 +141,13 @@ export default class My extends Component {
   }
   render() {
     return (
-      <View>
+      <View className='content'>
         <View className={this.state.content_name}>
           <Image 
             className='avatar'
             src={this.state.url}
           />
           <View className='top-container'>
-            <View className='likebox'>
-              <Image className='likePhoto' src={require('../../assets/png/like.png')}></Image>
-              <Text>{this.state.likes}</Text>
-            </View>
             <View className='per-information'>
               <View className='nickname'>
                 <View>昵称：</View>
@@ -169,23 +164,31 @@ export default class My extends Component {
                 {!this.state.show_qq && <View>*********</View>}
               </View>
             </View>
-            <View 
-              className='setting'
-              onClick={this.handleMask.bind(this)}
-            >
-              编辑
+            <View className='top-container-right'>
+              <View className='likebox'>
+                <Image className='likePhoto' src={require('../../assets/png/like.png')}></Image>
+                <Text>{this.state.likes}</Text>
+              </View>
+              <View 
+                className='setting'
+                onClick={this.handleMask.bind(this)}
+              >
+                编辑
+              </View>
             </View>
           </View>
           <View className='data'>
-            <View className='first-row'>
-              <View>借书次数</View>
-              <View>步数排名</View>
-              <View>学院贡献值</View>
+            <View className='book'>
+              <View className='name'>借阅书籍次数：</View>
+              <View className='number'>{this.state.booknum}</View>
             </View>
-            <View className='second-row'>
-              <View>{this.state.booknum}</View>
-              <View>{this.state.rank}</View>
-              <View>{this.state.contribute}</View>
+            <View className='rank'>
+              <View className='name'>今日步数校园排名：</View>
+              <View className='number'>{this.state.rank}</View>
+            </View>
+            <View className='contribute'>
+              <View className='name'>学院贡献值：</View>
+              <View className='number'>{this.state.contribute}</View>
             </View>
           </View>
           <View className='feedback' onClick={this.goToHelp}>反馈与帮助</View>

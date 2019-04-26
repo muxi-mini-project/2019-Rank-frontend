@@ -12,7 +12,7 @@ export default class Login extends Component {
   }
 
   config = {
-    navigationBarTitleText: '注册'
+    navigationBarTitleText: 'lib注册'
   }
   
   componentWillMount () { }
@@ -57,7 +57,7 @@ export default class Login extends Component {
       })
     }
     Taro.request({
-        url:'https://rank.muxixyz.com:5000/api/v1/users/lib/',
+        url:'https://rank.muxixyz.com/api/v1/users/lib/',
         data:{
           stdnum: that.state.stdnum,
           password: that.state.password
@@ -72,22 +72,44 @@ export default class Login extends Component {
             Taro.setStorage({
               key:'stdnum',
               data: that.state.stdnum
-          })
-          Taro.setStorage({
+            })
+            console.log('lib' + res.statusCode)
+            console.log(res)
+            Taro.setStorage({
               key:'password',
               data: that.state.password,
               success(){
+                Taro.showToast({
+                  title:'登录成功'
+                })
                 Taro.switchTab({
-                url:'../index/index'
-              })  
-            }
-          })
+                  url:'../index/index'
+                })  
+              }
+            })
           }
-          if(res.statusCode != 200){
+          if(res.statusCode === 400){
             Taro.showToast({
               title:'账号或密码输入错误',
               icon:'none'
             })
+          }
+          if(res.statusCode === 500){
+            Taro.showModal({
+              title: '错误',
+              content: '请求错误',
+              confirmText:'确定',
+              cancelText:'重新尝试',
+              success(res) {
+                if (res.confirm) {
+                  Taro.switchTab({
+                    url:'../index/index'
+                  })
+                } 
+              }
+            })
+            console.log('lib' + res.statusCode)
+            console.log(res)
           }
         }
     })
