@@ -48,7 +48,7 @@ class App extends Component {
 
   componentDidMount () {
     Taro.request({
-      url:'http://47.103.103.195:5000/api/v1/users/lib/',
+      url:'https://rank.muxixyz.com/api/v1/users/lib/',
       data:{
         stdnum: Taro.getStorageSync('stdnum'),
         password: Taro.getStorageSync('password')

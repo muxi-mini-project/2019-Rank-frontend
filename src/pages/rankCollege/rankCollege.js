@@ -20,11 +20,11 @@ export default class rankCollege extends Component {
 
   componentDidMount () { 
     Fetch('api/v1/rank/step/dept/week').then(data => {
-      //console.log(data)
+      console.log(data)
       this.setState({list1: data, list: data})
     })
     Fetch('api/v1/rank/step/dept/month').then(data => {
-      //console.log(data)
+      console.log(data)
       this.setState({list2: data})
     })
   }

@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Label, Input, Button, Textarea } from "@tarojs/components";
+import { View, Input, Button, Textarea } from "@tarojs/components";
 import Fetch from '../../common/require'
 
 export default class Index extends Component {
@@ -68,27 +68,30 @@ export default class Index extends Component {
       const { contact, content } = this.state
       return (
         <View className='feedback'>
-          <View className='form'>
-            <View>
-              <Label>联系方式</Label>
-              <Input 
-                type='text'
-                placeholder='请填写您的QQ号或手机号'
-                value={contact}
-                onChange={this.onChange.bind(this, "contact")}
+          <View className='box'>
+            <View className='form'>
+              <View className='contact'>
+                <View className='contact-head'>联系方式</View>
+                <Input 
+                  type='text'
+                  placeholder='请填写您的QQ号或手机号'
+                  value={contact}
+                  onChange={this.onChange.bind(this, "contact")}
+                />
+              </View>
+              <Textarea 
+                value={content}
+                placeholder='   请填写您的意见或建议，同时欢迎加入小程序交流群XXXXXXXXX与我们交流'
+                className='text'
+                onInput={this.onChange.bind(this, "content")}
               />
             </View>
-            <Textarea 
-              value={content}
-              placeholder='请填写您的意见或建议，同时欢迎加入小程序交流群XXXXXXXXX与我们交流'
-              className='text'
-              onInput={this.onChange.bind(this, "content")}
-            />
             <View>
-              <Button onClick={this.submit}>提交</Button>
+              <Button className='submit' onClick={this.submit}>提交</Button>
             </View>
           </View>
         </View>
+
       )
     }
 

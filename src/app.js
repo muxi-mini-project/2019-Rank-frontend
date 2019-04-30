@@ -41,8 +41,7 @@ class App extends Component {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#FF9125',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'white',
-      backgroundColor: '#EFEFF4'
+      navigationBarTextStyle: 'white'
     }
   }
 
@@ -75,14 +74,7 @@ class App extends Component {
                   iv: res.iv
                 },
                 success(){
-                  if(res.statusCode === 200){
-                    console.log('werun' + res.statusCode)
-
-                  }
-                  else{
-                    console.log('werun' + res.statusCode)
-                    console.log(res)
-                  }
+                  console.log('发送微信运动数据成功啦')
                 }
               })
             }

@@ -108,11 +108,6 @@ export default class Login extends Component {
           Taro.switchTab({
             url:'../index/index'
           })
-          Taro.showToast({
-            title:'登录成功'
-          })
-          console.log('bind' + res.statusCode)
-          console.log(res)
         }
         //否则告诉用户账号或者密码错误
         if(res.statusCode != 200){
@@ -121,8 +116,6 @@ export default class Login extends Component {
             icon: 'none',
             duration: 1000
           })
-          console.log('bind' + res.statusCode)
-          console.log(res)
           //向微信获取code并存下来
           Taro.login({
             success(res){

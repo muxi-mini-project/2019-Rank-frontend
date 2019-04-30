@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Image } from '@tarojs/components';
+import { View, Image, ScrollView } from '@tarojs/components';
 import './rankLib.scss'
 import RankItem  from '../../components/RankItem'
 import Fetch from '../../common/require'
@@ -12,8 +12,7 @@ export default class rankLib extends Component {
     totalNum: 0
   }
   config = {
-    navigationBarTitleText: '学霸排行榜',
-    "onReachBottomDistance": 200
+    navigationBarTitleText: '学霸排行榜'
   }
 
   componentWillMount () { }
@@ -43,12 +42,8 @@ export default class rankLib extends Component {
   toLinkShow(item) {
     const { my } = this.state
     if(item.user_id !== my.user_id){
-      Taro.switchTab({
-        url: `../people/people?id=${item.user_id}`
-      });
-    }else{
       Taro.navigateTo({
-        url: `../my/my`
+        url: `../people/people?id=${item.user_id}`
       });
     }
   }
@@ -58,12 +53,10 @@ export default class rankLib extends Component {
       url: `../my/my`
     });
   }
-  
-  onReachBottom() {
-    var { page,totalNum } = this.state
-    console.log("---开始上拉加载---")//
+
+  scrolltobottom() {
+    const { page,totalNum,list } = this.state
     if(page < totalNum) {
-      var list=this.state.list
       Fetch(
         'api/v1/rank/lib',
         {
@@ -76,9 +69,7 @@ export default class rankLib extends Component {
           page: data.now_page
         })
       })
-      console.log("---结束上拉加载---")//
     }
-
   }
 
   render() {
@@ -87,10 +78,14 @@ export default class rankLib extends Component {
       <View className='rankLib'>
         <View className='main-box'>
             <View className='body'>
-              <View
+              <ScrollView
                 className='scrollbox'
-                /*style={`height:${Taro.getSystemInfoSync().windowHeight}px`}
-                onScrollToLower={this.scrolltobottom}*/
+                scrollY
+                scrollWithAnimation
+                style={`height:${Taro.getSystemInfoSync().windowHeight}px`}
+                enableBackToTop
+                onScrollToLower={this.scrolltobottom}
+                lowerThreshold='20'
               >
                 <View className='background'>
                   <Image className='rank-background'></Image>
@@ -102,7 +97,7 @@ export default class rankLib extends Component {
                   <View className='name'>昵称</View>
                   <View className='count'>借书本数</View>
                 </View>              
-                <View className='item my'>
+                <View className='item my' onClick={this.toLinkMy}>
                   <View className='rank'>{my.rank}</View>
                   <View className='avatar'>
                     <Image src={my.url}></Image>
@@ -124,10 +119,9 @@ export default class rankLib extends Component {
                   )
                 })}  
                 </View>   
-              </View>
+              </ScrollView>
             </View>
         </View>
-        <View className='clear'></View>
       </View>
     )
   }

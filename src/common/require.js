@@ -7,9 +7,8 @@ import Taro from "@tarojs/taro";
 const preHttp = "https://rank.muxixyz.com/";
 const Fetch = (url, data = {}, method = "GET") => {
   const header = { 
-    //"content-type": "application/json", 
     "cookie": Taro.getStorageSync("cookie")
-  };
+  }
   return Taro.request({
     url: preHttp + url,
     data,

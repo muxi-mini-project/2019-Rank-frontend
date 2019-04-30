@@ -85,7 +85,6 @@ export default class rankPer extends Component {
               <ScrollView
                 className='scrollbox'
                 scrollY
-                scrollTop='0'
                 scrollWithAnimation
                 style={`height:${Taro.getSystemInfoSync().windowHeight}px`}
                 enableBackToTop

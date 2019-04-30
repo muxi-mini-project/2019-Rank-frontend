@@ -39,16 +39,7 @@ export default class Index extends Component {
                       iv: res.iv
                     },
                     success(){
-                      if(res.statusCode === 200){
-                        console.log('werun' + res.statusCode)
-                        console.log(res)
-
-                      }
-                      else{
-                        console.log('werun' + res.statusCode)
-                        console.log(res)
-                      }
-                      
+                      console.log('发送微信运动数据成功啦')
                     }
                   })
                 }
@@ -78,29 +69,17 @@ export default class Index extends Component {
               },
               method: 'POST',
               success(res){
-                Taro.showToast({
-                  title:'成功发送请求'
-                })
                 //如果200说明已经注册过了只是session过期，那就储存session并且登陆成功
                 if(res.statusCode === 200){
-                  console.log('login' + res.statusCode)
-                  console.log(res)
                   Taro.setStorage({
                     key:'cookie',
                     data: res.header['Set-Cookie']
                   })
-                  if(!Taro.getStorageSync('stdnum') || !Taro.getStorageSync('password')){
-                    Taro.redirectTo({
-                        url:'../libLogin/libLogin'
-                    })
-                  }
                 }
                 //否则就跳转到注册界面注册
-                if(res.statusCode != 200)
-                {
-                  console.log('login' + res.statusCode)
-                  console.log(res)
-                  Taro.redirectTo({
+                else{
+                  console.log(res.statusCode)
+                  Taro.navigateTo({
                     url:'../login/login'
                   })
                 }
@@ -111,7 +90,11 @@ export default class Index extends Component {
       })
     }
 
-    
+    if(!Taro.getStorageSync('stdnum') || !Taro.getStorageSync('password')){
+      Taro.navigateTo({
+          url:'../libLogin/libLogin'
+      })
+    }
   }
 
   componentDidHide () { }

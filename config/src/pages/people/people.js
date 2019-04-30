@@ -56,7 +56,7 @@ export default class People extends Component {
     var that = this
     const {id} = this.state
     Taro.request({
-      url:'http://47.103.103.195:5000/api/v1/likes/',
+      url:'https://rank.muxixyz.com/api/v1/likes/',
       method:'POST',
       header: {
         'cookie': Taro.getStorageSync('cookie')
@@ -88,7 +88,7 @@ export default class People extends Component {
     const { id } = this.state
     var that = this
     Taro.request({
-      url:'http://47.103.103.195:5000/api/v1/likes/',
+      url:'https://rank.muxixyz.com/api/v1/likes/',
       method:'DELETE',
       header: {
         'cookie': Taro.getStorageSync('cookie')
