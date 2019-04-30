@@ -57,7 +57,7 @@ export default class Login extends Component {
       })
     }
     Taro.request({
-        url:'https://rank.muxixyz.com:5000/api/v1/users/lib/',
+        url:'https://rank.muxixyz.com/api/v1/users/lib/',
         data:{
           stdnum: that.state.stdnum,
           password: that.state.password

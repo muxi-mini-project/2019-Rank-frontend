@@ -30,11 +30,15 @@ class App extends Component {
       list: [
         {
           pagePath: "pages/index/index",
-          text: "首页"
+          text: "首页",
+          iconPath:'./assets/png/unhome.png',
+          selectedIconPath:'./assets/png/home.png'
         },
         {
           pagePath: "pages/my/my",
-          text: "我的"
+          text: "我的",
+          iconPath:'./assets/png/unmy.png',
+          selectedIconPath:'./assets/png/my.png'
         }
       ]
     },
@@ -49,7 +53,7 @@ class App extends Component {
 
   componentDidMount () {
     Taro.request({
-      url:'https://rank.muxixyz.com:5000/api/v1/users/lib/',
+      url:'https://rank.muxixyz.com/api/v1/users/lib/',
       data:{
         stdnum: Taro.getStorageSync('stdnum'),
         password: Taro.getStorageSync('password')
@@ -66,7 +70,7 @@ class App extends Component {
             success(res){
               //获取数据后发给后端
               Taro.request({
-                url: 'https://47.103.103.195:5000/api/v1/werun/',
+                url: 'https://rank.muxixyz.com/api/v1/werun/',
                 method: 'POST',
                 header:{
                   'cookie': Taro.getStorageSync('cookie')

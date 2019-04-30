@@ -41,12 +41,22 @@ export default class rankPer extends Component {
   componentDidHide () { }
   
   toLinkShow(item) {
-    //console.log(item.user_id)
-    Taro.navigateTo({
-      url: `../people/people?id=${item.user_id}`
+    const { my } = this.state
+    if(item.user_id == my.user_id){
+      Taro.switchTab({
+        url: `../my/my`
+      });
+    }else{
+      Taro.navigateTo({
+        url: `../people/people?id=${item.user_id}`
+      });
+    }
+  }
+  toLinkMy() {
+    Taro.switchTab({
+      url: `../my/my`
     });
   }
-
   scrolltobottom() {
     console.log('have a try!')
     const { page,totalNum,list } = this.state
@@ -91,7 +101,10 @@ export default class rankPer extends Component {
                   <View className='name'>昵称</View>
                   <View className='count'>步数</View>
                 </View>              
-                <View className='item my'>
+                <View 
+                  className='item my'
+                  onCLick={this.toLinkMy}
+                >
                   <View className='rank'>{my.rank}</View>
                   <View className='avatar'>
                     <Image src={my.url}></Image>

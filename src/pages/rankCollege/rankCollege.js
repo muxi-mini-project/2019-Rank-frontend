@@ -36,6 +36,7 @@ export default class rankCollege extends Component {
   componentDidHide () { }
 
   switchNav(e) {
+    console.log(e)//
     const { list1,list2 } = this.state
     var cur = e.currentTarget.id
     //取事件源组件上的tag值, 此处target可以替换成currentTarget（指向当前组件）吗
@@ -46,6 +47,7 @@ export default class rankCollege extends Component {
         currentNav:cur,
         list: list1
       })
+
       console.log('week')
     }else if (cur == 1){
       this.setState({
@@ -66,7 +68,7 @@ export default class rankCollege extends Component {
           {navList.map((item, index) => {
             return (
               <View
-                className={this.state.currentNav == index ? 'now' : 'then'}
+                className={this.state.currentNav == index ? 'now common-title' : 'then common-title'}
                 key={index}
                 id={index}
                 onClick={this.switchNav.bind(this)}
@@ -84,7 +86,7 @@ export default class rankCollege extends Component {
                 scrollWithAnimation
                 scrollTop='0'
                 enableBackToTop
-                style={`height:${Taro.getSystemInfoSync().windowHeight}px`}
+                style={`height:${Taro.getSystemInfoSync().windowHeight-40}px`}
                 onScrollToLower={this.scrolltobottom}
                 lowerThreshold='20'
               >

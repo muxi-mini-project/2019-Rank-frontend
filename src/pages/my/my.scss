@@ -1,119 +1,119 @@
+$baseborder: 4px solid #DCDCDC;
+$whitecolor: #FFFFFF;
+@mixin dataroom {
+    height: 116px;
+    line-height: 116px;
+    padding-left: 66px;
+}
+@mixin button{
+    display: block;
+    width: 360px;
+    height: 80px;
+    color: $whitecolor;
+    background: #F18B2E;
+    text-align: center;
+    line-height: 80px;
+}
 page{
-    background-color: #EFEFF4;
+    background-color: $whitecolor;
+    font-size: 32px;
 }
 .content{
-    background-color: #ffffff;
+    background-color: $whitecolor;
     width: 664px;
-    display: block;
     margin: 0 auto;
     margin-top: 182px;
     height: 1000px;
-    font-size: 32px;
+    position: relative;
 }
 .avatar{
     height: 200px;
     width: 200px;
     border-radius: 100px;
     margin: 0 auto;
-    display: block;
+    position: absolute;
+    top: -100px;
+    left: 232px;
 }
 .top-container{
     .top-container-right{
-        display: inline-block;
+        position: absolute;
+        top: 50px;
+        right: 66px;
         width: 130px;
-        margin-left: 72px;
         .likebox{
-            display: inline-block;
+            float: right;
+            margin-right: 12px;
             width: 106px;
-            margin-top: 47px;
-            margin-right: 76px;
             .likePhoto{
                 width: 100px;
                 height: 83px;
-                border: 1px solid black;
-                display: inline-block;
             }
             Text{
-                display: inline-block;
                 width: 106px;
                 text-align: center;
+                display: inline-block;
             }
-        }
-        .setting{
-            background: #BFBFBF;
-            display: inline-block;
-            height: 70px;
-            width: 120px;
-            text-align: center;
-            line-height: 70px;
-            border-radius: 10px;
-            vertical-align: center;
         }
     }
     .per-information{
-        display: inline-block;
+        display: block;
         margin-left: 104px;
-        margin-top: 35px;
+        margin-top: 135px;
         width: 306px;
-        .nickname{
-            View{
-                display: inline-block;
-            }
-        }
-        .student-number{
-            View{
-                display: inline-block;
-            }
-            margin: 43px 0;
+        margin: 0 auto;
+        View{
+            margin-top: 44px;
         }
         .QQnumber{
-            View{
-                display: inline-block;
-            }
+            display: inline-block;
+        }
+        .setting{
+            color: #FF9125;
+            display: inline-block;
+            font-size: 24px;
+            margin-left: 27px;
         }
     }
 }
 
 .data{
     margin: 30 auto;
-    margin-top: 61px;
-    .book{
-        border: 4px solid #DCDCDC;
-        height: 96px;
-        text-align: center;
-        line-height: 96px;
+    margin-top: 60px;
+    Image{
+        display: inline-block;
+        width: 54px;
+        height: 54px;
+        margin: 31px 0px;
     }
-    .rank{
-        height: 96px;
-        text-align: center;
-        line-height: 96px;
-        border-left: 4px solid #DCDCDC;
-        border-right: 4px solid #DCDCDC;
-    }
-    .contribute{
-        border: 4px solid #DCDCDC;
-        height: 96px;
-        text-align: center;
-        line-height: 96px;
+    View{
+        display: block;
+        margin: 0 auto;
     }
     .name{
+        line-height: 116px;
+        vertical-align: top;
         display: inline-block;
+        margin-left: 47px;
     }
-    .number{
-        display: inline-block;
+    .book{
+        @include dataroom();
+        border: $baseborder;
+    }
+    .rank{
+        @include dataroom();
+        border-left: $baseborder;
+        border-right: $baseborder;
+    }
+    .contribute{
+        @include dataroom();
+        border: $baseborder;
     }
 }
 .feedback{
-    border: 1px solid #DCDCDC;
-    background-color: #BFBFBF;
-    height: 80px;
-    width: 360px;
+    @include button;
     border-radius: 10px;
-    line-height: 80px;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 74px;
-    margin-bottom: 94px;
+    margin: 54px auto;
 }
 .mask_bg_show{
     width: 100%;
@@ -132,35 +132,83 @@ page{
     display: none;
 }
 .unmask{
-    width: 500px;
+    width: 664px;
+    height: 468;
+    background: $whitecolor;
     position: absolute;
     z-index: 1005;
     top: 50%;
     left: 50%;
     transform:translate(-50%, -50%);
 }
-.checkbox_label{
-        display: block;
-        background: white;
-}
-    .inputbox{
-        margin: 10 auto;
-        height: 80px;
-        background: white;
-        Text{
+.unmask{
+    .left-box{
+        margin-left: 95px;
+        margin-top: 85px;
+        width: 40px;
+        Checkbox{
             display: inline-block;
-            vertical-align: bottom;
-            width: 140px;
         }
-        Input{
-            display: inline-block;
-            vertical-align: bottom;
-            width: 300px;
+        .showqq{
+            margin-bottom: 41px;
         }
-        button{
-            width: 200px;
-            height: 80px;
-        }
-        
+        display: inline-block;
     }
+    .right-box{
+        width: 460px;
+        margin-left: 50px;
+        display: inline-block;
+        .input_box{
+            margin-top: 58px;
+            Input{
+                display: inline-block;
+                vertical-align: bottom;
+                margin: 0;
+                padding: 0;
+                border-bottom: 1px solid black;
+                width: 260px;
+            }
+            Text{
+                display: inline-block;
+                vertical-align: bottom;
+                width: 120px;
+            }
+            .showQQbox{
+                margin: 41px 0;
+            }
+        }
+    }
+    .stdnum{
+        margin-bottom: 0;
+    }
+    .tips{
+        font-size: 24px;
+        margin-left: 260px;
+        color: #FF9125;
+        margin-bottom: 61px;
+        margin-top: 16px;
+    }
+    Button{
+        @include button;
+        margin: 0 auto;
+        margin-bottom: 42px;
+    }
+}
+// .checkbox_label{
+//     display: inline-block;
+// }
+// .inputbox{
+//     margin: 10 auto;
+//     height: 80px;
+//     background: $whitecolor;
+//     Text{
+//         vertical-align: bottom;
+//         width: 140px;
+//     }
+//     Input{
+//         display: inline-block;
+//         vertical-align: bottom;
+//         width: 300px;
+//     }
+// }
 

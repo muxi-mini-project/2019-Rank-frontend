@@ -29,7 +29,7 @@ export default class Index extends Component {
                 success(res){
                   //获取数据后发给后端
                   Taro.request({
-                    url: 'https://rank.muxixyz.com:5000/api/v1/werun/',
+                    url: 'https://rank.muxixyz.com/api/v1/werun/',
                     method: 'POST',
                     header:{
                       'cookie': Taro.getStorageSync('cookie')
@@ -42,13 +42,11 @@ export default class Index extends Component {
                       if(res.statusCode === 200){
                         console.log('werun' + res.statusCode)
                         console.log(res)
-
                       }
                       else{
                         console.log('werun' + res.statusCode)
                         console.log(res)
                       }
-                      
                     }
                   })
                 }
@@ -72,7 +70,7 @@ export default class Index extends Component {
         success(res){
           if(res.code){
             Taro.request({
-              url:'https://rank.muxixyz.com:5000/api/v1/login/',
+              url:'https://rank.muxixyz.com/api/v1/login/',
               data:{
                 code:res.code
               },

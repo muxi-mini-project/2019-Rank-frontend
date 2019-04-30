@@ -56,7 +56,7 @@ export default class People extends Component {
     var that = this
     const {id} = this.state
     Taro.request({
-      url:'https://rank.muxixyz.com:5000/api/v1/likes/',
+      url:'https://rank.muxixyz.com/api/v1/likes/',
       method:'POST',
       header: {
         'cookie': Taro.getStorageSync('cookie')
@@ -65,6 +65,8 @@ export default class People extends Component {
         star_id: id
       },
       success(res){
+        console.log('likes' + res.statusCode)
+        console.log(res)
         if(res.statusCode === 200){
           Taro.showToast({
             title:'点赞成功'
@@ -88,7 +90,7 @@ export default class People extends Component {
     const { id } = this.state
     var that = this
     Taro.request({
-      url:'https://47.103.103.195:5000/api/v1/likes/',
+      url:'https://rank.muxixyz.com/api/v1/likes/',
       method:'DELETE',
       header: {
         'cookie': Taro.getStorageSync('cookie')
@@ -118,7 +120,7 @@ export default class People extends Component {
   }
   render() {
     return (
-      <View>
+      <View className='content'>
         <View className={this.state.content_name}>
           <Image 
             className='avatar'
