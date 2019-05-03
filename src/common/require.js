@@ -3,12 +3,13 @@ import Taro from "@tarojs/taro";
 // amd cmd;模块发展的演变的过程；
 // promise就是一个表示未来的事情；
 
-// Fetch(url, data).then((res) => { console.log(res) })
+// Fetch(url, data).then((res) => { console.log(res)})
 const preHttp = "https://rank.muxixyz.com/";
 const Fetch = (url, data = {}, method = "GET") => {
   const header = { 
+    "content-type": "application/json", 
     "cookie": Taro.getStorageSync("cookie")
-  }
+  };
   return Taro.request({
     url: preHttp + url,
     data,

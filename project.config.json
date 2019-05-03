@@ -1,8 +1,8 @@
 {
-	"miniprogramRoot": "dist/",
-	"projectname": "D%E7%9B%98ranking4.14%E6%99%9A%E4%B8%8A%E5%8F%A6%E5%AD%98%E7%89%88",
-	"description": "",
-	"appid": "wx99d261528d305c95",
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
@@ -12,6 +12,14 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
+	"libVersion": "2.6.2",
+	"appid": "wx99d261528d305c95",
+	"projectname": "rank",
+	"miniprogramRoot": "dist/",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -29,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": 0,
@@ -63,6 +71,13 @@
 					"id": -1,
 					"name": "f",
 					"pathName": "pages/feedback/feedback",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "h",
+					"pathName": "pages/help/help",
 					"scene": null
 				}
 			]

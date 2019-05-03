@@ -8,6 +8,7 @@ export default class My extends Component {
       this.state = {
         stdnum:'',
         qq:'',
+        name:'',
         username:'',
         show_qq: false,
         show_stdnum: false,
@@ -15,7 +16,7 @@ export default class My extends Component {
         likes: '',
         contribute: '',
         rank:'',
-        avatarUrl:'',
+        changename:false,
         url:'',
         button:[{
           text:'保存',
@@ -88,9 +89,12 @@ export default class My extends Component {
       data:{
         qq: that.state.qq,
         show_qq: that.state.show_qq,
-        show_stdnum: that.state.show_stdnum
+        show_stdnum: that.state.show_stdnum,
+        username: that.state.name
       },
       success(res){
+        console.log('my' + res.statusCode)
+        console.log(res)
         if(res.statusCode === 200){
           Taro.showToast({
             title:'编辑成功',
@@ -135,78 +139,108 @@ export default class My extends Component {
       qq: e.detail.value
     })
   }
+  changename(e){
+    this.setState({
+      name: e.detail.value,
+      changename: true
+    })
+  }
   goToHelp(){
     Taro.navigateTo({
-      url:'../feedback/feedback'
+      url:'../help/help'
     })
   }
   render() {
     return (
-      <View>
-        <View className={this.state.content_name}>
+      <View className={this.state.content_name}>
+        <View className='content'>
           <Image 
             className='avatar'
             src={this.state.url}
           />
           <View className='top-container'>
-            <View className='likebox'>
-              <Image className='likePhoto' src={require('../../assets/png/like.png')}></Image>
-              <Text>{this.state.likes}</Text>
-            </View>
             <View className='per-information'>
               <View className='nickname'>
-                <View>昵称：</View>
-                <View>{this.state.username}</View>
+                <Text>昵称：</Text>
+                {this.state.changename && <Text>{this.state.name}</Text>}
+                {!this.state.changename && <Text>{this.state.username}</Text>}
               </View>
               <View className='student-number'>
-                <View>学号：</View>
-                {this.state.show_stdnum && <View>{this.state.stdnum}</View>}
-                {!this.state.show_stdnum && <View>*********</View>}
+                <Text>学号：</Text>
+                {this.state.show_stdnum && <Text>{this.state.stdnum}</Text>}
+                {!this.state.show_stdnum && <Text>*********</Text>}
               </View>
               <View className='QQnumber'>
-                <View>QQ：</View>
-                {this.state.show_qq && <View>{this.state.qq}</View>}
-                {!this.state.show_qq && <View>*********</View>}
+                <Text>QQ：</Text>
+                {this.state.show_qq && <Text>{this.state.qq}</Text>}
+                {!this.state.show_qq && <Text>*********</Text>}
+              </View>
+              <View 
+                className='setting'
+                onClick={this.handleMask.bind(this)}
+              >
+                编辑
               </View>
             </View>
-            <View 
-              className='setting'
-              onClick={this.handleMask.bind(this)}
-            >
-              编辑
+            <View className='top-container-right'>
+              <View className='likebox'>
+                <Image className='likePhoto' src={require('../../assets/png/like.png')}></Image>
+                <Text>{this.state.likes}</Text>
+              </View>
             </View>
           </View>
           <View className='data'>
-            <View className='first-row'>
-              <View>借书次数</View>
-              <View>步数排名</View>
-              <View>学院贡献值</View>
+            <View className='book'>
+              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
+              <Text className='name'>借书次数：{this.state.booknum}</Text>
             </View>
-            <View className='second-row'>
-              <View>{this.state.booknum}</View>
-              <View>{this.state.rank}</View>
-              <View>{this.state.contribute}</View>
+            <View className='rank'>
+              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
+              <Text className='name'>步数排名：{this.state.rank}</Text>
+            </View>
+            <View className='contribute'>
+              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
+              <Text className='name'>学院贡献：{this.state.contribute}</Text>
             </View>
           </View>
-          <View className='feedback' onClick={this.goToHelp}>反馈与帮助</View>
+          <View className='feedback' onClick={this.goToHelp}>问题与反馈</View>
         </View>
         <View className={this.state.mask_bg}></View>
         <View className={this.state.mask_name}>
-          <CheckboxGroup className='checkbox_label' onChange={this.changeShow.bind(this)}>
-            <Checkbox checked={this.state.show_qq} value='qq'>对他人显示QQ号</Checkbox>
-            <Checkbox checked={this.state.show_stdnum} value='stdnum'>对他人显示学号</Checkbox>
+          <CheckboxGroup className='left-box' onChange={this.changeShow.bind(this)}>
+            <Checkbox className='showqq' checked={this.state.show_qq} value='qq' />
+            <Checkbox checked={this.state.show_stdnum} value='stdnum' />
           </CheckboxGroup>
-          <View className='inputbox'>
-            <Text>QQ号：</Text>
-            <Input
-              placeholderClass='placeholder'
-              type='number'
-              placeholder='请输入你的QQ号'
-              value={this.state.QQ}
-              onInput={this.changeQQNumber.bind(this)}
-              onChange={this.changeQQNumber.bind(this)}
-            />
+          <View className='right-box'>
+            <View className='input_box'>
+              <View className='shownamebox'>
+                <Text>昵称：</Text>
+                <Input
+                  placeholderClass='placeholder'
+                  type='text '
+                  placeholder='请输入你的昵称'
+                  value={this.state.name}
+                  onInput={this.changename.bind(this)}
+                  onChange={this.changename.bind(this)}
+                />
+              </View>
+              <View className='showQQbox'>
+                <Text>QQ号：</Text>
+                <Input
+                  placeholderClass='placeholder'
+                  type='number'
+                  placeholder='请输入你的QQ号'
+                  value={this.state.QQ}
+                  onInput={this.changeQQNumber.bind(this)}
+                  onChange={this.changeQQNumber.bind(this)}
+                />
+              </View>
+            </View> 
+            <View className='stdnum'>
+              <Text>学号：{this.state.stdnum}</Text>
+            </View>         
           </View>
+          <View className='tips'>*勾选代表对其他人可见</View>
           <Button
             size={this.state.button.size}
             type={this.state.button.type}

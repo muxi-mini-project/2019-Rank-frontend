@@ -16,24 +16,27 @@ class App extends Component {
       'pages/index/index',
       'pages/login/login',
       'pages/my/my',
-      //'pages/help/help',
+      'pages/help/help',
       'pages/feedback/feedback',
       'pages/rankLib/rankLib',
       'pages/rankPer/rankPer',
       'pages/rankCollege/rankCollege',
       'pages/people/people',
-      'pages/libLogin/libLogin',
-      
+      'pages/libLogin/libLogin'      
     ],
     tabBar: {
       list: [
         {
           pagePath: "pages/index/index",
-          text: "首页"
+          text: "首页",
+          iconPath:'./assets/png/unhome.png',
+          selectedIconPath:'./assets/png/home.png'
         },
         {
           pagePath: "pages/my/my",
-          text: "我的"
+          text: "我的",
+          iconPath:'./assets/png/unmy.png',
+          selectedIconPath:'./assets/png/my.png'
         }
       ]
     },
@@ -41,7 +44,8 @@ class App extends Component {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#FF9125',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'white'
+      navigationBarTextStyle: 'white',
+      backgroundColor: '#EFEFF4'
     }
   }
 
@@ -74,7 +78,14 @@ class App extends Component {
                   iv: res.iv
                 },
                 success(){
-                  console.log('发送微信运动数据成功啦')
+                  if(res.statusCode === 200){
+                    console.log('werun' + res.statusCode)
+
+                  }
+                  else{
+                    console.log('werun' + res.statusCode)
+                    console.log(res)
+                  }
                 }
               })
             }

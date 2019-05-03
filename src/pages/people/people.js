@@ -65,6 +65,8 @@ export default class People extends Component {
         star_id: id
       },
       success(res){
+        console.log('likes' + res.statusCode)
+        console.log(res)
         if(res.statusCode === 200){
           Taro.showToast({
             title:'点赞成功'
@@ -118,7 +120,7 @@ export default class People extends Component {
   }
   render() {
     return (
-      <View>
+      <View className='content'>
         <View className={this.state.content_name}>
           <Image 
             className='avatar'

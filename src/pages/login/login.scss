@@ -1,5 +1,6 @@
 $basecolor: #FF9125;
 $basefontsize: 36px;
+
 page{
     background-color: #EFEFF4;
 }
@@ -25,7 +26,6 @@ View{
             flex-direction: row;
             justify-content: center;
             margin-bottom: 60px;
-            background: #FFFFFF;
             View{
                 display: inline-block;
                 vertical-align: bottom;
@@ -43,7 +43,6 @@ View{
             font-size: 30px;
             text-align: center;
             width: 650px;
-            background: #FFFFFF;
         }
         
     }

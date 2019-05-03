@@ -47,7 +47,7 @@ export default class rankLib extends Component {
       });
     }
   }
-
+  
   toLinkMy() {
     Taro.switchTab({
       url: `../my/my`
@@ -91,33 +91,36 @@ export default class rankLib extends Component {
                   <Image className='rank-background'></Image>
                 </View>           
                 <View className='main'>
-                <View className='head'>
-                  <View className='rank'>名次</View>
-                  <View className='avatar'>头像</View>
-                  <View className='name'>昵称</View>
-                  <View className='count'>借书本数</View>
-                </View>              
-                <View className='item my' onClick={this.toLinkMy}>
-                  <View className='rank'>{my.rank}</View>
-                  <View className='avatar'>
-                    <Image src={my.url}></Image>
+                  <View className='head'>
+                    <View className='rank inline'>名次</View>
+                    <View className='avatar inline'>头像</View>
+                    <View className='name inline'>昵称</View>
+                    <View className='count inline'>借书本数</View>
+                  </View>              
+                  <View className='item my' onClick={this.toLinkMy}>
+                    <View className='rank inline'>{my.rank}</View>
+                    <View className='avatar inline'>
+                      <Image src={my.url}></Image>
+                    </View>
+                    <View className='name inline'>{my.username}</View>
+                    <View className='count inline'>{my.booknum}</View>
                   </View>
-                  <View className='name'>{my.username}</View>
-                  <View className='count'>{my.booknum}</View>
-                </View>
-                {list.map((item, index) => {
-                  return (
-                    <RankItem 
-                      key={item.user_id}
-                      rank={index+1}
-                      item={item}
-                      url={item.url}
-                      count={item.booknum}
-                      username={item.username}
-                      onCLick={this.toLinkShow}
-                    />
-                  )
-                })}  
+                  <View className='table'>
+                    {list.map((item, index) => {
+                      return (
+                        <RankItem 
+                          className='rank-item'
+                          key={item.user_id}
+                          rank={index+1}
+                          item={item}
+                          url={item.url}
+                          count={item.booknum}
+                          username={item.username}
+                          onCLick={this.toLinkShow}
+                        />
+                      )
+                    })}  
+                  </View>
                 </View>   
               </ScrollView>
             </View>
