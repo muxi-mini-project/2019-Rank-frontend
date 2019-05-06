@@ -93,18 +93,18 @@ export default class rankPer extends Component {
                 </View>           
                 <View className='main'>
                 <View className='head'>
-                  <View className='rank'>名次</View>
-                  <View className='avatar'>头像</View>
-                  <View className='name'>昵称</View>
-                  <View className='count'>步数</View>
+                  <View className='rank inline'>名次</View>
+                  <View className='avatar inline'>头像</View>
+                  <View className='name inline'>昵称</View>
+                  <View className='count inline'>步数</View>
                 </View>              
                 <View className='item my' onCLick={this.toLinkMy}>
-                  <View className='rank'>{my.rank}</View>
-                  <View className='avatar'>
+                  <View className='rank inline'>{my.rank}</View>
+                  <View className='avatar  inline'>
                     <Image src={my.url}></Image>
                   </View>
-                  <View className='name'>{my.username}</View>
-                  <View className='count'>{my.step}</View>
+                  <View className='name inline'>{my.username}</View>
+                  <View className='count inline'>{my.step}</View>
                 </View>
                 {list.map((item, index) => {
                   return (

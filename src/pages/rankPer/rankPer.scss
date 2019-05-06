@@ -43,13 +43,9 @@
 }
 .rank{
   width: 110px;
-  text-align: center;
-  display: inline-block;
 }
 .avatar{
   width: 140px;
-  display: inline-block;
-  text-align: center;
 }
 .avatar image{
   width: 100px;
@@ -58,11 +54,11 @@
 }
 .name{
   width: 238px;
-  text-align: center;
-  display: inline-block;
 }
 .count{
   width: 176px;
+}
+.inline{
   text-align: center; 
   display: inline-block; 
 }

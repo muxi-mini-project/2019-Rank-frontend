@@ -15,8 +15,8 @@ $whitecolor: #FFFFFF;
     line-height: 80px;
 }
 page{
-    background-color: $whitecolor;
     font-size: 32px;
+    background-color: #EFEFF4;
 }
 .content{
     background-color: $whitecolor;
@@ -36,6 +36,9 @@ page{
     left: 232px;
 }
 .top-container{
+    margin-top: 100px;
+    display: inline-block;
+    width: 664px;
     .top-container-right{
         position: absolute;
         top: 50px;
@@ -45,21 +48,16 @@ page{
             float: right;
             margin-right: 12px;
             width: 106px;
-            .likePhoto{
-                width: 100px;
-                height: 83px;
-            }
-            Text{
-                width: 106px;
-                text-align: center;
-                display: inline-block;
+            Image{
+                width: 54px;
+                height: 44px;
+                margin-right: 10px;
             }
         }
     }
     .per-information{
         display: block;
         margin-left: 104px;
-        margin-top: 135px;
         width: 306px;
         margin: 0 auto;
         View{
@@ -67,14 +65,24 @@ page{
         }
         .QQnumber{
             display: inline-block;
+            .left{
+                margin-right: 12px;
+            }
+            .right{
+                width: 180px;
+                display: inline-block;
+            }
         }
         .setting{
+            margin-top: 0px;
             color: #FF9125;
-            display: inline-block;
             font-size: 24px;
-            margin-left: 27px;
+            float: right;
+            right: 86px;
+            top: 100px;
         }
     }
+    
 }
 
 .data{
@@ -194,21 +202,4 @@ page{
         margin-bottom: 42px;
     }
 }
-// .checkbox_label{
-//     display: inline-block;
-// }
-// .inputbox{
-//     margin: 10 auto;
-//     height: 80px;
-//     background: $whitecolor;
-//     Text{
-//         vertical-align: bottom;
-//         width: 140px;
-//     }
-//     Input{
-//         display: inline-block;
-//         vertical-align: bottom;
-//         width: 300px;
-//     }
-// }
 

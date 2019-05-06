@@ -80,7 +80,7 @@ export default class People extends Component {
           Taro.showToast({
             title:'点赞失败',
             icon: 'none'
-          })
+          }) 
         }
       }
     })
@@ -121,47 +121,49 @@ export default class People extends Component {
   render() {
     return (
       <View className='content'>
-        <View className={this.state.content_name}>
-          <Image 
-            className='avatar'
-            src={this.state.url}
-          />
-          <View className='top-container'>
+        <Image 
+          className='avatar'
+          src={this.state.url}
+        />
+        <View className='top-container'>
+          <View className='top-contaniner-right'>
             <View className='likebox'>
-              {this.state.is_liked && <Image onClick={this.changeToUnlike.bind(this)} className='likePhoto' src={require('../../assets/png/like.png')} />}
-              {!this.state.is_liked && <Image onClick={this.changeToLike.bind(this)} className='likePhoto' src={require('../../assets/png/unlike.png')} />}
+              {this.state.is_liked && <Image style='width:54rpx; height:44rpx; margin-left:460rpx; margin-right: 15rpx' onClick={this.changeToUnlike.bind(this)} src={require('../../assets/png/like.png')} />}
+              {!this.state.is_liked && <Image style='width:54rpx; height:44rpx; margin-left:460rpx; margin-right: 15rpx' onClick={this.changeToLike.bind(this)} src={require('../../assets/png/unlike.png')} />}
               <Text>{this.state.likes}</Text>
             </View>
-            <View className='per-information'>
-              <View className='nickname'>
-                <View>昵称：</View>
-                <View>{this.state.username}</View>
-              </View>
-              <View className='student-number'>
-                <View>学号：</View>
-                {this.state.stdnum && <View>{this.state.stdnum}</View>}
-                {!this.state.stdnum && <View>*********</View>}
-              </View>
-              <View className='QQnumber'>
-                <View>QQ：</View>
-                {this.state.qq && <View>{this.state.qq}</View>}
-                {!this.state.qq && <View>*********</View>}
-              </View>
-            </View>
           </View>
-          <View className='data'>
-            <View className='first-row'>
-              <View>借书次数</View>
-              <View>步数排名</View>
-              <View>学院贡献值</View>
+          <View className='per-information'>
+            <View className='nickname'>
+              <Text>昵称：</Text>
+              <Text>{this.state.username}</Text>
             </View>
-            <View className='second-row'>
-              <View>{this.state.booknum}</View>
-              <View>{this.state.rank}</View>
-              <View>{this.state.contribute}</View>
+            <View className='student-number'>
+              <Text>学号：</Text>
+              {this.state.stdnum && <Text>{this.state.stdnum}</Text>}
+              {!this.state.stdnum && <Text>*********</Text>}
+            </View>
+            <View className='QQnumber'>
+              <Text>QQ：</Text>
+              {this.state.qq && <Text>{this.state.qq}</Text>}
+              {!this.state.qq && <Text>*********</Text>}
             </View>
           </View>
         </View>
+        <View className='data'>
+            <View className='book'>
+              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
+              <Text className='name'>借书次数：{this.state.booknum}</Text>
+            </View>
+            <View className='rank'>
+              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
+              <Text className='name'>步数排名：{this.state.rank}</Text>
+            </View>
+            <View className='contribute'>
+              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
+              <Text className='name'>学院贡献：{this.state.contribute}</Text>
+            </View>
+          </View>
       </View>
     )
   }

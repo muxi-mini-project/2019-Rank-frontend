@@ -97,14 +97,19 @@ export default class My extends Component {
         console.log(res)
         if(res.statusCode === 200){
           Taro.showToast({
-            title:'编辑成功',
+            title:'编辑成功'
+          })
+        }
+        else if(res.statusCode === 400){
+          Taro.showToast({
+            title:'昵称或QQ重复，请重新尝试',
             icon: 'none',
             duration: 1000
           })
         }
         else{
           Taro.showToast({
-            title:'编辑失败，请重新尝试',
+            title:'网络错误，请重新尝试',
             icon: 'none',
             duration: 1000
           })
@@ -171,15 +176,10 @@ export default class My extends Component {
                 {!this.state.show_stdnum && <Text>*********</Text>}
               </View>
               <View className='QQnumber'>
-                <Text>QQ：</Text>
-                {this.state.show_qq && <Text>{this.state.qq}</Text>}
-                {!this.state.show_qq && <Text>*********</Text>}
-              </View>
-              <View 
-                className='setting'
-                onClick={this.handleMask.bind(this)}
-              >
-                编辑
+                <Text className='left'>QQ：</Text>
+                {this.state.show_qq && <Text className='right'>{this.state.qq}</Text>}
+                {!this.state.show_qq && <Text className='right'>*********</Text>}
+                <View className='setting' onClick={this.handleMask.bind(this)}>编辑</View>
               </View>
             </View>
             <View className='top-container-right'>
@@ -237,7 +237,7 @@ export default class My extends Component {
               </View>
             </View> 
             <View className='stdnum'>
-              <Text>学号：{this.state.stdnum}</Text>
+              <Text>学号：   {this.state.stdnum}</Text>
             </View>         
           </View>
           <View className='tips'>*勾选代表对其他人可见</View>
