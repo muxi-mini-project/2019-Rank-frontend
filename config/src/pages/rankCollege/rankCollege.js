@@ -15,9 +15,6 @@ export default class rankCollege extends Component {
     navigationBarTitleText: '学院运动榜'
   }
 
-
-  componentWillMount () { }
-
   componentDidMount () { 
     Fetch('api/v1/rank/step/dept/week').then(data => {
       console.log(data)
@@ -29,11 +26,12 @@ export default class rankCollege extends Component {
     })
   }
 
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
+  toLinkDept(e) {
+    let name = e.currentTarget.dataset.name
+    Taro.navigateTo({
+      url: `../rankDept/rankDept?id=${name}`
+    });
+  }
 
   switchNav(e) {
     const { list1,list2 } = this.state
@@ -102,6 +100,8 @@ export default class rankCollege extends Component {
                       <View 
                         key={index}
                         className='college-item' 
+                        data-name={item.department_name}
+                        onClick={this.toLinkDept}
                       >
                         <View>{index+1}</View>
                         <View>{item.department_name}</View>

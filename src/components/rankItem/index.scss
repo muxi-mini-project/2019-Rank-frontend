@@ -3,7 +3,7 @@
     height: 134px;
     border-bottom: 2px solid rgba(220,220,220,1);
     background:rgba(255,255,255,1);
-  }
+}
 .rank{
   width: 110px;
   text-align: center;
@@ -26,10 +26,16 @@
   width: 238px;
   text-align: center;
   display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .count{
   width: 176px;
   text-align: center; 
   display: inline-block; 
 }
-
+.first, .second, .third{
+  opacity: 0;
+  background-color: red;
+}

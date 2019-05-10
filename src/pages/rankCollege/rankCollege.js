@@ -15,9 +15,6 @@ export default class rankCollege extends Component {
     navigationBarTitleText: '学院运动榜'
   }
 
-
-  componentWillMount () { }
-
   componentDidMount () { 
     Fetch('api/v1/rank/step/dept/week').then(data => {
       console.log(data)
@@ -29,11 +26,13 @@ export default class rankCollege extends Component {
     })
   }
 
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
+  toLinkDept(e) {
+    console.log(e.currentTarget.dataset.name)
+    let name = e.currentTarget.dataset.name
+    Taro.navigateTo({
+      url: `../rankDept/rankDept?id=${name}`
+    });
+  }
 
   switchNav(e) {
     console.log(e)//
@@ -47,16 +46,13 @@ export default class rankCollege extends Component {
         currentNav:cur,
         list: list1
       })
-
-      console.log('week')
     }else if (cur == 1){
       this.setState({
         currentNav:cur,
         list: list2
       })
-      console.log('month')
     }else{
-      console.log('error' + e)
+      console.log('error' + e)//
     }
   }  
 
@@ -91,7 +87,10 @@ export default class rankCollege extends Component {
                 lowerThreshold='20'
               >
                 <View className='background'>
-                  <Image className='rank-background'></Image>
+                <Image 
+                  className='rank-background'
+                  src='../../assets/png/collegeBG.png'
+                />
                 </View>               
                 <View className='head'>
                   <View className='rank'>名次</View>
@@ -104,8 +103,14 @@ export default class rankCollege extends Component {
                       <View 
                         key={index}
                         className='college-item' 
+                        data-name={item.department_id}
+                        onClick={this.toLinkDept}
                       >
-                        <View className='rank'>{index+1}</View>
+                        <View
+                          className={index == 0 ? 'rank first': ( index == 1 ? 'rank second': (index == 2 ? 'rank third' :'rank') )}
+                        >
+                          <View>{index+1}</View>
+                        </View>
                         <View className='name'>{item.department_name}</View>
                         <View className='count'>{item.step}</View>
                     </View>
