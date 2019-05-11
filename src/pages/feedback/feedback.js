@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Label, Input, Button, Textarea } from "@tarojs/components";
+import { View, Input, Button, Textarea } from "@tarojs/components";
 import Fetch from '../../common/require'
 
 export default class Index extends Component {
@@ -27,14 +27,14 @@ export default class Index extends Component {
       const { contact, content } = this.state
       if (content === "") {
         Taro.showToast({
-          title: '写点什么吧～', 
+          title: '请留下你的意见吧！', 
           icon: 'none'
         })
         return
       }
       if (contact === "") {
         Taro.showToast({
-          title: '写点什么吧～', 
+          title: '请留下你的意见吧！', 
           icon: 'none'
         })
         return

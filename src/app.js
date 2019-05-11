@@ -21,6 +21,7 @@ class App extends Component {
       'pages/rankLib/rankLib',
       'pages/rankPer/rankPer',
       'pages/rankCollege/rankCollege',
+      'pages/rankDept/rankDept',
       'pages/people/people',
       'pages/libLogin/libLogin'      
     ],

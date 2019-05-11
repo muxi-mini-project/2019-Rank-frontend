@@ -1,31 +1,31 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image, ScrollView } from '@tarojs/components';
-import './rankPer.scss'
-import RankItem from '../../components/RankItem/index'
+import './rankDept.scss'
+//import RankItem from '../../components/RankItem/index'
 import Fetch from '../../common/require'
 
-export default class rankPer extends Component {
+export default class rankDept extends Component {
   state = {
     list: [],
-    my: [],
+    //my: [],
     page: 1,
     totalNum: 0
   }
 
   config = {
-    navigationBarTitleText: '运动健将榜'
+    navigationBarTitleText: '叫啥比较好？'
   }
 
   componentDidMount () { 
     Fetch(
-      'api/v1/rank/step/person',
+      'api/v1/rank/step/dept/person',
       {
+        department_id: this.$router.params.id,
         page: 1
       }
     ).then(data => {
       this.setState({
         list: this.state.list.concat(data.list),
-        my: data.my,
         totalNum: data.total_page,
         page: data.now_page
       })
@@ -53,18 +53,19 @@ export default class rankPer extends Component {
     }
   }
 
-  toLinkMy() {
+  /*toLinkMy() {
     Taro.switchTab({
       url: `../my/my`
     });
-  }
+  }*/
 
   scrolltobottom() {
     const { page,totalNum,list } = this.state
     if(page < totalNum) {
       Fetch(
-        'api/v1/rank/step/person',
+        'api/v1/rank/step/dept/person',
         {
+          department_id: this.$router.params.id,
           page: page+1
         }
       ).then(data => {
@@ -73,14 +74,13 @@ export default class rankPer extends Component {
           totalNum: data.total_page,
           page: data.now_page
         })
-        console.log('haha')
       })
     }
   }
   render() {
-    const { list, my } = this.state;
+    const { list } = this.state;
     return (
-      <View className='rankPer'>
+      <View className='rankDept'>
         <View className='main-box'>
             <View className='body'>
               <ScrollView
@@ -93,10 +93,7 @@ export default class rankPer extends Component {
                 lowerThreshold='20'
               >
                 <View className='background'>
-                <Image 
-                  className='rank-background'
-                  src='../../assets/png/runBG.png'
-                />
+                  <Image className='rank-background'></Image>
                 </View>           
                 <View className='main'>
                 <View className='head'>
@@ -105,14 +102,6 @@ export default class rankPer extends Component {
                   <View className='name inline'>昵称</View>
                   <View className='count inline'>步数</View>
                 </View>              
-                <View className='item my' onClick={this.toLinkMy}>
-                  <View className='ranking inline'>{my.rank}</View>
-                  <View className='avatar  inline'>
-                    <Image src={my.url}></Image>
-                  </View>
-                  <View className='name inline'>{my.username}</View>
-                  <View className='count inline'>{my.step}</View>
-                </View>
                 {list.map((item, index) => {
                   return (
                     /*<RankItem 

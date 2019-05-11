@@ -26,11 +26,11 @@ const Fetch = (url, data = {}, method = "GET") => {
     } else {
       // 异常
       Taro.showToast({
-        title: `服务端错误: ${res.statusCode}`,
+        title: `网络错误，请重新尝试`,
         icon: "none",
         duration: 1000
       });
-      throw new Error(`服务端错误: ${res.statusCode}`);
+      throw new Error(`服务端错误，请重新尝试`);
     }
   });
 };

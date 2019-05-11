@@ -15,8 +15,6 @@ export default class rankLib extends Component {
     navigationBarTitleText: '学霸排行榜'
   }
 
-  componentWillMount () { }
-
   componentDidMount () {
     Fetch(
       'api/v1/rank/lib',
@@ -79,7 +77,10 @@ export default class rankLib extends Component {
                 lowerThreshold='20'
               >
                 <View className='background'>
-                  <Image className='rank-background'></Image>
+                  <Image 
+                    className='rank-background'
+                    src={require('../../assets/png/rankLib.png')}
+                  />
                 </View>           
                 <View className='main'>
                 <View className='head'>
