@@ -82,7 +82,7 @@ export default class rankLib extends Component {
                 <View className='background'>
                   <Image 
                     className='rank-background'
-                    src='../../assets/png/runBG.png'
+                    src='../../assets/png/libBG.png'
                   />
                 </View>           
                 <View className='main'>

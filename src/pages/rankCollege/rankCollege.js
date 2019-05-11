@@ -17,20 +17,18 @@ export default class rankCollege extends Component {
 
   componentDidMount () { 
     Fetch('api/v1/rank/step/dept/week').then(data => {
-      console.log(data)
       this.setState({list1: data, list: data})
     })
     Fetch('api/v1/rank/step/dept/month').then(data => {
-      console.log(data)
       this.setState({list2: data})
     })
   }
 
   toLinkDept(e) {
-    console.log(e.currentTarget.dataset.name)
+    let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
     Taro.navigateTo({
-      url: `../rankDept/rankDept?id=${name}`
+      url: `../rankDept/rankDept?id=${id}&name=${name}`
     });
   }
 
@@ -103,7 +101,8 @@ export default class rankCollege extends Component {
                       <View 
                         key={index}
                         className='college-item' 
-                        data-name={item.department_id}
+                        data-id={item.department_id}
+                        data-name={item.department_name}
                         onClick={this.toLinkDept}
                       >
                         <View

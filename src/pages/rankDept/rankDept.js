@@ -13,7 +13,13 @@ export default class rankDept extends Component {
   }
 
   config = {
-    navigationBarTitleText: '叫啥比较好？'
+    navigationBarTitleText: '学院排行榜'
+  }
+
+  componentWillMount () {
+    Taro.setNavigationBarTitle({
+      title: `${this.$router.params.name}`
+    })    
   }
 
   componentDidMount () { 
@@ -93,7 +99,10 @@ export default class rankDept extends Component {
                 lowerThreshold='20'
               >
                 <View className='background'>
-                  <Image className='rank-background'></Image>
+                  <Image 
+                    className='rank-background'
+                    src='../../assets/png/runBG.png'
+                  />
                 </View>           
                 <View className='main'>
                 <View className='head'>
