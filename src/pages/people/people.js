@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image , Text} from '@tarojs/components'
 import './people.scss'
-import Fetch from '../../common/require'
+import Fetch from '../../common/require2'
 
 export default class People extends Component {
   constructor(){
@@ -13,7 +13,7 @@ export default class People extends Component {
         booknum: '',
         contribute: '',
         rank:'',
-        is_liked: true,
+        isLiked: true,
         likes: 0,
         url:'',
         id:''
@@ -40,7 +40,7 @@ export default class People extends Component {
         rank: data.rank,
         id: data.id,
         likes: data.likes,
-        is_liked: data.is_liked
+        isLiked: data.is_liked
       });
     });
     Fetch(`api/v1/users/${this.$router.params.id}/info/avatar`).then(data => {
@@ -51,117 +51,112 @@ export default class People extends Component {
   }
 
   componentDidHide () { }
-  //add like发送给后端，并把is_liked改为true(已经点赞啦)
+  //add like发送给后端，并把isLiked改为true(已经点赞啦)
   changeToLike(){
-    var that = this
-    const {id} = this.state
-    Taro.request({
-      url:'https://rank.muxixyz.com/api/v1/likes/',
-      method:'POST',
-      header: {
-        'cookie': Taro.getStorageSync('cookie')
-      },
-      data:{
+    const {id, likes} = this.state
+
+    Fetch(
+      'api/v1/likes/',
+      {
         star_id: id
       },
-      success(res){
-        console.log('likes' + res.statusCode)
-        console.log(res)
-        if(res.statusCode === 200){
+      'POST'
+    )
+      .then(data =>{
+        if(data){
           Taro.showToast({
             title:'点赞成功'
           })
-          that.setState({
-            is_liked: true,
-            likes: that.state.likes + 1
-          })    
+          this.setState({
+            isLiked: true,
+            likes: likes + 1
+          })
         }
-        else{
+      })
+      .then(statusCode =>{
+        if(statusCode){
           Taro.showToast({
-            title:'点赞失败',
-            icon: 'none'
-          }) 
-        }
-      }
-    })
-  }
-  //delete like发送给后端，并把is_liked改为false(还没有点赞)
-  changeToUnlike(){
-    const { id } = this.state
-    var that = this
-    Taro.request({
-      url:'https://rank.muxixyz.com/api/v1/likes/',
-      method:'DELETE',
-      header: {
-        'cookie': Taro.getStorageSync('cookie')
-      },
-      data:{
-        star_id: id
-      },
-      success(res){
-        if(res.statusCode === 200){
-          Taro.showToast({
-            title:'取消点赞成功'
-          }) 
-          that.setState({
-            is_liked: false,
-            likes: that.state.likes - 1
-          })    
-        }
-        else{
-          Taro.showToast({
-            title:'取消点赞失败',
+            title:'网络错误，请重新尝试',
             icon: 'none'
           })
         }
-      }
-    })
-     
+      })
+  }
+  //delete like发送给后端，并把isLiked改为false(还没有点赞)
+  changeToUnlike(){
+    const { id, likes } = this.state
+    Fetch(
+      'api/v1/likes/',
+      {
+        star_id: id
+      },
+      'DELETE'
+    )
+      .then(data =>{
+        if(data){
+          Taro.showToast({
+            title:'取消点赞成功'
+          })
+          this.setState({
+            isLiked: false,
+            likes: likes - 1
+          })
+        }
+      })
+      .then(statusCode =>{
+        if(statusCode){
+          Taro.showToast({
+            title:'网络错误，请重新尝试',
+            icon: 'none'
+          })
+        }
+      })
   }
   render() {
+    const { url, isLiked, username, stdnum, likes, booknum, rank, contribute, qq } = this.state
     return (
       <View className='content'>
         <Image 
           className='avatar'
-          src={this.state.url}
+          src={url}
         />
         <View className='top-container'>
           <View className='top-contaniner-right'>
             <View className='likebox'>
-              {this.state.is_liked && <Image style='width:54rpx; height:44rpx; margin-left:460rpx; margin-right: 15rpx' onClick={this.changeToUnlike.bind(this)} src={require('../../assets/png/like.png')} />}
-              {!this.state.is_liked && <Image style='width:54rpx; height:44rpx; margin-left:460rpx; margin-right: 15rpx' onClick={this.changeToLike.bind(this)} src={require('../../assets/png/unlike.png')} />}
-              <Text>{this.state.likes}</Text>
+              {isLiked && <Image style='width:54rpx; height:44rpx; margin-left:460rpx; margin-right: 15rpx' onClick={this.changeToUnlike.bind(this)} src={require('../../assets/png/like.png')} />}
+              {!isLiked && <Image style='width:54rpx; height:44rpx; margin-left:460rpx; margin-right: 15rpx' onClick={this.changeToLike.bind(this)} src={require('../../assets/png/unlike.png')} />}
+              <Text>{likes}</Text>
             </View>
           </View>
           <View className='per-information'>
             <View className='nickname'>
               <Text>昵称：</Text>
-              <Text>{this.state.username}</Text>
+              <Text>{username}</Text>
             </View>
             <View className='student-number'>
               <Text>学号：</Text>
-              {this.state.stdnum && <Text>{this.state.stdnum}</Text>}
-              {!this.state.stdnum && <Text>*********</Text>}
+              {stdnum && <Text>{stdnum}</Text>}
+              {!stdnum && <Text>*********</Text>}
             </View>
             <View className='QQnumber'>
               <Text>QQ：</Text>
-              {this.state.qq && <Text>{this.state.qq}</Text>}
-              {!this.state.qq && <Text>*********</Text>}
+              {qq && <Text>{qq}</Text>}
+              {!qq && <Text>*********</Text>}
             </View>
           </View>
         </View>
         <View className='data'>
             <View className='book'>
-              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
-              <Text className='name'>借书次数：{this.state.booknum}</Text>
+              <Image className='pointPhoto' src={require('../../assets/png/book.png')}></Image>
+              <Text className='name'>借书本数：{booknum}</Text>
             </View>
             <View className='rank'>
-              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
-              <Text className='name'>步数排名：{this.state.rank}</Text>
+              <Image className='pointPhoto' src={require('../../assets/png/sport.png')}></Image>
+              <Text className='name'>步数排名：{rank}</Text>
             </View>
             <View className='contribute'>
-              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
-              <Text className='name'>学院贡献：{this.state.contribute}</Text>
+              <Image className='pointPhoto' src={require('../../assets/png/college.png')}></Image>
+              <Text className='name'>学院贡献：{contribute}</Text>
             </View>
           </View>
       </View>

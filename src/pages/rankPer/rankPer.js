@@ -11,10 +11,12 @@ export default class rankPer extends Component {
     page: 1,
     totalNum: 0
   }
-
   config = {
     navigationBarTitleText: '运动健将榜'
   }
+
+
+  componentWillMount () { }
 
   componentDidMount () { 
     Fetch(
@@ -31,24 +33,18 @@ export default class rankPer extends Component {
       })
     }) 
   }
+
+  componentWillUnmount () { }
+
+  componentDidShow () { }
+
+  componentDidHide () { }
   
-  /*toLinkShow(item) {
-    console.log(item)//
+  toLinkShow(item) {
     const { my } = this.state
     if(item.user_id !== my.user_id){
       Taro.navigateTo({
         url: `../people/people?id=${item.user_id}`
-      });
-    }
-  }*/  
-  
-  toLinkShow(e) {
-    const { my } = this.state
-    let id = e.currentTarget.dataset.usrid
-    console.log(id)
-    if(id!== my.user_id){
-      Taro.navigateTo({
-        url: `../people/people?id=${id}`
       });
     }
   }
@@ -93,10 +89,7 @@ export default class rankPer extends Component {
                 lowerThreshold='20'
               >
                 <View className='background'>
-                <Image 
-                  className='rank-background'
-                  src='../../assets/png/runBG.png'
-                />
+                  <Image className='rank-background'></Image>
                 </View>           
                 <View className='main'>
                 <View className='head'>
@@ -105,8 +98,8 @@ export default class rankPer extends Component {
                   <View className='name inline'>昵称</View>
                   <View className='count inline'>步数</View>
                 </View>              
-                <View className='item my' onClick={this.toLinkMy}>
-                  <View className='ranking inline'>{my.rank}</View>
+                <View className='item my' onCLick={this.toLinkMy}>
+                  <View className='rank inline'>{my.rank}</View>
                   <View className='avatar  inline'>
                     <Image src={my.url}></Image>
                   </View>
@@ -115,7 +108,7 @@ export default class rankPer extends Component {
                 </View>
                 {list.map((item, index) => {
                   return (
-                    /*<RankItem 
+                    <RankItem 
                       key={item.user_id}
                       rank={index+1}
                       item={item}
@@ -123,19 +116,7 @@ export default class rankPer extends Component {
                       count={item.step}
                       username={item.username}
                       onCLick={this.toLinkShow}
-                    />*/
-                    <View className='rank-item' key={item.user_id} data-usrid={item.user_id} onClick={this.toLinkShow}>
-                    <View 
-                      className={index == 0 ? 'ranking inline first': ( index == 1 ? 'ranking inline second': (index == 2 ? 'ranking inline third' :'ranking inline') )}
-                    >
-                      <View>{index+1}</View>
-                    </View>
-                    <View className='avatar inline'>
-                      <Image src={item.url}></Image>
-                    </View>
-                    <View className='name inline'>{item.username}</View>
-                    <View className='count inline'>{item.step}</View>
-                  </View>
+                    />
                   )
                 })}  
                 </View>   

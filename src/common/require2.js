@@ -16,16 +16,15 @@ const Fetch = (url, data = {}, method = "GET") => {
     method,
     header
   }).then(res => {
-    console.log(res)//
     if (res.statusCode === 200) {
       if (res.data) {
         return res.data;
       } else {
         return res.code; // 业务逻辑错误，返回业务错误码
       }
-    } else {
-      // 异常
-      return res.code
+    } 
+    else{
+      return res.statusCode;
     }
   });
 };

@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image , Checkbox, Input, Button, Text, CheckboxGroup} from '@tarojs/components'
 import './my.scss'
+import Fetch from '../../common/require2'
 
 export default class My extends Component {
   constructor(){
@@ -10,22 +11,17 @@ export default class My extends Component {
         qq:'',
         name:'',
         username:'',
-        show_qq: false,
-        show_stdnum: false,
+        showqq: false,
+        showStdnum: false,
         booknum: '',
         likes: '',
         contribute: '',
         rank:'',
         changename:false,
         url:'',
-        button:[{
-          text:'保存',
-          size:'primary',
-          type: '{{mini}}'
-        }],
-        mask_name: 'mask',
-        content_name: 'uncover',
-        mask_bg: 'mask-bg-none'
+        maskName: 'mask',
+        contentName: 'uncover',
+        maskBg: 'none'
       }
   }
   config = {
@@ -39,103 +35,90 @@ export default class My extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    //获取我的qq、学号、是否显示、借书次数、排名等信息
-    var that = this
-    Taro.request({
-      url:'https://rank.muxixyz.com/api/v1/users/my/info/',
-      method:'GET',
-      header: {
-        'cookie': Taro.getStorageSync('cookie')
-      },
-      success(res){
-        that.setState({
-          stdnum: res.data.stdnum,
-          show_stdnum: res.data.show_stdnum,
-          qq: res.data.qq,
-          show_qq: res.data.show_qq,
-          booknum: res.data.booknum,
-          likes: res.data.likes,
-          username: res.data.username,
-          contribute: res.data.contribute,
-          rank: res.data.rank,
-          url: res.data.url
-        })
-      }
+    //获取我的qq、学号、是否显示、借书次数、排名、头像url等信息
+    Fetch('api/v1/users/my/info/').then(data =>{
+      this.setState({
+        stdnum: data.stdnum,
+        showStdnum: data.show_stdnum,
+        qq: data.qq,
+        showqq: data.show_qq,
+        booknum: data.booknum,
+        likes: data.likes,
+        username: data.username,
+        contribute: data.contribute,
+        rank: data.rank,
+        url: data.url
+      })
     })
-    //获取我的头像url
   }
 
   componentDidHide () { }
   handleMask(){
     this.setState({
-      mask_name: 'unmask',
-      content_name: 'cover',
-      mask_bg: 'mask_bg_show'
+      maskName: 'unmask',
+      contentName: 'cover',
+      maskBg: 'show'
     })
   }
   handleSave(){
-    var that = this
+    const { qq, showqq, showStdnum, name } = this.state
     this.setState({
-      mask_name: 'mask',
-      content_name: 'uncover',
-      mask_bg: 'mask_bg_none',
+      maskName: 'mask',
+      contentName: 'uncover',
+      maskBg: 'none',
     })
-    Taro.request({
-      url:'https://rank.muxixyz.com/api/v1/users/my/info/',
-      method:'PUT',
-      header:{
-        'cookie': Taro.getStorageSync('cookie')
+    Fetch(
+      'api/v1/users/my/info/',
+      {
+        qq: qq,
+        show_qq: showqq,
+        show_stdnum: showStdnum,
+        username: name
       },
-      data:{
-        qq: that.state.qq,
-        show_qq: that.state.show_qq,
-        show_stdnum: that.state.show_stdnum,
-        username: that.state.name
-      },
-      success(res){
-        console.log('my' + res.statusCode)
-        console.log(res)
-        if(res.statusCode === 200){
+      'PUT'
+    )
+      .then(data =>{
+        if(data){
           Taro.showToast({
             title:'编辑成功'
           })
         }
-        else if(res.statusCode === 400){
+      })
+      .then(statusCode =>{
+        if(statusCode === 400){
           Taro.showToast({
             title:'昵称或QQ重复，请重新尝试',
             icon: 'none',
             duration: 1000
           })
         }
-        else{
+        if(statusCode === 502 || statusCode === 401){
           Taro.showToast({
             title:'网络错误，请重新尝试',
             icon: 'none',
             duration: 1000
           })
         }
-      }
-    })
+      })
   }
   changeShow(e){
-    console.log(e.detail.value)
     var arr = e.detail.value
     if(arr.indexOf("qq") > -1){
       this.setState({
-        show_qq: true
+        showqq: true
       })
     }else{
       this.setState({
-        show_qq: false
+        showqq: false
       })
     }
     if(arr.indexOf("stdnum") > -1){
       this.setState({
-        show_stdnum: true
+        showStdnum: true
       })
     }else{
       this.setState({
-        show_stdnum: false
+        showStdnum: false
       })
     }
   }
@@ -152,64 +135,65 @@ export default class My extends Component {
   }
   goToHelp(){
     Taro.navigateTo({
-      url:'../help/help'
+      url:'../feedback/feedback'
     })
   }
   render() {
+    const {contentName, url, changename, username, name, showStdnum, showqq, stdnum, likes, booknum, rank, contribute, qq, maskBg, maskName} = this.state
     return (
-      <View className={this.state.content_name}>
+      <View className={contentName}>
         <View className='content'>
           <Image 
             className='avatar'
-            src={this.state.url}
+            src={url}
           />
           <View className='top-container'>
             <View className='per-information'>
               <View className='nickname'>
                 <Text>昵称：</Text>
-                {this.state.changename && <Text>{this.state.name}</Text>}
-                {!this.state.changename && <Text>{this.state.username}</Text>}
+                {changename && <Text>{name}</Text>}
+                {!changename && <Text>{username}</Text>}
               </View>
               <View className='student-number'>
                 <Text>学号：</Text>
-                {this.state.show_stdnum && <Text>{this.state.stdnum}</Text>}
-                {!this.state.show_stdnum && <Text>*********</Text>}
+                {showStdnum && <Text>{stdnum}</Text>}
+                {!showStdnum && <Text>*********</Text>}
               </View>
               <View className='QQnumber'>
                 <Text className='left'>QQ：</Text>
-                {this.state.show_qq && <Text className='right'>{this.state.qq}</Text>}
-                {!this.state.show_qq && <Text className='right'>*********</Text>}
+                {showqq && <Text className='right'>{qq}</Text>}
+                {!showqq && <Text className='right'>*********</Text>}
                 <View className='setting' onClick={this.handleMask.bind(this)}>编辑</View>
               </View>
             </View>
             <View className='top-container-right'>
               <View className='likebox'>
                 <Image className='likePhoto' src={require('../../assets/png/like.png')}></Image>
-                <Text>{this.state.likes}</Text>
+                <Text>{likes}</Text>
               </View>
             </View>
           </View>
           <View className='data'>
             <View className='book'>
-              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
-              <Text className='name'>借书次数：{this.state.booknum}</Text>
+              <Image className='pointPhoto' src={require('../../assets/png/book.png')}></Image>
+              <Text className='name'>借书本数：{booknum}</Text>
             </View>
             <View className='rank'>
-              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
-              <Text className='name'>步数排名：{this.state.rank}</Text>
+              <Image className='pointPhoto' src={require('../../assets/png/sport.png')}></Image>
+              <Text className='name'>步数排名：{rank}</Text>
             </View>
             <View className='contribute'>
-              <Image className='pointPhoto' src={require('../../assets/png/point.png')}></Image>
-              <Text className='name'>学院贡献：{this.state.contribute}</Text>
+              <Image className='pointPhoto' src={require('../../assets/png/college.png')}></Image>
+              <Text className='name'>学院贡献：{contribute}</Text>
             </View>
           </View>
           <View className='feedback' onClick={this.goToHelp}>问题与反馈</View>
         </View>
-        <View className={this.state.mask_bg}></View>
-        <View className={this.state.mask_name}>
+        <View className={maskBg}></View>
+        <View className={maskName}>
           <CheckboxGroup className='left-box' onChange={this.changeShow.bind(this)}>
-            <Checkbox className='showqq' checked={this.state.show_qq} value='qq' />
-            <Checkbox checked={this.state.show_stdnum} value='stdnum' />
+            <Checkbox className='showqq' checked={showqq} value='qq' />
+            <Checkbox checked={showStdnum} value='stdnum' />
           </CheckboxGroup>
           <View className='right-box'>
             <View className='input_box'>
@@ -237,7 +221,7 @@ export default class My extends Component {
               </View>
             </View> 
             <View className='stdnum'>
-              <Text>学号：   {this.state.stdnum}</Text>
+              <Text>学号：   {stdnum}</Text>
             </View>         
           </View>
           <View className='tips'>*勾选代表对其他人可见</View>

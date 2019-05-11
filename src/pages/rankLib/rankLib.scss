@@ -54,9 +54,6 @@
 }
 .name{
   width: 238px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .count{
   width: 176px;
@@ -64,4 +61,8 @@
 .inline{
   text-align: center; 
   display: inline-block; 
+}
+.table .rank-item:nth-child(1){
+  opacity: 0;
+  background-image: url('../../assets/png/gold.png')
 }

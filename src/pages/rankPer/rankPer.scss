@@ -18,7 +18,7 @@
     //justify-content: space-around;
     width:664px;
     height:134px;
-    border: 2px solid rgba(220,220,220,1);
+    border: 2px rgba(220,220,220,1);
   }
 .my{
   background:rgba(220,220,220,1);
@@ -41,39 +41,19 @@
   background:rgba(255,255,255,1);
   border-radius:10px 10px 5px 5px;
 }
-.rank-item{
-  width:664px;
-  height: 134px;
-  border-bottom: 2px solid rgba(220,220,220,1);
-  background:rgba(255,255,255,1);
-}
 .rank{
   width: 110px;
 }
-.ranking{
-  width: 110px;
-  height: 134px;
-  line-height: 134px;
-  //vertical-align: middle;
-}
 .avatar{
   width: 140px;
-  height: 134px;
-  line-height: 134px;
-  text-align: center;
 }
 .avatar image{
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  vertical-align: middle;
 }
 .name{
   width: 238px;
-  overflow: hidden;
-  vertical-align: middle;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .count{
   width: 176px;
@@ -81,22 +61,4 @@
 .inline{
   text-align: center; 
   display: inline-block; 
-}
-.first View, .second View, .third View{
-  opacity: 0;
-}
-.first{
-  background: url('../../assets/png/gold.png') no-repeat;
-  background-size: 86px 80px;
-  background-position: center;
-}
-.second{
-  background: url('../../assets/png/silver.png') no-repeat;
-  background-size: 86px 80px;
-  background-position: center;
-}
-.third{
-  background: url('../../assets/png/bronze.png') no-repeat;
-  background-size: 86px 80px;
-  background-position: center;
 }

@@ -27,14 +27,14 @@ export default class Index extends Component {
       const { contact, content } = this.state
       if (content === "") {
         Taro.showToast({
-          title: '请留下你的意见吧！', 
+          title: '写点什么吧～', 
           icon: 'none'
         })
         return
       }
       if (contact === "") {
         Taro.showToast({
-          title: '请留下你的意见吧！', 
+          title: '写点什么吧～', 
           icon: 'none'
         })
         return

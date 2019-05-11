@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import Index from './pages/index'
-
+import Fetch from './common/require2'
 import './app.scss'
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -16,14 +16,15 @@ class App extends Component {
       'pages/index/index',
       'pages/login/login',
       'pages/my/my',
-      'pages/help/help',
+      // 'pages/help/help',
       'pages/feedback/feedback',
       'pages/rankLib/rankLib',
       'pages/rankPer/rankPer',
       'pages/rankCollege/rankCollege',
-      'pages/rankDept/rankDept',
+      // 'pages/rankCollegeMonth/rankCollegeMonth',
       'pages/people/people',
-      'pages/libLogin/libLogin'      
+      'pages/libLogin/libLogin',
+      
     ],
     tabBar: {
       list: [
@@ -51,44 +52,29 @@ class App extends Component {
   }
 
   componentDidMount () {
-    Taro.request({
-      url:'https://rank.muxixyz.com/api/v1/users/lib/',
-      data:{
+    Fetch(
+      'api/v1/users/lib',
+      {
         stdnum: Taro.getStorageSync('stdnum'),
         password: Taro.getStorageSync('password')
       },
-      header: {
-        'cookie': Taro.getStorageSync('cookie')
-      },
-      method:'POST'
-    })
+      'POST'
+    )
+
     Taro.getSetting({
       success(res){
         if (res.authSetting['scope.werun']) {
           Taro.getWeRunData({
             success(res){
               //获取数据后发给后端
-              Taro.request({
-                url: 'https://rank.muxixyz.com/api/v1/werun/',
-                method: 'POST',
-                header:{
-                  'cookie': Taro.getStorageSync('cookie')
-                },
-                data:{
+              Fetch(
+                'api/v1/werun/',
+                {
                   encryptedData: res.encryptedData,
                   iv: res.iv
                 },
-                success(){
-                  if(res.statusCode === 200){
-                    console.log('werun' + res.statusCode)
-
-                  }
-                  else{
-                    console.log('werun' + res.statusCode)
-                    console.log(res)
-                  }
-                }
-              })
+                'POST'
+              )
             }
           })
         } 

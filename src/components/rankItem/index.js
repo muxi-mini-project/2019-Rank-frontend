@@ -12,16 +12,12 @@ export default class RankItem extends Component {
     const { rank,username,url,count } = this.props;
     return (
       <View className='item' onClick={this.onClick}>
-        <View 
-          className={rank == 1 ? 'rank inline first': ( rank == 2 ? 'rank inline second': (rank == 3 ? 'rank inline third' :'rank inline') )}
-        >
-          <View>{rank}</View>
-        </View>
-        <View className='avatar inline'>
+        <View className='rank'>{rank}</View>
+        <View className='avatar'>
           <Image src={url}></Image>
         </View>
-        <View className='name inline'>{username}</View>
-        <View className='count inline'>{count}</View>
+        <View className='name'>{username}</View>
+        <View className='count'>{count}</View>
       </View>
     )
   }

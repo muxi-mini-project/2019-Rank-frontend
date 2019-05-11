@@ -123,7 +123,7 @@ page{
     border-radius: 10px;
     margin: 54px auto;
 }
-.mask_bg_show{
+.show{
     width: 100%;
     height: 100%;
     background: grey;
@@ -133,7 +133,7 @@ page{
     left: 0;
     opacity: 0.6;
 }
-.mask_bg_none{
+.none{
     display: none;
 }
 .mask{

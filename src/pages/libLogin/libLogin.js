@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Form, Input, Button, Image} from '@tarojs/components';
 import './libLogin.scss';
+import Fetch from '../../common/require2';
 
 export default class Login extends Component {
   constructor(props){
@@ -40,7 +41,8 @@ export default class Login extends Component {
   }
   
   toLogin(){
-    var that = this
+    const { stdnum, password } = this.state
+    
     //如果学号为空，提醒输入学号
     if(!this.state.stdnum){
       Taro.showToast({
@@ -56,67 +58,63 @@ export default class Login extends Component {
         icon: 'none'
       })
     }
-    Taro.request({
-        url:'https://rank.muxixyz.com/api/v1/users/lib/',
-        data:{
-          stdnum: that.state.stdnum,
-          password: that.state.password
-        },
-        header:{
-            'cookie': Taro.getStorageSync('cookie')
-        },
-        method:'POST',
-        success(res){
-          if(res.statusCode === 200){
-            Taro.setStorage({
-              key:'stdnum',
-              data: that.state.stdnum
-            })
-            console.log('lib' + res.statusCode)
-            console.log(res)
-            Taro.setStorage({
-              key:'password',
-              data: that.state.password,
-              success(){
-                Taro.showToast({
-                  title:'登录成功'
-                })
+    Fetch(
+      'api/v1/users/lib/',
+      {
+        stdnum: stdnum,
+        password: password
+      },
+      'POST'
+    )
+      .then(data =>{
+        if(data){
+          Taro.setStorage({
+            key:'stdnum',
+            data: stdnum
+          })
+          Taro.setStorage({
+            key:'password',
+            data: password,
+            success(){
+              Taro.showToast({
+                title:'登录成功'
+              })
+              Taro.switchTab({
+                url:'../index/index'
+              })  
+            }
+          })
+        }
+      })
+      .then(statusCode =>{
+        if(statusCode === 400){
+          Taro.showToast({
+            title:'账号或密码输入错误',
+            icon:'none'
+          })
+        }
+        if(statusCode === 500){
+          Taro.showModal({
+            title: '错误',
+            content: '请求错误',
+            confirmText:'确定',
+            cancelText:'重新尝试',
+            success(res) {
+              if (res.confirm) {
                 Taro.switchTab({
                   url:'../index/index'
-                })  
-              }
-            })
-          }
-          if(res.statusCode === 400){
-            Taro.showToast({
-              title:'账号或密码输入错误',
-              icon:'none'
-            })
-          }
-          if(res.statusCode === 500){
-            Taro.showModal({
-              title: '错误',
-              content: '请求错误',
-              confirmText:'确定',
-              cancelText:'重新尝试',
-              success(res) {
-                if (res.confirm) {
-                  Taro.switchTab({
-                    url:'../index/index'
-                  })
-                } 
-              }
-            })
-            console.log('lib' + res.statusCode)
-            console.log(res)
-          }
+                })
+              } 
+            }
+          })
         }
-    })
+      })
   }
   
   render() {
+    const {content_name, stdnum, password} = this.state
     return (
-    <View className={this.state.content_name}>
+    <View className={content_name}>
       <Image
         className='icon'
         src={require("../../assets/png/logo.png")} 
@@ -128,7 +126,7 @@ export default class Login extends Component {
               placeholderClass='placeholder'
               type='number'
               placeholder='请输入你的学号'
-              value={this.state.stdnum}
+              value={stdnum}
               onInput={this.changeLoginNumber}
               onChange={this.changeLoginNumber}
             />
@@ -139,7 +137,7 @@ export default class Login extends Component {
               placeholderClass='placeholder'
               type='text'
               placeholder='请输入你的密码'
-              value={this.state.password}
+              value={password}
               onInput={this.changePassword}
               onChange={this.changePassword}
               password='true'

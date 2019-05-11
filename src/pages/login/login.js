@@ -63,6 +63,7 @@ export default class Login extends Component {
   }
   
   toLogin(){
+    const { stdnum, password } = this.state
     var that = this
     //如果学号为空，提醒输入学号
     if(!this.state.stdnum){
@@ -80,6 +81,64 @@ export default class Login extends Component {
       })
     }
     //把学号、密码以及微信昵称和code发送给后端
+    // Fetch(
+    //   'api/v1/bind/',
+    //   {
+    //     stdnum: stdnum,
+    //     password: password,
+    //     code: code,
+    //     username: username,
+    //     url: url
+    //   },
+    //   'POST'
+    // )
+      // .then(data =>{
+      //   if(data){
+      //     Taro.setStorage({
+      //       key:'cookie',
+      //       data: data.header['Set-Cookie']
+      //     })
+      //     Taro.setStorage({
+      //       key:'stdnum',
+      //       data: stdnum
+      //     })
+      //     Taro.setStorage({
+      //       key:'password',
+      //       data: password
+      //     })
+      //     Taro.switchTab({
+      //       url:'../index/index'
+      //     })
+      //     Taro.showToast({
+      //       title:'登录成功'
+      //     })
+      //   }
+      // })
+      // .then(statusCode =>{
+      //   if(statusCode){
+      //     Taro.showToast({
+      //       title:'账号或密码输入错误，请重新输入',
+      //       icon: 'none',
+      //       duration: 1000
+      //     })
+      //     Taro.login({
+      //       success(res){
+      //         if (res.code) { 
+      //           that.setState({
+      //             code: res.code
+      //           })
+      //         } else {
+      //           Taro.showToast({
+      //             title:'获取code失败，请联系开发者',
+      //             icon: 'none',
+      //             duration: 1000
+      //           })
+      //         }
+      //       }
+      //     })
+      //   }
+      // })
+
     Taro.request({
       url:'https://rank.muxixyz.com/api/v1/bind/',
       method:'POST',
@@ -99,11 +158,11 @@ export default class Login extends Component {
           })
           Taro.setStorage({
             key:'stdnum',
-            data: that.state.stdnum
+            data: stdnum
           })
           Taro.setStorage({
             key:'password',
-            data: that.state.password
+            data: password
           })
           Taro.switchTab({
             url:'../index/index'
@@ -111,8 +170,6 @@ export default class Login extends Component {
           Taro.showToast({
             title:'登录成功'
           })
-          console.log('bind' + res.statusCode)
-          console.log(res)
         }
         //否则告诉用户账号或者密码错误
         if(res.statusCode != 200){
@@ -121,8 +178,6 @@ export default class Login extends Component {
             icon: 'none',
             duration: 1000
           })
-          console.log('bind' + res.statusCode)
-          console.log(res)
           //向微信获取code并存下来
           Taro.login({
             success(res){
@@ -159,8 +214,9 @@ export default class Login extends Component {
     })
   }
   render() {
+    const {content_name, mask_bg, mask_name} = this.state
     return (
-    <View className={this.state.content_name}>
+    <View className={content_name}>
       <Image
         className='icon'
         src={require("../../assets/png/logo.png")} 
@@ -196,9 +252,11 @@ export default class Login extends Component {
           注册
         </Button>
       </View>
-      <View className={this.state.mask_bg}></View>
-      <View className={this.state.mask_name}>
+      <View className={mask_bg}></View>
+      <View className={mask_name}>
         <Image></Image>
+        <View className='rank'>欢迎来到华师rank小程序</View>
+        <View className='welcome'>Welcome!</View>
         <Button
           open-type='getUserInfo' 
           lang='zh_CN' 

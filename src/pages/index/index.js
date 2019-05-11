@@ -1,13 +1,11 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image } from '@tarojs/components';
 import './index.scss';
-
+import Fetch from '../../common/require2'
 
 export default class Index extends Component {
   constructor(props){
     super(props);
-    this.state = {
-    } 
   }
  
   config = {
@@ -28,27 +26,14 @@ export default class Index extends Component {
               Taro.getWeRunData({
                 success(res){
                   //获取数据后发给后端
-                  Taro.request({
-                    url: 'https://rank.muxixyz.com/api/v1/werun/',
-                    method: 'POST',
-                    header:{
-                      'cookie': Taro.getStorageSync('cookie')
-                    },
-                    data:{
+                  Fetch(
+                    'api/v1/werun/',
+                    {
                       encryptedData: res.encryptedData,
                       iv: res.iv
                     },
-                    success(){
-                      if(res.statusCode === 200){
-                        console.log('werun' + res.statusCode)
-                        console.log(res)
-                      }
-                      else{
-                        console.log('werun' + res.statusCode)
-                        console.log(res)
-                      }
-                    }
-                  })
+                    'POST'
+                  )
                 }
               })
             }
@@ -63,53 +48,41 @@ export default class Index extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    //如果本地没有cookie
-    if (!Taro.getStorageSync('cookie')) {
-      //获取code并把code发给后端
-      Taro.login({
-        success(res){
-          if(res.code){
-            Taro.request({
-              url:'https://rank.muxixyz.com/api/v1/login/',
-              data:{
-                code:res.code
-              },
-              method: 'POST',
-              success(res){
-                Taro.showToast({
-                  title:'成功发送请求'
+    //获取code并把code发给后端
+    Taro.login({
+      success(res){
+        if(res.code){
+          Taro.request({
+            url:'https://rank.muxixyz.com/api/v1/login/',
+            data:{
+              code:res.code
+            },
+            method: 'POST',
+            success(res){
+              //如果200说明已经注册过了只是session过期，那就储存session并且登陆成功
+              if(res.statusCode === 200){
+                Taro.setStorage({
+                  key:'cookie',
+                  data: res.header['Set-Cookie']
                 })
-                //如果200说明已经注册过了只是session过期，那就储存session并且登陆成功
-                if(res.statusCode === 200){
-                  console.log('login' + res.statusCode)
-                  console.log(res)
-                  Taro.setStorage({
-                    key:'cookie',
-                    data: res.header['Set-Cookie']
-                  })
-                  if(!Taro.getStorageSync('stdnum') || !Taro.getStorageSync('password')){
-                    Taro.redirectTo({
-                        url:'../libLogin/libLogin'
-                    })
-                  }
-                }
-                //否则就跳转到注册界面注册
-                if(res.statusCode != 200)
-                {
-                  console.log('login' + res.statusCode)
-                  console.log(res)
+                if(!Taro.getStorageSync('stdnum') || !Taro.getStorageSync('password')){
                   Taro.redirectTo({
-                    url:'../login/login'
+                      url:'../libLogin/libLogin'
                   })
                 }
               }
-            })
-          }
+              //否则就跳转到注册界面注册
+              if(res.statusCode != 200)
+              {
+                Taro.redirectTo({
+                  url:'../login/login'
+                })
+              }
+            }
+          })
         }
-      })
-    }
-
-    
+      }
+    })
   }
 
   componentDidHide () { }
@@ -157,7 +130,6 @@ export default class Index extends Component {
           src={require('../../assets/png/rankCollege.png')}
           onClick={this.torankCollege}
         />
-        <navigator url='../login/login'>登录</navigator>
       </View>
     )
   }
