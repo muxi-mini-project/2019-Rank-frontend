@@ -88,7 +88,10 @@ export default class rankLib extends Component {
                 lowerThreshold='20'
               >
                 <View className='background'>
-                  <Image className='rank-background'></Image>
+                  <Image 
+                    className='rank-background'
+                    src='../../assets/png/libBG.png'
+                  />
                 </View>           
                 <View className='main'>
                   <View className='head'>

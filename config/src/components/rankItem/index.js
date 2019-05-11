@@ -12,7 +12,9 @@ export default class RankItem extends Component {
     const { rank,username,url,count } = this.props;
     return (
       <View className='item' onClick={this.onClick}>
-        <View className='rank'>{rank}</View>
+        <View className='rank'>
+          <View>{rank}</View>
+        </View>
         <View className='avatar'>
           <Image url={url}></Image>
         </View>

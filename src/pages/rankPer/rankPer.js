@@ -48,7 +48,18 @@ export default class rankPer extends Component {
       });
     }
   }
-
+  
+ /* toLinkShow(e) {
+    const { my } = this.state
+    let id = e.currentTarget.dataset.usrid
+    console.log(id)
+    if(id!== my.user_id){
+      Taro.navigateTo({
+        url: `../people/people?id=${id}`
+      });
+    }
+  }
+  */
   toLinkMy() {
     Taro.switchTab({
       url: `../my/my`
@@ -117,6 +128,18 @@ export default class rankPer extends Component {
                       username={item.username}
                       onCLick={this.toLinkShow}
                     />
+                    /*<View className='rank-item' key={item.user_id} data-usrid={item.user_id} onClick={this.toLinkShow}>
+                    <View 
+                      className={index == 0 ? 'ranking inline first': ( index == 1 ? 'ranking inline second': (index == 2 ? 'ranking inline third' :'ranking inline') )}
+                    >
+                      <View>{index+1}</View>
+                    </View>
+                    <View className='avatar inline'>
+                      <Image src={item.url}></Image>
+                    </View>
+                    <View className='name inline'>{item.username}</View>
+                    <View className='count inline'>{item.step}</View>
+                  </View>*/
                   )
                 })}  
                 </View>   

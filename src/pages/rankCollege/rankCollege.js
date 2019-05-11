@@ -27,11 +27,13 @@ export default class rankCollege extends Component {
     })
   }
 
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
+  toLinkDept(e) {
+    let id = e.currentTarget.dataset.id
+    let name = e.currentTarget.dataset.name
+    Taro.navigateTo({
+      url: `../rankDept/rankDept?id=${id}&name=${name}`
+    });
+  }
 
   switchNav(e) {
     const { list1,list2 } = this.state
@@ -96,6 +98,9 @@ export default class rankCollege extends Component {
                       <View 
                         key={index}
                         className='college-item' 
+                        data-id={item.department_id}
+                        data-name={item.department_name}
+                        onClick={this.toLinkDept}
                       >
                         <View className='rank'>{index+1}</View>
                         <View className='name'>{item.department_name}</View>

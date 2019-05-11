@@ -16,7 +16,6 @@ const Fetch = (url, data = {}, method = "GET") => {
     method,
     header
   }).then(res => {
-    console.log(res)//
     if (res.statusCode === 200) {
       if (res.data) {
         return res.data;

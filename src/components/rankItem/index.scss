@@ -6,6 +6,8 @@
   }
 .rank{
   width: 110px;
+  height: 134px;
+  line-height: 134px;
   text-align: center;
   display: inline-block;
 }
@@ -24,12 +26,31 @@
 }
 .name{
   width: 238px;
+  vertical-align: middle;
   text-align: center;
   display: inline-block;
 }
 .count{
   width: 176px;
+  vertical-align: middle;
   text-align: center; 
   display: inline-block; 
 }
-
+.first View, .second View, .third View{
+  opacity: 0;
+}
+.first{
+  background: url('../../assets/png/gold.png') no-repeat;
+  background-size: 86px 80px;
+  background-position: center;
+}
+.second{
+  background: url('../../assets/png/silver.png') no-repeat;
+  background-size: 86px 80px;
+  background-position: center;
+}
+.third{
+  background: url('../../assets/png/bronze.png') no-repeat;
+  background-size: 86px 80px;
+  background-position: center;
+}

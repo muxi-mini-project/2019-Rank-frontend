@@ -17,11 +17,9 @@ export default class rankCollege extends Component {
 
   componentDidMount () { 
     Fetch('api/v1/rank/step/dept/week').then(data => {
-      console.log(data)
       this.setState({list1: data, list: data})
     })
     Fetch('api/v1/rank/step/dept/month').then(data => {
-      console.log(data)
       this.setState({list2: data})
     })
   }
@@ -44,13 +42,11 @@ export default class rankCollege extends Component {
         currentNav:cur,
         list: list1
       })
-      console.log('week')
     }else if (cur == 1){
       this.setState({
         currentNav:cur,
         list: list2
       })
-      console.log('month')
     }else{
       console.log('error' + e)
     }
