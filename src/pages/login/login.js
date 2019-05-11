@@ -254,7 +254,7 @@ export default class Login extends Component {
       </View>
       <View className={mask_bg}></View>
       <View className={mask_name}>
-        <Image></Image>
+        <Image   src={require("../../assets/png/welcome.png")} />
         <View className='rank'>欢迎来到华师rank小程序</View>
         <View className='welcome'>Welcome!</View>
         <Button

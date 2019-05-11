@@ -53,7 +53,7 @@ class App extends Component {
 
   componentDidMount () {
     Fetch(
-      'api/v1/users/lib',
+      'api/v1/users/lib/',
       {
         stdnum: Taro.getStorageSync('stdnum'),
         password: Taro.getStorageSync('password')
