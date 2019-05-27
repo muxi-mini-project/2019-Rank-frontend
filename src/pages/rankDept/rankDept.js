@@ -49,14 +49,11 @@ export default class rankDept extends Component {
   }*/  
   
   toLinkShow(e) {
-    const { my } = this.state
+    //const { my } = this.state
     let id = e.currentTarget.dataset.usrid
-    console.log(id)
-    if(id!== my.user_id){
-      Taro.navigateTo({
-        url: `../people/people?id=${id}`
-      });
-    }
+    Taro.navigateTo({
+      url: `../people/people?id=${id}`
+    });
   }
 
   /*toLinkMy() {

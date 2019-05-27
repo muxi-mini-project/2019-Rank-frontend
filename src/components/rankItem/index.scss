@@ -1,9 +1,9 @@
 .item{
-    width:664px;
-    height: 134px;
-    border-bottom: 2px solid rgba(220,220,220,1);
-    background:rgba(255,255,255,1);
-  }
+  width:664px;
+  height: 134px;
+  border-bottom: 2px solid rgba(220,220,220,1);
+  background:rgba(255,255,255,1);
+}
 .rank{
   width: 110px;
   height: 134px;
@@ -29,6 +29,9 @@
   vertical-align: middle;
   text-align: center;
   display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .count{
   width: 176px;

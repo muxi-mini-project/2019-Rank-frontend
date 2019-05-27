@@ -135,7 +135,7 @@ export default class My extends Component {
   }
   goToHelp(){
     Taro.navigateTo({
-      url:'../feedback/feedback'
+      url:'../help/help'
     })
   }
   render() {

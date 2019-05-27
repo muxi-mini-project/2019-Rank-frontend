@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Input, Button, Textarea } from "@tarojs/components";
-import Fetch from '../../common/require'
+import Fetch from '../../common/require';
+import './feedback.scss';
 
 export default class Index extends Component {
 
@@ -77,14 +78,14 @@ export default class Index extends Component {
                 <View className='contact-head'>联系方式</View>
                 <Input 
                   type='text'
-                  placeholder='请填写您的QQ号或手机号'
+                  placeholder='请填写您的QQ或手机号'
                   value={contact}
                   onChange={this.onChange.bind(this, "contact")}
                 />
               </View>
               <Textarea 
                 value={content}
-                placeholder='请填写您的意见或建议，同时欢迎加入小程序交流群XXXXXXXXX与我们交流'
+                placeholder='请填写您的意见或建议，同时欢迎加入小程序交流群123456与我们交流'
                 className='text'
                 onInput={this.onChange.bind(this, "content")}
               />
