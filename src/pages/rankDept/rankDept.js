@@ -98,7 +98,7 @@ export default class rankDept extends Component {
                 <View className='background'>
                   <Image 
                     className='rank-background'
-                    src='../../assets/png/runBG.png'
+                    src='../../assets/png/collegeBG.png'
                   />
                 </View>           
                 <View className='main'>
