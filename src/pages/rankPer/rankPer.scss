@@ -54,6 +54,9 @@
 }
 .name{
   width: 238px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .count{
   width: 176px;

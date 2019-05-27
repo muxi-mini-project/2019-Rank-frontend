@@ -49,14 +49,11 @@ export default class rankDept extends Component {
   }*/  
   
   toLinkShow(e) {
-    const { my } = this.state
+    //const { my } = this.state
     let id = e.currentTarget.dataset.usrid
-    console.log(id)
-    if(id!== my.user_id){
-      Taro.navigateTo({
-        url: `../people/people?id=${id}`
-      });
-    }
+    Taro.navigateTo({
+      url: `../people/people?id=${id}`
+    });
   }
 
   /*toLinkMy() {
@@ -101,7 +98,7 @@ export default class rankDept extends Component {
                 <View className='background'>
                   <Image 
                     className='rank-background'
-                    src='../../assets/png/runBG.png'
+                    src='../../assets/png/collegeBG.png'
                   />
                 </View>           
                 <View className='main'>

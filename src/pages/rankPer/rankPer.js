@@ -80,7 +80,6 @@ export default class rankPer extends Component {
           totalNum: data.total_page,
           page: data.now_page
         })
-        console.log('haha')
       })
     }
   }
@@ -100,7 +99,10 @@ export default class rankPer extends Component {
                 lowerThreshold='20'
               >
                 <View className='background'>
-                  <Image className='rank-background'></Image>
+                  <Image 
+                    className='rank-background'
+                    src='../../assets/png/runBG.png'
+                  />
                 </View>           
                 <View className='main'>
                 <View className='head'>
