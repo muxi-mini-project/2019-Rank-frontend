@@ -1,10 +1,10 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
+	"miniprogramRoot": "dist/",
+	"projectname": "D%E7%9B%98ranking4.14%E6%99%9A%E4%B8%8A%E5%8F%A6%E5%AD%98%E7%89%88",
+	"description": "",
+	"appid": "wx99d261528d305c95",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
@@ -12,14 +12,8 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.2",
-	"appid": "wx99d261528d305c95",
-	"projectname": "rank",
-	"miniprogramRoot": "dist/",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"scripts": {},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -37,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -48,43 +42,30 @@
 				},
 				{
 					"id": -1,
-					"name": "per",
-					"pathName": "pages/rankPer/rankPer",
+					"name": "login",
+					"pathName": "pages/login/login",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "college",
-					"pathName": "pages/rankCollege/rankCollege",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "index",
+					"name": "lib",
 					"pathName": "pages/index/index",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "f",
-					"pathName": "pages/feedback/feedback",
+					"name": "my",
+					"pathName": "pages/my/my",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "h",
-					"pathName": "pages/help/help",
+					"name": "my",
+					"pathName": "pages/visitorlogin/visitorlogin",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "ddd",
-					"pathName": "pages/rankDept/rankDept",
 					"scene": null
 				}
 			]

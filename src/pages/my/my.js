@@ -21,7 +21,9 @@ export default class My extends Component {
         url:'',
         maskName: 'mask',
         contentName: 'uncover',
-        maskBg: 'none'
+        maskBg: 'none',
+        departmentID: '',
+        showReLogin: false
       }
   }
   config = {
@@ -35,11 +37,13 @@ export default class My extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
+    const { departmentID } = this.state
     //获取我的qq、学号、是否显示、借书次数、排名、头像url等信息
     Fetch('api/v1/users/my/info/').then(data =>{
       this.setState({
         stdnum: data.stdnum,
         showStdnum: data.show_stdnum,
+        departmentID: data.department_id, 
         qq: data.qq,
         showqq: data.show_qq,
         booknum: data.booknum,
@@ -50,6 +54,11 @@ export default class My extends Component {
         url: data.url
       })
     })
+    if(departmentID === 25){
+      this.setState({
+        showReLogin: true
+      })
+    }
   }
 
   componentDidHide () { }
@@ -135,11 +144,34 @@ export default class My extends Component {
   }
   goToHelp(){
     Taro.navigateTo({
-      url:'../feedback/feedback'
+      url:'../help/help'
     })
   }
+  toReLogin(){
+    Taro.navigateTo({
+      url:`../visitorlogin/visitorlogin?url=${this.state.url}&username=${this.state.username}`
+    })
+  }
+  //转至图书借阅排行榜
+  torankLib(){
+    Taro.navigateTo({
+      url:'../rankLib/rankLib'
+    })
+  }
+  //转至个人步数排行榜
+  torankPer(){
+    Taro.navigateTo({
+      url:'../rankPer/rankPer'
+  })
+  }
+  //转至学院步数排行榜
+  torankCollege(){
+    Taro.navigateTo({
+      url:'../rankCollege/rankCollege'
+  })
+  }
   render() {
-    const {contentName, url, changename, username, name, showStdnum, showqq, stdnum, likes, booknum, rank, contribute, qq, maskBg, maskName} = this.state
+    const {showReLogin, contentName, url, changename, username, name, showStdnum, showqq, stdnum, likes, booknum, rank, contribute, qq, maskBg, maskName} = this.state
     return (
       <View className={contentName}>
         <View className='content'>
@@ -176,18 +208,20 @@ export default class My extends Component {
           <View className='data'>
             <View className='book'>
               <Image className='pointPhoto' src={require('../../assets/png/book.png')}></Image>
-              <Text className='name'>借书本数：{booknum}</Text>
+              <Text className='name' onClick={this.torankLib}>借书本数：{booknum}</Text>
             </View>
             <View className='rank'>
               <Image className='pointPhoto' src={require('../../assets/png/sport.png')}></Image>
-              <Text className='name'>步数排名：{rank}</Text>
+              <Text className='name' onClick={this.torankPer}>步数排名：{rank}</Text>
             </View>
             <View className='contribute'>
               <Image className='pointPhoto' src={require('../../assets/png/college.png')}></Image>
-              <Text className='name'>学院贡献：{contribute}</Text>
+              <Text className='name' onClick={this.torankCollege}>学院贡献：{contribute}</Text>
             </View>
           </View>
           <View className='feedback' onClick={this.goToHelp}>问题与反馈</View>
+          {showReLogin && <View className='feedback' onClick={this.toReLogin.bind(this)}>绑定学号</View>}
+          {!showReLogin && <View />}
         </View>
         <View className={maskBg}></View>
         <View className={maskName}>

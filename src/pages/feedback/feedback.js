@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Input, Button, Textarea } from "@tarojs/components";
-import Fetch from '../../common/require'
+import Fetch from '../../common/require';
+import './feedback.scss';
 
 export default class Index extends Component {
 

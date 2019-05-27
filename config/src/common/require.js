@@ -4,7 +4,7 @@ import Taro from "@tarojs/taro";
 // promise就是一个表示未来的事情；
 
 // Fetch(url, data).then((res) => { console.log(res)})
-const preHttp = "https://rank.muxixyz.com/";
+const preHttp = "http://47.103.103.195:5000/";
 const Fetch = (url, data = {}, method = "GET") => {
   const header = { 
     "content-type": "application/json", 
@@ -16,6 +16,7 @@ const Fetch = (url, data = {}, method = "GET") => {
     method,
     header
   }).then(res => {
+    console.log(res)//
     if (res.statusCode === 200) {
       if (res.data) {
         return res.data;
