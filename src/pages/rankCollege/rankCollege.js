@@ -17,11 +17,9 @@ export default class rankCollege extends Component {
 
   componentDidMount () { 
     Fetch('api/v1/rank/step/dept/week').then(data => {
-      console.log(data)
       this.setState({list1: data, list: data})
     })
     Fetch('api/v1/rank/step/dept/month').then(data => {
-      console.log(data)
       this.setState({list2: data})
     })
   }
@@ -35,7 +33,6 @@ export default class rankCollege extends Component {
   }
 
   switchNav(e) {
-    console.log(e)//
     const { list1,list2 } = this.state
     var cur = e.currentTarget.id
     //取事件源组件上的tag值, 此处target可以替换成currentTarget（指向当前组件）吗
@@ -51,8 +48,6 @@ export default class rankCollege extends Component {
         currentNav:cur,
         list: list2
       })
-    }else{
-      console.log('error' + e)//
     }
   }  
 
@@ -89,7 +84,7 @@ export default class rankCollege extends Component {
                 <View className='background'>
                 <Image 
                   className='rank-background'
-                  src='../../assets/png/collegeBG.png'
+                  src={require('../../assets/png/collegeBG.png')}
                 />
                 </View>               
                 <View className='head'>

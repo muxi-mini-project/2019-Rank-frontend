@@ -1,4 +1,4 @@
-$basecolor: #FF9125;
+$basecolor: #FFFFFF;
 $basefontsize: 36px;
 page{
     background-color: #EFEFF4;
@@ -12,12 +12,12 @@ View{
         text-align: center;
         margin-top: 172px;
     }
-    .form_login{
+    .login{
         display: block;
         margin: 0 auto;
         width: 648px;
         height: 360px;
-        background: #FFFFFF;
+        background: $basecolor;
         padding-top: 72px;
         .username{
             font-size: $basefontsize;
@@ -25,7 +25,7 @@ View{
             flex-direction: row;
             justify-content: center;
             margin-bottom: 60px;
-            background: #FFFFFF;
+            background: $basecolor;
             View{
                 display: inline-block;
                 vertical-align: bottom;
@@ -43,9 +43,8 @@ View{
             font-size: 30px;
             text-align: center;
             width: 650px;
-            background: #FFFFFF;
+            background: $basecolor;
         }
-        
     }
     View{
         Button{
@@ -54,8 +53,8 @@ View{
             font-size: $basefontsize;
             text-align: center;
             line-height: 88px;
-            background: $basecolor;
-            color: #FFFFFF;
+            background: #FF9125;
+            color: $basecolor;
             margin-top: 72px;
         }
     }

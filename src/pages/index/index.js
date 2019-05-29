@@ -38,19 +38,19 @@ export default class Index extends Component {
   }
 
   componentDidHide () { }
-  //转至图书借阅排行榜
+  //跳转页面至图书借阅排行榜
   torankLib(){
     Taro.navigateTo({
       url:'../rankLib/rankLib'
     })
   }
-  //转至个人步数排行榜
+  //跳转页面至个人步数排行榜
   torankPer(){
     Taro.navigateTo({
       url:'../rankPer/rankPer'
   })
   }
-  //转至学院步数排行榜
+  //跳转页面至学院步数排行榜
   torankCollege(){
     Taro.navigateTo({
       url:'../rankCollege/rankCollege'

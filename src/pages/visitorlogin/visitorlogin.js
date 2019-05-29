@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Form, Input, Button, Image} from '@tarojs/components';
+import { View, Input, Button, Image} from '@tarojs/components';
 import './visitorlogin.scss';
 
 export default class Visitorlogin extends Component {
@@ -74,64 +74,6 @@ export default class Visitorlogin extends Component {
         icon: 'none'
       })
     }
-    //把学号、密码以及微信昵称和code发送给后端
-    // Fetch(
-    //   'api/v1/bind/',
-    //   {
-    //     stdnum: stdnum,
-    //     password: password,
-    //     code: code,
-    //     username: username,
-    //     url: url
-    //   },
-    //   'POST'
-    // )
-      // .then(data =>{
-      //   if(data){
-      //     Taro.setStorage({
-      //       key:'cookie',
-      //       data: data.header['Set-Cookie']
-      //     })
-      //     Taro.setStorage({
-      //       key:'stdnum',
-      //       data: stdnum
-      //     })
-      //     Taro.setStorage({
-      //       key:'password',
-      //       data: password
-      //     })
-      //     Taro.switchTab({
-      //       url:'../index/index'
-      //     })
-      //     Taro.showToast({
-      //       title:'登录成功'
-      //     })
-      //   }
-      // })
-      // .then(statusCode =>{
-      //   if(statusCode){
-      //     Taro.showToast({
-      //       title:'账号或密码输入错误，请重新输入',
-      //       icon: 'none',
-      //       duration: 1000
-      //     })
-      //     Taro.login({
-      //       success(res){
-      //         if (res.code) { 
-      //           that.setState({
-      //             code: res.code
-      //           })
-      //         } else {
-      //           Taro.showToast({
-      //             title:'获取code失败，请联系开发者',
-      //             icon: 'none',
-      //             duration: 1000
-      //           })
-      //         }
-      //       }
-      //     })
-      //   }
-      // })
 
     Taro.request({
       url:'https://rank.muxixyz.com/api/v1/rebind/student',
@@ -198,7 +140,7 @@ export default class Visitorlogin extends Component {
         className='icon'
         src={require("../../assets/png/logo.png")} 
       />
-      <Form className='form_login'>
+      <View className='login'>
         <View className='username'>
             <View>学号：</View>
             <Input 
@@ -223,9 +165,9 @@ export default class Visitorlogin extends Component {
             />
         </View>
         <View className='tips'>*请输入一站式服务的学号和对应的密码</View>
-      </Form>
+      </View>
       <View>
-        <Button className='loginBtn' onClick={this.toLogin.bind(this)}>
+        <Button onClick={this.toLogin.bind(this)}>
           注册
         </Button>
       </View>

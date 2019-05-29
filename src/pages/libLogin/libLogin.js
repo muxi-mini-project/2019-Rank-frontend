@@ -58,6 +58,7 @@ export default class Login extends Component {
         icon: 'none'
       })
     }
+    //把账号和密码发送给后端便于后端去学校官网获取书籍借阅本数
     Fetch(
       'api/v1/users/lib/',
       {
@@ -66,6 +67,7 @@ export default class Login extends Component {
       },
       'POST'
     )
+      //如果成功了就显示“登陆成功”
       .then(data =>{
         if(data){
           Taro.setStorage({
@@ -87,12 +89,16 @@ export default class Login extends Component {
         }
       })
       .then(statusCode =>{
+        //如果账号密码错误就显示“账号密码错误”
         if(statusCode === 400){
           Taro.showToast({
             title:'账号或密码输入错误',
             icon:'none'
           })
         }
+        //如果因为某些原因返回了500，那就弹出提示框显示请求错误
+        //如果点击重新尝试那会回到页面中，可通过点击注册按钮重新尝试
+        //如果点击确定那会直接进入到首页，取消此次账号密码的获取（放弃本次图书借阅本书的数据更新）
         if(statusCode === 500){
           Taro.showModal({
             title: '错误',
@@ -112,14 +118,14 @@ export default class Login extends Component {
   }
   
   render() {
-    const {content_name, stdnum, password} = this.state
+    const {stdnum, password} = this.state
     return (
-    <View className={content_name}>
+    <View>
       <Image
         className='icon'
         src={require("../../assets/png/logo.png")} 
       />
-      <Form className='form_login'>
+      <Form className='login'>
         <View className='username'>
             <View>学号：</View>
             <Input 
@@ -146,7 +152,7 @@ export default class Login extends Component {
         <View className='tips'>*请输入一站式服务的学号和对应的密码</View>
       </Form>
       <View>
-        <Button className='loginBtn' onClick={this.toLogin.bind(this)}>
+        <Button onClick={this.toLogin.bind(this)}>
           注册
         </Button>
       </View>
