@@ -14,16 +14,6 @@ export default class Index extends Component {
       content: ''
     };
 
-    componentWillMount() {}
-
-    componentDidMount() {}
-
-    componentWillUnmount() {}
-
-    componentDidShow() {}
-
-    componentDidHide() {}
-
     submit() {
       const { contact, content } = this.state
       if (content === "") {
@@ -47,14 +37,17 @@ export default class Index extends Component {
           content
         },
         'POST'
-      ).then((res) => {
-        console.log(res.data)
+      ).then(
         Taro.showToast({
           title: '反馈成功',
           icon: 'success',
           duration: 1000
         })
-      })
+      ).then(
+        Taro.switchTab({
+          url:`../my/my`
+        })
+      )
     }
   
 

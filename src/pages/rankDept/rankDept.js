@@ -7,7 +7,6 @@ import Fetch from '../../common/require'
 export default class rankDept extends Component {
   state = {
     list: [],
-    //my: [],
     page: 1,
     totalNum: 0
   }
@@ -38,29 +37,12 @@ export default class rankDept extends Component {
     }) 
   }
   
-  /*toLinkShow(item) {
-    console.log(item)//
-    const { my } = this.state
-    if(item.user_id !== my.user_id){
-      Taro.navigateTo({
-        url: `../people/people?id=${item.user_id}`
-      });
-    }
-  }*/  
-  
   toLinkShow(e) {
-    //const { my } = this.state
     let id = e.currentTarget.dataset.usrid
     Taro.navigateTo({
       url: `../people/people?id=${id}`
     });
   }
-
-  /*toLinkMy() {
-    Taro.switchTab({
-      url: `../my/my`
-    });
-  }*/
 
   scrolltobottom() {
     const { page,totalNum,list } = this.state

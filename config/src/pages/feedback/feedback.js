@@ -47,7 +47,7 @@ export default class Index extends Component {
         },
         'POST'
       ).then((res) => {
-        console.log(res.data)
+        console.log(res.data)//
         Taro.showToast({
           title: '反馈成功',
           icon: 'success',

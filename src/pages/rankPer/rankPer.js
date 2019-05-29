@@ -15,9 +15,6 @@ export default class rankPer extends Component {
     navigationBarTitleText: '运动健将榜'
   }
 
-
-  componentWillMount () { }
-
   componentDidMount () { 
     Fetch(
       'api/v1/rank/step/person',
@@ -33,12 +30,6 @@ export default class rankPer extends Component {
       })
     }) 
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
   
   toLinkShow(item) {
     const { my } = this.state
@@ -48,18 +39,7 @@ export default class rankPer extends Component {
       });
     }
   }
-  
- /* toLinkShow(e) {
-    const { my } = this.state
-    let id = e.currentTarget.dataset.usrid
-    console.log(id)
-    if(id!== my.user_id){
-      Taro.navigateTo({
-        url: `../people/people?id=${id}`
-      });
-    }
-  }
-  */
+
   toLinkMy() {
     Taro.switchTab({
       url: `../my/my`
