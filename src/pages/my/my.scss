@@ -65,6 +65,8 @@ page{
         }
         .QQnumber{
             display: inline-block;
+            width: 350px;
+            margin-top: 0px;
             .left{
                 margin-right: 12px;
             }
@@ -72,14 +74,12 @@ page{
                 width: 180px;
                 display: inline-block;
             }
-        }
-        .setting{
-            margin-top: 0px;
-            color: #FF9125;
-            font-size: 24px;
-            float: right;
-            right: 86px;
-            top: 100px;
+            .setting{
+                margin-left: 30px;
+                color: #FF9125;
+                font-size: 24px;
+                display: inline-block;
+            }
         }
     }
     
