@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image, ScrollView } from '@tarojs/components';
 import './rankDept.scss'
-//import RankItem from '../../components/RankItem/index'
 import Fetch from '../../common/require'
 
 export default class rankDept extends Component {
@@ -80,7 +79,7 @@ export default class rankDept extends Component {
                 <View className='background'>
                   <Image 
                     className='rank-background'
-                    src='../../assets/png/collegeBG.png'
+                    src={require('../../assets/png/collegeBG.png')}
                   />
                 </View>           
                 <View className='main'>
@@ -92,15 +91,6 @@ export default class rankDept extends Component {
                 </View>              
                 {list.map((item, index) => {
                   return (
-                    /*<RankItem 
-                      key={item.user_id}
-                      rank={index+1}
-                      item={item}
-                      url={item.url}
-                      count={item.step}
-                      username={item.username}
-                      onCLick={this.toLinkShow}
-                    />*/
                     <View className='rank-item' key={item.user_id} data-usrid={item.user_id} onClick={this.toLinkShow}>
                     <View 
                       className={index == 0 ? 'ranking inline first': ( index == 1 ? 'ranking inline second': (index == 2 ? 'ranking inline third' :'ranking inline') )}

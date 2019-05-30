@@ -84,7 +84,7 @@ export default class rankCollege extends Component {
                 <View className='background'>
                 <Image 
                   className='rank-background'
-                  src='../../assets/png/collegeBG.png'
+                  src={require('../../assets/png/collegeBG.png')}
                 />
                 </View>               
                 <View className='head'>

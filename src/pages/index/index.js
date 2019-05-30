@@ -12,33 +12,19 @@ export default class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount () { 
-    //微信运动授权
-    //判断是否授权过微信运动
-    Taro.getSetting({
-      success(res) {
-        //如果没有授权过就去授权
-        if (!res.authSetting['scope.werun']) {
-          Taro.authorize({
-            scope: 'scope.werun',
-            success(){
-              //授权成功调取微信运动API获得数据
-              Taro.getWeRunData({
-                success(res){
-                  //获取数据后发给后端
-                  Fetch(
-                    'api/v1/werun/',
-                    {
-                      encryptedData: res.encryptedData,
-                      iv: res.iv
-                    },
-                    'POST'
-                  )
-                }
-              })
-            }
-          })
-        }
+  componentWillMount () {
+    //向微信运动请求数据
+    Taro.getWeRunData({
+      success(res){
+        //将获取到的数据发给后端
+        Fetch(
+          'api/v1/werun/',
+          {
+            encryptedData: res.encryptedData,
+            iv: res.iv
+          },
+          'POST'
+        )
       }
     })
   }
@@ -48,69 +34,27 @@ export default class Index extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    //获取code并把code发给后端
-    Taro.login({
-      success(res){
-        if(res.code){
-          Taro.request({
-            url:'https://rank.muxixyz.com/api/v1/login/',
-            data:{
-              code:res.code
-            },
-            method: 'POST',
-            success(res){
-              //如果200说明已经注册过了只是session过期，那就储存session并且登陆成功
-              if(res.statusCode === 200){
-                Taro.setStorage({
-                  key:'cookie',
-                  data: res.header['Set-Cookie']
-                })
-                if(!Taro.getStorageSync('stdnum') || !Taro.getStorageSync('password')){
-                  Taro.redirectTo({
-                      url:'../libLogin/libLogin'
-                  })
-                }
-              }
-              //否则就跳转到注册界面注册
-              if(res.statusCode != 200)
-              {
-                Taro.redirectTo({
-                  url:'../login/login'
-                })
-              }
-            }
-          })
-        }
-      }
-    })
+    
   }
 
   componentDidHide () { }
-  
+  //跳转页面至图书借阅排行榜
   torankLib(){
     Taro.navigateTo({
       url:'../rankLib/rankLib'
     })
   }
+  //跳转页面至个人步数排行榜
   torankPer(){
     Taro.navigateTo({
       url:'../rankPer/rankPer'
   })
   }
+  //跳转页面至学院步数排行榜
   torankCollege(){
     Taro.navigateTo({
       url:'../rankCollege/rankCollege'
   })
-  }
-  toMy(){
-    Taro.navigateTo({
-      url:'../my/my'
-    })
-  }
-  toIndex(){
-    Taro.navigateTo({
-      url:'../index/index'
-    })
   }
   render() {
     return (

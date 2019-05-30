@@ -15,8 +15,6 @@ export default class rankLib extends Component {
     navigationBarTitleText: '学霸排行榜'
   }
 
-  componentWillMount () { }
-
   componentDidMount () {
     Fetch(
       'api/v1/rank/lib',
@@ -32,12 +30,6 @@ export default class rankLib extends Component {
       })
     }) 
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
   
   toLinkShow(item) {
     const { my } = this.state
@@ -90,7 +82,7 @@ export default class rankLib extends Component {
                 <View className='background'>
                   <Image 
                     className='rank-background'
-                    src='../../assets/png/libBG.png'
+                    src={require('../../assets/png/libBG.png')}
                   />
                 </View>           
                 <View className='main'>

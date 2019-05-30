@@ -13,7 +13,7 @@ View{
         text-align: center;
         margin-top: 172px;
     }
-    .form_login{
+    .formLogin{
         display: block;
         margin: 0 auto;
         width: 648px;
@@ -59,7 +59,7 @@ View{
         }
     }
 }
-.mask_bg_show{
+.maskBgShow{
     width: 100%;
     height: 100%;
     background: grey;
@@ -69,7 +69,7 @@ View{
     left: 0;
     opacity: 0.6;
 }
-.mask_bg_none{
+.maskBgNone{
     display: none;
 }
 .mask{

@@ -81,7 +81,7 @@ export default class rankPer extends Component {
                 <View className='background'>
                   <Image 
                     className='rank-background'
-                    src='../../assets/png/runBG.png'
+                    src={require('../../assets/png/runBG.png')}
                   />
                 </View>           
                 <View className='main'>

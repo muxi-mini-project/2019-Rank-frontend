@@ -81,7 +81,7 @@ export default class Login extends Component {
     }
     //把学号、密码以及微信昵称和code发送给后端
     Taro.request({
-      url:'https://rank.muxixyz.com/api/v1/bind/',
+      url:'http://47.103.103.195:5000/api/v1/bind/',
       method:'POST',
       data:{
         stdnum: this.state.stdnum,

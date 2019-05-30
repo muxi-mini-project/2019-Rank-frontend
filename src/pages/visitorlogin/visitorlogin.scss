@@ -1,5 +1,6 @@
-$basecolor: #FFFFFF;
+$basecolor: #FF9125;
 $basefontsize: 36px;
+
 page{
     background-color: #EFEFF4;
 }
@@ -17,7 +18,7 @@ View{
         margin: 0 auto;
         width: 648px;
         height: 360px;
-        background: $basecolor;
+        background: #FFFFFF;
         padding-top: 72px;
         .username{
             font-size: $basefontsize;
@@ -25,7 +26,6 @@ View{
             flex-direction: row;
             justify-content: center;
             margin-bottom: 60px;
-            background: $basecolor;
             View{
                 display: inline-block;
                 vertical-align: bottom;
@@ -43,7 +43,6 @@ View{
             font-size: 30px;
             text-align: center;
             width: 650px;
-            background: $basecolor;
         }
     }
     View{
@@ -53,8 +52,8 @@ View{
             font-size: $basefontsize;
             text-align: center;
             line-height: 88px;
-            background: #FF9125;
-            color: $basecolor;
+            background: $basecolor;
+            color: #FFFFFF;
             margin-top: 72px;
         }
     }

@@ -1,22 +1,39 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Form, Input, Button, Image} from '@tarojs/components';
-import './libLogin.scss';
-import Fetch from '../../common/require2';
+import { View, Input, Button, Image} from '@tarojs/components';
+import './visitorlogin.scss';
 
-export default class Login extends Component {
+export default class Visitorlogin extends Component {
   constructor(props){
     super(props);
     this.state = {
       stdnum:'',
-      password:''
+      password:'',
+      code:''
     }
   }
 
   config = {
-    navigationBarTitleText: 'lib注册'
+    navigationBarTitleText: '学号绑定'
   }
   
-  componentWillMount () { }
+  componentWillMount () {
+    //向微信获取code并存下来
+    Taro.login({
+      success:res => {
+        if (res.code) { 
+          this.setState({
+            code: res.code
+          })
+        } else {
+          Taro.showToast({
+            title:'获取code失败，请联系开发者',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      }
+    })
+   }
 
   componentDidMount () { }
 
@@ -25,7 +42,6 @@ export default class Login extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
-
 
   //记录学号的值
   changeLoginNumber(e){
@@ -39,10 +55,10 @@ export default class Login extends Component {
       password: e.detail.value
     })
   }
-  
+  //学生登录
   toLogin(){
-    const { stdnum, password } = this.state
-    
+    const { stdnum, password, code } = this.state
+    var that = this
     //如果学号为空，提醒输入学号
     if(!this.state.stdnum){
       Taro.showToast({
@@ -58,81 +74,80 @@ export default class Login extends Component {
         icon: 'none'
       })
     }
-    //把账号和密码发送给后端便于后端去学校官网获取书籍借阅本数
-    Fetch(
-      'api/v1/users/lib/',
-      {
+
+    Taro.request({
+      url:'https://rank.muxixyz.com/api/v1/rebind/student',
+      method:'POST',
+      data:{
         stdnum: stdnum,
-        password: password
+        password: password,
+        code: code
       },
-      'POST'
-    )
-      //如果成功了就显示“登陆成功”
-      .then(data =>{
-        if(data){
+      success(res){
+        //如果200，cookie存本地，转回index页面
+        if(res.statusCode === 200){
+          Taro.setStorage({
+            key:'cookie',
+            data: res.header['Set-Cookie']
+          })
           Taro.setStorage({
             key:'stdnum',
             data: stdnum
           })
           Taro.setStorage({
             key:'password',
-            data: password,
-            success(){
-              Taro.showToast({
-                title:'登录成功'
-              })
-              Taro.switchTab({
-                url:'../index/index'
-              })  
-            }
+            data: password
           })
-        }
-      })
-      .then(statusCode =>{
-        //如果账号密码错误就显示“账号密码错误”
-        if(statusCode === 400){
+          Taro.switchTab({
+            url:'../index/index'
+          })
           Taro.showToast({
-            title:'账号或密码输入错误',
-            icon:'none'
+            title:'登录成功'
           })
         }
-        //如果因为某些原因返回了500，那就弹出提示框显示请求错误
-        //如果点击重新尝试那会回到页面中，可通过点击注册按钮重新尝试
-        //如果点击确定那会直接进入到首页，取消此次账号密码的获取（放弃本次图书借阅本书的数据更新）
-        if(statusCode === 500){
-          Taro.showModal({
-            title: '错误',
-            content: '请求错误',
-            confirmText:'确定',
-            cancelText:'重新尝试',
-            success(res) {
-              if (res.confirm) {
-                Taro.switchTab({
-                  url:'../index/index'
+        //否则告诉用户账号或者密码错误
+        if(res.statusCode != 200){
+          Taro.showToast({
+            title:'账号或密码输入错误，请重新输入',
+            icon: 'none',
+            duration: 1000
+          })
+          //向微信获取code并存下来
+          Taro.login({
+            success(res){
+              if (res.code) { 
+                that.setState({
+                  code: res.code
                 })
-              } 
+              } else {
+                Taro.showToast({
+                  title:'获取code失败，请联系开发者',
+                  icon: 'none',
+                  duration: 1000
+                })
+              }
             }
           })
         }
-      })
+      }
+    })
   }
-  
+
   render() {
-    const {stdnum, password} = this.state
     return (
     <View>
       <Image
         className='icon'
         src={require("../../assets/png/logo.png")} 
       />
-      <Form className='login'>
+      <View className='login'>
         <View className='username'>
             <View>学号：</View>
             <Input 
               placeholderClass='placeholder'
               type='number'
               placeholder='请输入你的学号'
-              value={stdnum}
+              value={this.state.stdnum}
               onInput={this.changeLoginNumber}
               onChange={this.changeLoginNumber}
             />
@@ -143,14 +158,14 @@ export default class Login extends Component {
               placeholderClass='placeholder'
               type='text'
               placeholder='请输入你的密码'
-              value={password}
+              value={this.state.password}
               onInput={this.changePassword}
               onChange={this.changePassword}
               password='true'
             />
         </View>
         <View className='tips'>*请输入一站式服务的学号和对应的密码</View>
-      </Form>
+      </View>
       <View>
         <Button onClick={this.toLogin.bind(this)}>
           注册
